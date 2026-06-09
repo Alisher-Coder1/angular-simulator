@@ -585,24 +585,24 @@
 }
 
 .page-loader {
-  position: absolute;
-  top: 150px;
-  left: 0;
-  z-index: 20;
-  width: 390px;
-  min-height: 96px;
-  padding: 20px 24px;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 18px;
-  background-color: #f3e7df;
+  justify-content: center;
+  gap: 16px;
+
+  background-color: rgba(24, 18, 30, 0.85);
 }
 
 .page-loader__icon {
   width: 34px;
   height: 34px;
   flex: 0 0 34px;
-  border: 4px solid #18121c;
+  border: 4px solid #fdfdfd;
   border-top-color: transparent;
   border-radius: 50%;
   animation: page-loader-spin 1s linear infinite;
