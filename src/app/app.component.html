@@ -181,7 +181,7 @@
         странных слов в Lorem Ipsum, "consectetur" и занялся его поисками
         в классической латинской литературе.
       </p>
-      <button class="about__button" type="button">
+      <button class="about__button" type="button" (click)="addMessage(MessageType.Warn, 'Программа тура сейчас недоступна')">
         Программа тура
       </button>
     </div>
@@ -215,7 +215,7 @@
         }
       </div>
 
-      <button class="programs__button" type="button">
+      <button class="programs__button" type="button" (click)="addMessage(MessageType.Info, 'Стоимость программ рассчитана')">
         Стоимость программ
       </button>
     </div>
@@ -230,4 +230,129 @@
       }
     </div>
   </div>
+</section>
+<section class="popular">
+<div class="popular__header">
+  <span class="popular__subtitle">
+    по версии отдыхающих
+  </span>
+
+  <h2 class="popular__title">
+    Популярные направления
+  </h2>
+</div>
+
+<div class="popular__cards">
+  @for (tour of popularTours; track tour.title) {
+   <article class="popular__card">
+  <img
+    class="popular__image"
+    [src]="tour.image"
+    [alt]="tour.title"
+  />
+  <div class="popular__rating">
+  ⭐️ {{ tour.rating }}
+</div>
+<div class="popular__content">
+  <div>
+    <h3 class="popular__card-title">
+      {{ tour.title }}
+    </h3>
+
+    <p class="popular__card-text">
+      {{ tour.description }}
+    </p>
+  </div>
+
+  <span class="popular__price">
+    {{ tour.price }} $
+  </span>
+</div>
+</article>
+  }
+</div>
+<button class="popular__button" type="button"  (click)="addMessage(MessageType.Success, 'Направления получены')">
+  Рейтинг направлений
+</button>
+</section>
+<section class="blog">
+  <div class="blog__inner">
+
+  <div class="blog__header">
+
+    <span class="blog__subtitle">
+      делимся впечатлениями
+    </span>
+
+    <h2 class="blog__title">
+      Блог о путешествиях
+    </h2>
+
+  </div>
+
+  <div class="blog__content">
+  @for (post of blogPosts; track post.title) {
+    <article class="blog__post">
+  <img
+    class="blog__post-image"
+    [src]="post.image"
+    [alt]="post.title"
+  />
+
+  <div class="blog__post-content">
+  <h3 class="blog__post-title">
+    {{ post.title }}
+  </h3>
+
+  <p class="blog__post-description">
+    {{ post.description }}
+  </p>
+  <div class="blog__post-footer">
+  <span class="blog__post-date">
+    {{ post.date }}
+  </span>
+
+  <a class="blog__post-link" href="#">
+    {{ post.link }}
+  </a>
+</div>
+</div>
+</article>
+  }
+</div>
+
+  <div class="blog__footer">
+  <button class="blog__button" (click)="addMessage(MessageType.Error, 'Материалы временно недоступны')">
+    Другие материалы
+  </button>
+</div>
+</div>
+<ng-template #messageTemplate let-message>
+  <div class="message" [class]="'message message--' + message.type">
+   <img
+  class="message__icon"
+  src="assets/message.svg"
+  alt=""
+/>
+    <div class="message__content">
+      <strong class="message__title">{{ message.type }}</strong>
+      <p class="message__text">{{ message.text }}</p>
+    </div>
+
+    <button
+      class="message__close"
+      type="button"
+      (click)="messageService.closeMessage(message.id)"
+    >
+      ×
+    </button>
+  </div>
+</ng-template>
+<div class="messages">
+  <ng-container
+    *ngFor="let message of messageService.messages"
+    [ngTemplateOutlet]="messageTemplate"
+    [ngTemplateOutletContext]="{ $implicit: message }">
+  </ng-container>
+</div>
 </section>
