@@ -282,13 +282,13 @@ blogPosts = [
   // Метод получает текущее количество заходов из localStorage,
   // увеличивает значение на 1 и сохраняет обратно.
   saveVisitCount(): void {
-    const savedVisitCount = this.localStorageService.getItem('visitCount');
+    const savedVisitCount = this.localStorageService.getItem<number>('visitCount');
     const currentVisitCount = savedVisitCount ? Number(savedVisitCount) : 0;
     const nextVisitCount = currentVisitCount + 1;
 
-    this.localStorageService.setItem('visitCount', String(nextVisitCount));
+    this.localStorageService.setItem('visitCount', nextVisitCount);
   }
-
+  
   // Пункт 4 домашнего задания №16:
   // Метод формирует текущую дату и время до секунд.
   updateCurrentDateTime(): void {
@@ -306,7 +306,7 @@ blogPosts = [
       second: '2-digit',
     });
 
-    this.currentDateTime = `${date} ${time}`;
+    this.currentDateTime = date + ' ' + time;
   }
 
   // Пункт 5 домашнего задания №16:
