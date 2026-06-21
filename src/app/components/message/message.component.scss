@@ -1,0 +1,83 @@
+// Контейнер для всех активных уведомлений.
+.messages {
+  position: fixed;
+  top: 80px;
+  right: 40px;
+  z-index: 1000;
+
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+// Внешний вид одного уведомления.
+.message {
+  width: 350px;
+  height: 70px;
+  padding: 16px;
+  border-radius: 10px;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  position: relative;
+
+  background: rgba(15, 23, 42, 0.68);
+  border: 1px solid #ffffff;
+  color: #ffffff;
+  box-shadow: none;
+}
+
+// Иконка уведомления.
+.message__icon {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+}
+
+// Контейнер с типом и текстом уведомления.
+.message__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0;
+}
+
+// Название типа уведомления.
+.message__title {
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 20px;
+  text-transform: capitalize;
+}
+
+// Основной текст уведомления.
+.message__text {
+  margin: 0;
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+}
+
+// Кнопка закрытия уведомления.
+.message__close {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+
+  width: 20px;
+  height: 20px;
+  padding: 0;
+
+  border: 1px solid #ffffff;
+  border-radius: 50%;
+  background: transparent;
+  color: #ffffff;
+
+  font-size: 14px;
+  line-height: 18px;
+  cursor: pointer;
+}

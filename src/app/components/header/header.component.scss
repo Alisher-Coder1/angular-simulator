@@ -1,0 +1,30 @@
+.header {
+  padding: 24px 40px;
+  background-color: #ffffff;
+  border-bottom: 1px solid #dddddd;
+
+  &__navigation {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 32px;
+  }
+
+  &__link {
+    color: #18121e;
+    font-size: 18px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: #1a3e5e;
+    }
+
+    &--active {
+      color: #1a3e5e;
+      text-decoration: underline;
+      text-underline-offset: 6px;
+    }
+  }
+}

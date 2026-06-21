@@ -1,0 +1,14 @@
+<header class="header">
+  <nav class="header__navigation">
+    @for (link of navigationLinks; track link.path) {
+      <a
+        class="header__link"
+        [routerLink]="link.path"
+        routerLinkActive="header__link--active"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        {{ link.title }}
+      </a>
+    }
+  </nav>
+</header>

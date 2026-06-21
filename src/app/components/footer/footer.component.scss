@@ -1,0 +1,459 @@
+.footer {
+  // Footer служит опорой для белой карточки подписки.
+  position: relative;
+
+  // Основной фон footer из макета.
+  background-color: #1a3e3e;
+}
+
+.footer__subscription {
+  // Размер белой карточки в Figma — 1180 × 196 px.
+  position: absolute;
+  top: -98px;
+  left: 50%;
+  z-index: 1;
+
+  width: calc(100% - 40px);
+  max-width: 1180px;
+  min-height: 196px;
+
+  // Заголовок слева, форма справа.
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+
+  padding: 40px 80px;
+
+  background-color: #fdfdfd;
+  border-radius: 6px;
+  box-shadow: 0 0 15px rgb(24 18 30 / 12%);
+
+  box-sizing: border-box;
+  transform: translateX(-50%);
+}
+
+.footer__subscription-heading {
+  width: 380px;
+  flex: 0 0 380px;
+}
+
+.footer__subscription-subtitle {
+  margin: 0 0 8px;
+
+  color: #f2be22;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 20px;
+}
+
+.footer__subscription-title {
+  margin: 0;
+
+  color: #18121e;
+  font-size: 26px;
+  font-weight: 800;
+  line-height: 120%;
+}
+
+.footer__subscription-form {
+  width: 536px;
+
+  display: grid;
+  grid-template-columns: 280px 240px;
+  grid-template-areas:
+    "label empty"
+    "input button"
+    "agreement agreement";
+  column-gap: 16px;
+  row-gap: 8px;
+}
+
+// Позволяет дочерним элементам участвовать
+// непосредственно в сетке формы.
+.footer__subscription-field {
+  display: contents;
+}
+
+.footer__subscription-label {
+  grid-area: label;
+
+  color: #18121e;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 20px;
+}
+
+.footer__subscription-input {
+  grid-area: input;
+
+  width: 280px;
+  height: 44px;
+
+  padding: 0 16px;
+
+  color: #18121e;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 20px;
+
+  background-color: #f3f5f4;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  outline: none;
+
+  box-sizing: border-box;
+}
+
+.footer__subscription-input::placeholder {
+  color: #18121e;
+  opacity: 1;
+}
+
+.footer__subscription-input:focus {
+  border-color: #1a3e3e;
+}
+
+.footer__subscription-agreement {
+  grid-area: agreement;
+
+  margin: 0;
+
+  color: #18121e;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 18px;
+}
+
+.footer__subscription-button {
+  grid-area: button;
+
+  width: 240px;
+  height: 44px;
+
+  padding: 12px 24px;
+
+  color: #fdfdfd;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 20px;
+
+  background-color: #1a3e3e;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.footer__subscription-button:hover {
+  opacity: 0.9;
+}
+
+// Контейнер основной части footer с тремя колонками.
+.footer__content {
+  width: calc(100% - 40px);
+  max-width: 1180px;
+
+  margin: 0 auto;
+  padding: 178px 0 100px;
+
+  display: grid;
+  grid-template-columns:
+    minmax(0, 480px)
+    minmax(220px, 280px)
+    minmax(220px, 280px);
+  justify-content: space-between;
+  column-gap: 40px;
+
+  color: #f3f5f4;
+
+  box-sizing: border-box;
+}
+
+.footer__company {
+  width: 100%;
+  max-width: 480px;
+}
+
+.footer__services,
+.footer__important {
+  width: 100%;
+  max-width: 280px;
+}
+
+.footer__column-title {
+  margin: 0 0 17px;
+
+  color: #f3f5f4;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 24px;
+}
+
+.footer__company-description {
+  width: 100%;
+  max-width: 456px;
+  margin: 0;
+
+  color: #f3f5f4;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+}
+
+.footer__contacts {
+  margin-top: 80px;
+
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+
+.footer__contact-link {
+  color: #f3f5f4;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 18px;
+  text-decoration: underline;
+}
+
+.footer__contact-link:hover {
+  color: #f2be22;
+}
+
+.footer__socials {
+  margin-top: 32px;
+
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.footer__social-link {
+  width: 32px;
+  height: 32px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+  text-decoration: none;
+}
+
+.footer__social-icon {
+  width: 32px;
+  height: 32px;
+
+  display: block;
+  object-fit: contain;
+}
+
+.footer__links {
+  margin: 0;
+  padding: 0;
+
+  display: grid;
+  gap: 16px;
+
+  list-style: none;
+}
+
+.footer__links-item {
+  margin: 0;
+}
+
+.footer__link {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+
+  color: #f3f5f4;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 18px;
+  text-decoration: none;
+}
+
+.footer__link::before {
+  content: "›";
+
+  flex-shrink: 0;
+
+  color: #f3f5f4;
+  font-size: 18px;
+  line-height: 16px;
+}
+
+.footer__link:hover,
+.footer__link:hover::before {
+  color: #f2be22;
+}
+
+.footer__bottom {
+  width: 100%;
+  min-height: 66px;
+
+  display: flex;
+  align-items: center;
+
+  background-color: #18121e;
+}
+
+.footer__bottom-container {
+  width: calc(100% - 40px);
+  max-width: 1180px;
+  min-height: 66px;
+
+  margin: 0 auto;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.footer__copyright {
+  margin: 0;
+
+  color: #f3f5f4;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 18px;
+}
+
+.footer__privacy-link {
+  color: #f3f5f4;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 18px;
+  text-decoration: underline;
+}
+
+.footer__privacy-link:hover {
+  color: #f2be22;
+}
+
+@media (max-width: 1100px) {
+  .footer__subscription {
+    padding: 40px;
+  }
+
+  .footer__subscription-heading {
+    width: 330px;
+    flex-basis: 330px;
+  }
+
+  .footer__content {
+    grid-template-columns: minmax(0, 1.4fr) 1fr 1fr;
+    column-gap: 28px;
+  }
+}
+
+@media (max-width: 900px) {
+  .footer {
+    padding-top: 40px;
+  }
+
+  .footer__subscription {
+    position: static;
+
+    width: calc(100% - 40px);
+    min-height: auto;
+    margin: 0 auto;
+    padding: 40px;
+
+    flex-direction: column;
+    align-items: flex-start;
+
+    transform: none;
+  }
+
+  .footer__subscription-heading,
+  .footer__subscription-form {
+    width: 100%;
+    flex-basis: auto;
+  }
+
+  .footer__subscription-form {
+    grid-template-columns: minmax(0, 1fr) 240px;
+  }
+
+  .footer__subscription-input {
+    width: 100%;
+  }
+
+  .footer__content {
+    padding: 64px 0;
+
+    grid-template-columns: 1fr 1fr;
+    row-gap: 48px;
+  }
+
+  .footer__company {
+    grid-column: 1 / -1;
+  }
+
+  .footer__contacts {
+    margin-top: 40px;
+  }
+}
+
+@media (max-width: 640px) {
+  .footer__subscription {
+    width: calc(100% - 32px);
+    padding: 28px 20px;
+  }
+
+  .footer__subscription-title {
+    font-size: 22px;
+  }
+
+  .footer__subscription-form {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .footer__subscription-field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .footer__subscription-input,
+  .footer__subscription-button {
+    width: 100%;
+  }
+
+  .footer__subscription-button {
+    margin-top: 8px;
+  }
+
+  .footer__content {
+    width: calc(100% - 32px);
+    padding: 48px 0;
+
+    grid-template-columns: 1fr;
+    row-gap: 40px;
+  }
+
+  .footer__company {
+    grid-column: auto;
+  }
+
+  .footer__services,
+  .footer__important {
+    max-width: none;
+  }
+
+  .footer__bottom-container {
+    width: calc(100% - 32px);
+    padding: 18px 0;
+
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

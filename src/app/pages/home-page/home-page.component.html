@@ -1,0 +1,306 @@
+@if (isPageLoading) {
+  <div class="page-loader">
+    <div class="page-loader__icon"></div>
+    <p class="page-loader__text">
+      Иконка загрузки, которую мы должны отобразить. Добавить анимацию прокрутки
+    </p>
+  </div>
+}
+
+<!-- Панель с датой и счётчиком вынесена наверх, отдельно от header -->
+<div class="top-task-panel">
+  <div class="top-task-panel__content">
+    @if (taskPanelMode === 'date') {
+      <span class="top-task-panel__datetime">
+        {{ currentDateTime }}
+      </span>
+    } @else {
+      <button
+        class="top-task-panel__button"
+        type="button"
+        (click)="decreaseClickCount()"
+        [disabled]="clickCount === 0"
+      >
+        -
+      </button>
+
+      <span class="top-task-panel__counter">
+        {{ clickCount }}
+      </span>
+
+      <button class="top-task-panel__button" type="button" (click)="increaseClickCount()">+</button>
+    }
+
+    <button class="top-task-panel__toggle" type="button" (click)="toggleTaskPanelMode()">
+      {{ taskPanelToggleText }}
+    </button>
+  </div>
+</div>
+
+<section class="hero">
+  <header class="header">
+    <div class="header__inner">
+      <a class="logo" href="#">
+        <img class="logo__icon" src="assets/logo-mountains.svg" alt="" />
+        <span class="logo__text">
+          {{ companyName }}
+        </span>
+      </a>
+
+      <nav class="nav">
+        @for (item of menuItems; track item) {
+          <a class="nav__link" href="#">
+            {{ item }}
+          </a>
+        }
+      </nav>
+
+      <button class="consultation-button" type="button">Консультация</button>
+    </div>
+  </header>
+
+  <div class="hero__content">
+    <h1 class="hero__title">
+      НАСЛАДИСЬ ПРОГУЛКОЙ В ГОРАХ <br />
+      С КОМАНДОЙ ЕДИНОМЫШЛЕННИКОВ
+    </h1>
+
+    <form class="search-form">
+      <div class="search-field">
+        <select class="search-select" name="tourLocation" [(ngModel)]="selectedTourLocation">
+          <option value="">Локация для тура</option>
+          @for (location of tourLocations; track location) {
+            <option [value]="location">
+              {{ location }}
+            </option>
+          }
+        </select>
+        <span class="search-field__hint">выберите из списка</span>
+      </div>
+
+      <div class="search-field">
+        <input class="search-input" type="date" name="tourDate" [(ngModel)]="selectedTourDate" />
+        <span class="search-field__hint">укажите дату</span>
+      </div>
+
+      <div class="search-field">
+        <select class="search-select" name="participants" [(ngModel)]="selectedParticipants">
+          <option value="">Участники</option>
+          @for (participant of participantOptions; track participant) {
+            <option [value]="participant">
+              {{ participant }}
+            </option>
+          }
+        </select>
+        <span class="search-field__hint">выберите из списка</span>
+      </div>
+
+      <button class="search-button" type="button" [disabled]="isSearchButtonDisabled">
+        Найти программу
+      </button>
+    </form>
+
+    <!-- Live input (пункт 7) -->
+    <div class="live-input-demo">
+      <label class="live-input-demo__label">Live input:</label>
+      <input
+        class="live-input-demo__field"
+        type="text"
+        [(ngModel)]="liveInputText"
+        placeholder="Введите текст..."
+      />
+      <p class="live-input-demo__result">
+        Вы ввели: <strong>{{ liveInputText }}</strong>
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="about">
+  <div class="about__inner">
+    <div class="about__media">
+      <img
+        class="about__image about__image--back"
+        src="assets/about-mountain-back.png"
+        alt="Горный пейзаж"
+      />
+      <div class="about__video">
+        <img
+          class="about__image about__image--front"
+          src="assets/about-video-preview.png"
+          alt="Видео о походе"
+        />
+        <button class="about__play-button" type="button" aria-label="Смотреть видео">
+          <img class="about__play-icon" src="assets/play-icon.svg" alt="" />
+        </button>
+      </div>
+    </div>
+
+    <div class="about__content">
+      <span class="about__label">о нашем походе</span>
+      <h2 class="about__title">Исследуйте все горные массивы мира вместе с нами</h2>
+      <p class="about__text">
+        Его корни уходят в один фрагмент классической латыни 45 года н.э., то есть более двух
+        тысячелетий назад. Ричард МакКлинток, профессор латыни из колледжа Hampden-Sydney, штат
+        Вирджиния, взял одно из самых странных слов в Lorem Ipsum, "consectetur" и занялся его
+        поисками в классической латинской литературе.
+      </p>
+      <button
+        class="about__button"
+        type="button"
+        (click)="addMessage(MessageType.Warn, 'Программа тура сейчас недоступна')"
+      >
+        Программа тура
+      </button>
+    </div>
+  </div>
+</section>
+
+<section class="programs">
+  <div class="programs__inner">
+    <div class="programs__content">
+      <span class="programs__label">наше предложение</span>
+      <h2 class="programs__title">Лучшие программы для тебя</h2>
+      <p class="programs__text">
+        Его корни уходят в один фрагмент классической латыни 45 года н.э., то есть более двух
+        тысячелетий назад. Ричард МакКлинток, профессор латыни из колледжа.
+      </p>
+
+      <div class="programs__list">
+        @for (feature of programFeatures; track feature.title) {
+          <article class="programs__item">
+            <img class="programs__icon" [src]="feature.icon" alt="" />
+            <div class="programs__item-content">
+              <h3 class="programs__item-title">
+                {{ feature.title }}
+              </h3>
+              <p class="programs__item-text">
+                {{ feature.text }}
+              </p>
+            </div>
+          </article>
+        }
+      </div>
+
+      <button
+        class="programs__button"
+        type="button"
+        (click)="addMessage(MessageType.Info, 'Стоимость программ рассчитана')"
+      >
+        Стоимость программ
+      </button>
+    </div>
+
+    <div class="programs__gallery">
+      @for (image of programImages; track image.src) {
+        <img
+          [class]="'programs__image programs__image--' + image.modifier"
+          [src]="image.src"
+          [alt]="image.alt"
+        />
+      }
+    </div>
+  </div>
+</section>
+<section class="popular">
+  <div class="popular__header">
+    <span class="popular__subtitle"> по версии отдыхающих </span>
+
+    <h2 class="popular__title">Популярные направления</h2>
+  </div>
+
+  <div class="popular__cards">
+    @for (tour of popularTours; track tour.title) {
+      <article class="popular__card">
+        <img class="popular__image" [src]="tour.image" [alt]="tour.title" />
+        <div class="popular__rating">⭐️ {{ tour.rating }}</div>
+        <div class="popular__content">
+          <div>
+            <h3 class="popular__card-title">
+              {{ tour.title }}
+            </h3>
+
+            <p class="popular__card-text">
+              {{ tour.description }}
+            </p>
+          </div>
+
+          <span class="popular__price"> {{ tour.price }} $ </span>
+        </div>
+      </article>
+    }
+  </div>
+  <button
+    class="popular__button"
+    type="button"
+    (click)="addMessage(MessageType.Success, 'Направления получены')"
+  >
+    Рейтинг направлений
+  </button>
+</section>
+<section class="blog">
+  <div class="blog__inner">
+    <div class="blog__header">
+      <span class="blog__subtitle"> делимся впечатлениями </span>
+
+      <h2 class="blog__title">Блог о путешествиях</h2>
+    </div>
+
+    <div class="blog__content">
+      @for (post of blogPosts; track post.title) {
+        <article class="blog__post">
+          <img class="blog__post-image" [src]="post.image" [alt]="post.title" />
+
+          <div class="blog__post-content">
+            <h3 class="blog__post-title">
+              {{ post.title }}
+            </h3>
+
+            <p class="blog__post-description">
+              {{ post.description }}
+            </p>
+            <div class="blog__post-footer">
+              <span class="blog__post-date">
+                {{ post.date }}
+              </span>
+
+              <a class="blog__post-link" href="#">
+                {{ post.link }}
+              </a>
+            </div>
+          </div>
+        </article>
+      }
+    </div>
+
+    <div class="blog__footer">
+      <button
+        class="blog__button"
+        (click)="addMessage(MessageType.Error, 'Материалы временно недоступны')"
+      >
+        Другие материалы
+      </button>
+    </div>
+  </div>
+  <app-message></app-message>
+</section>
+<section class="gallery">
+  <div class="gallery__container">
+    <p class="gallery__subtitle">фото-отчет</p>
+
+    <h2 class="gallery__title">Делимся впечатлениями</h2>
+
+    <div class="gallery__grid">
+      @for (image of galleryImages; track image.src) {
+        <img
+          class="gallery__image"
+          [class.gallery__image--wide]="image.isWide"
+          [src]="image.src"
+          [alt]="image.alt"
+        />
+      }
+    </div>
+
+    <button class="gallery__button" type="button">Наш pinterest</button>
+  </div>
+</section>
