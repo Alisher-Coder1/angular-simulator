@@ -16,7 +16,7 @@
     </div>
 
     <!-- Закрывает выбранное уведомление по его идентификатору. -->
-    <button class="message__close" type="button" (click)="messageService.closeMessage(message.id)">
+    <button class="message__close" type="button" (click)="closeMessage(message.id)">
       ×
     </button>
   </div>
@@ -25,7 +25,7 @@
 <!-- Выводим все активные уведомления из сервиса. -->
 <div class="messages">
   <ng-container
-    *ngFor="let message of messageService.messages"
+    *ngFor="let message of messages$ | async"
     [ngTemplateOutlet]="messageTemplate"
     [ngTemplateOutletContext]="{ $implicit: message }"
   >

@@ -1,0 +1,274 @@
+:host {
+  display: block;
+}
+
+/* Общая область страницы пользователей. */
+.user-page {
+  min-height: 100vh;
+  padding: 80px 40px 80px;
+
+  background-color: #f3f5f4;
+  font-family: 'Nunito Sans', sans-serif;
+}
+
+/* Главный заголовок страницы. */
+.user-page__title {
+  width: 1460px;
+  max-width: 100%;
+  margin: 0 auto 80px;
+
+  color: #1d3939;
+  font-size: 48px;
+  font-weight: 800;
+  line-height: 29.9px;
+  text-align: center;
+}
+
+/* Сетка карточек пользователей. */
+.user-page__list {
+  display: grid;
+  grid-template-columns: repeat(3, 440px);
+  column-gap: 70px;
+  row-gap: 50px;
+
+  width: 1460px;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+/* Карточка одного пользователя. */
+.user-card {
+  box-sizing: border-box;
+  width: 440px;
+  height: 630px;
+  padding: 0 30px 30px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+
+  overflow: hidden;
+
+  background-color: #ffffff;
+  border-top: 4px solid #d4a373;
+  border-radius: 4px;
+}
+
+/* Верхняя часть карточки: имя и username. */
+.user-card__header {
+  box-sizing: border-box;
+  width: 440px;
+  min-height: 106px;
+  margin: 0 -30px;
+  padding: 35px 30px 20px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+/* Имя пользователя. */
+.user-card__name {
+  margin: 0;
+
+  color: #1d3939;
+  font-size: 26px;
+  font-weight: 800;
+  line-height: 29.9px;
+}
+
+/* Username пользователя. */
+.user-card__username {
+  margin: 0;
+
+  color: #d4a373;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 17.25px;
+}
+
+/* Отдельный информационный раздел карточки. */
+.user-card__section {
+  display: flex;
+  flex-direction: column;
+  gap: 9.9px;
+}
+
+/* Заголовок раздела и горизонтальная линия справа. */
+.user-card__section-title {
+  margin: 0 0 2px;
+
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  color: #1d3939;
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 13.8px;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+}
+
+/* Разделительная линия после заголовка раздела. */
+.user-card__section-title::after {
+  content: '';
+
+  flex: 1;
+  height: 1px;
+
+  background-color: #e2e8f0;
+}
+
+/* Одна строка с названием поля и значением. */
+.user-card__row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+
+  width: 100%;
+  min-height: 20px;
+}
+
+/* Название поля слева. */
+.user-card__label {
+  color: #667c7c;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 19.6px;
+}
+
+/* Значение поля справа. */
+.user-card__value {
+  width: auto;
+  max-width: 190px;
+  margin-left: 16px;
+
+  color: #1d3939;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 19.6px;
+  text-align: right;
+  overflow-wrap: anywhere;
+}
+
+.user-card__coordinate {
+  padding: 0.5px 6px;
+  background-color: #f4f7f5;
+  border: 1px solid #e2e8f0;
+  border-radius: 3px;
+
+  font-family: 'Inter', sans-serif;
+  font-size: 11.8px;
+  font-weight: 700;
+  line-height: 16.8px;
+  color: #1d3939;
+}
+
+.user-card__value--coordinates {
+  display: inline-flex;
+  align-items: center;
+  gap: 3.78px;
+}
+
+/* Акцентный цвет электронной почты и веб-сайта. */
+.user-card__value--accent {
+  color: #d4a373;
+}
+
+.user-card__value--mission {
+  font-size: 13px;
+  font-style: italic;
+  line-height: 18.2px;
+  color: #667c7c;
+  text-align: right;
+}
+
+.user-card__value--specialization {
+  max-width: 220px;
+}
+
+/* Сообщение при отсутствии пользователей. */
+.user-page__empty {
+  width: fit-content;
+  margin: 0 auto;
+  padding: 16px 24px;
+
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 700;
+
+  background-color: #d45d79;
+  border-radius: 4px;
+}
+
+/* Две карточки в ряду на среднем экране. */
+@media (max-width: 1539px) {
+  .user-page__title,
+  .user-page__list {
+    width: 950px;
+  }
+
+  .user-page__list {
+    grid-template-columns: repeat(2, 440px);
+  }
+}
+
+/* Одна карточка в ряду. */
+@media (max-width: 1019px) {
+  .user-page__title,
+  .user-page__list {
+    width: 440px;
+  }
+
+  .user-page__list {
+    grid-template-columns: 440px;
+  }
+}
+
+/* Адаптация страницы для мобильных экранов. */
+@media (max-width: 600px) {
+  .user-page {
+    padding: 32px 16px 56px;
+  }
+
+  .user-page__title {
+    width: 100%;
+    margin-bottom: 40px;
+
+    font-size: 32px;
+  }
+
+  .user-page__list {
+    width: 100%;
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 25px;
+  }
+
+  .user-card {
+    width: 100%;
+    height: auto;
+    min-height: 630px;
+    padding-right: 20px;
+    padding-left: 20px;
+  }
+
+  .user-card__header {
+    width: calc(100% + 40px);
+    margin-right: -20px;
+    margin-left: -20px;
+    padding-right: 20px;
+    padding-left: 20px;
+  }
+
+  .user-card__row {
+    grid-template-columns: 1fr;
+    gap: 2px;
+  }
+
+  .user-card__value {
+    width: auto;
+    justify-self: start;
+    text-align: left;
+  }
+}

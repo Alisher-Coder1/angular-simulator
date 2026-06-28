@@ -1,7 +1,120 @@
 <section class="user-page">
-  <!-- Основной заголовок страницы пользователей. -->
-  <h1>Пользователи</h1>
+  <h1 class="user-page__title">Список Пользователей</h1>
 
-  <!-- Краткое содержимое страницы. -->
-  <p>Здесь будет отображаться список пользователей.</p>
+  <!-- AsyncPipe получает массив пользователей из Observable. -->
+  @if (users$ | async; as users) {
+    @if (users.length > 0) {
+      <div class="user-page__list">
+        <!-- Создаём отдельную карточку для каждого пользователя. -->
+        @for (user of users; track user.id) {
+          <article class="user-card">
+            <header class="user-card__header">
+              <h2 class="user-card__name">{{ user.name }}</h2>
+              <p class="user-card__username">@{{ user.username }}</p>
+            </header>
+
+            <section class="user-card__section">
+              <h3 class="user-card__section-title">Контакты</h3>
+
+              <div class="user-card__row">
+                <span class="user-card__label">Эл. почта:</span>
+
+                <span class="user-card__value user-card__value--accent">
+                  {{ user.email }}
+                </span>
+              </div>
+
+              <div class="user-card__row">
+                <span class="user-card__label">Телефон:</span>
+                <span class="user-card__value">{{ user.phone }}</span>
+              </div>
+
+              <div class="user-card__row">
+                <span class="user-card__label">Веб-сайт:</span>
+
+                <span class="user-card__value user-card__value--accent">
+                  {{ user.website }}
+                </span>
+              </div>
+            </section>
+
+            <section class="user-card__section">
+              <h3 class="user-card__section-title">Адрес проживания</h3>
+
+              <div class="user-card__row">
+                <span class="user-card__label">Город:</span>
+                <span class="user-card__value">
+                  {{ user.address.city }}
+                </span>
+              </div>
+
+              <div class="user-card__row">
+                <span class="user-card__label">Улица:</span>
+                <span class="user-card__value">
+                  {{ user.address.street }}
+                </span>
+              </div>
+
+              <div class="user-card__row">
+                <span class="user-card__label">Офис:</span>
+                <span class="user-card__value">
+                  {{ user.address.suite }}
+                </span>
+              </div>
+
+              <div class="user-card__row">
+                <span class="user-card__label">Индекс:</span>
+                <span class="user-card__value">
+                  {{ user.address.zipcode }}
+                </span>
+              </div>
+
+              <div class="user-card__row">
+                <span class="user-card__label">Координаты:</span>
+
+                <span class="user-cardvalue user-card__value--coordinates">
+                  <span class="user-card__coordinate">
+                    {{ user.address.geo.lat }}
+                  </span>
+
+                  <span class="user-card__coordinate">
+                    {{ user.address.geo.lng }}
+                  </span>
+                </span>
+              </div>
+            </section>
+
+            <section class="user-card__section">
+              <h3 class="user-card__section-title">Место работы</h3>
+
+              <div class="user-card__row">
+                <span class="user-card__label">Компания:</span>
+                <span class="user-card__value">
+                  {{ user.company.name }}
+                </span>
+              </div>
+
+              <div class="user-card__row">
+                <span class="user-card__label">Миссия:</span>
+
+                <span class="user-card__value user-card__value--mission">
+                  {{ user.company.catchPhrase }}
+                </span>
+              </div>
+
+              <div class="user-card__row">
+                <span class="user-card__label">Специализация:</span>
+
+                <span class="user-card__value user-card__value--specialization">
+                  {{ user.company.bs }}
+                </span>
+              </div>
+            </section>
+          </article>
+        }
+      </div>
+    } @else {
+      <p class="user-page__empty">Нет пользователей для отображения</p>
+    }
+  }
 </section>
