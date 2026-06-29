@@ -1,11 +1,9 @@
 <section class="user-page">
   <h1 class="user-page__title">Список Пользователей</h1>
 
-  <!-- AsyncPipe получает массив пользователей из Observable. -->
   @if (users$ | async; as users) {
     @if (users.length > 0) {
       <div class="user-page__list">
-        <!-- Создаём отдельную карточку для каждого пользователя. -->
         @for (user of users; track user.id) {
           <article class="user-card">
             <header class="user-card__header">
