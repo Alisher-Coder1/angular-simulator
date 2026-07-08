@@ -1,10 +1,7 @@
-<!-- Шаблон одного уведомления. -->
 <ng-template #messageTemplate let-message>
   <div class="message" [class]="'message message--' + message.type">
-    <!-- Иконка уведомления. -->
     <img class="message__icon" src="assets/message.svg" alt="" />
 
-    <!-- Тип и текст уведомления. -->
     <div class="message__content">
       <strong class="message__title">
         {{ message.type }}
@@ -15,17 +12,13 @@
       </p>
     </div>
 
-    <!-- Закрывает выбранное уведомление по его идентификатору. -->
-    <button class="message__close" type="button" (click)="messageService.closeMessage(message.id)">
-      ×
-    </button>
+    <button class="message__close" type="button" (click)="closeMessage(message.id)">×</button>
   </div>
 </ng-template>
 
-<!-- Выводим все активные уведомления из сервиса. -->
 <div class="messages">
   <ng-container
-    *ngFor="let message of messageService.messages"
+    *ngFor="let message of messages$ | async"
     [ngTemplateOutlet]="messageTemplate"
     [ngTemplateOutletContext]="{ $implicit: message }"
   >
