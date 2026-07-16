@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Output } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators, } from '@angular/forms';
 import { User } from '../../../interfaces/user';
 
@@ -9,7 +9,7 @@ import { User } from '../../../interfaces/user';
   styleUrl: './user-create.component.scss',
 })
 export class UserCreateComponent {
-  private readonly formBuilder = new FormBuilder();
+  private readonly formBuilder = inject(FormBuilder);
 
   @Output() createUser = new EventEmitter<User>();
 
