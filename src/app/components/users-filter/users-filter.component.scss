@@ -1,0 +1,42 @@
+:host {
+  display: block;
+}
+
+.users-filter {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  width: 950px;
+  max-width: 100%;
+  margin: 0 auto 30px;
+
+  color: #1d3939;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.users-filter__input {
+  height: 40px;
+  padding: 8px 12px;
+
+  color: #1d3939;
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 4px;
+  outline: none;
+}
+
+.users-filter__input:focus {
+  border-color: #d4a373;
+}
+
+@media (max-width: 600px) {
+  .users-filter {
+    width: 100%;
+  }
+}

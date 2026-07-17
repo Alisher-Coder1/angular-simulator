@@ -1,0 +1,85 @@
+<form class="user-create" [formGroup]="userForm" (ngSubmit)="onSubmit()">
+  <h2 class="user-create__title">Создать пользователя</h2>
+
+  <div class="user-create__grid">
+    <label class="user-create__field" for="create-user-name">
+      Имя *
+      <input id="create-user-name" type="text" formControlName="name" />
+    </label>
+
+    <label class="user-create__field" for="create-user-username">
+      Username
+      <input id="create-user-username" type="text" formControlName="username" />
+    </label>
+
+    <label class="user-create__field" for="create-user-email">
+      Email *
+      <input id="create-user-email" type="email" formControlName="email" />
+    </label>
+
+    <label class="user-create__field" for="create-user-phone">
+      Телефон
+      <input id="create-user-phone" type="text" formControlName="phone" />
+    </label>
+
+    <label class="user-create__field" for="create-user-website">
+      Веб-сайт
+      <input id="create-user-website" type="text" formControlName="website" />
+    </label>
+
+    <label class="user-create__field" for="create-user-city">
+      Город
+      <input id="create-user-city" type="text" formControlName="city" />
+    </label>
+
+    <label class="user-create__field" for="create-user-street">
+      Улица
+      <input id="create-user-street" type="text" formControlName="street" />
+    </label>
+
+    <label class="user-create__field" for="create-user-suite">
+      Офис
+      <input id="create-user-suite" type="text" formControlName="suite" />
+    </label>
+
+    <label class="user-create__field" for="create-user-zipcode">
+      Индекс
+      <input id="create-user-zipcode" type="text" formControlName="zipcode" />
+    </label>
+
+    <label class="user-create__field" for="create-user-lat">
+      Широта
+      <input id="create-user-lat" type="text" formControlName="lat" />
+    </label>
+
+    <label class="user-create__field" for="create-user-lng">
+      Долгота
+      <input id="create-user-lng" type="text" formControlName="lng" />
+    </label>
+
+    <label class="user-create__field" for="create-user-company-name">
+      Компания
+      <input id="create-user-company-name" type="text" formControlName="companyName" />
+    </label>
+
+    <label class="user-createfield user-createfield--wide" for="create-user-catch-phrase">
+      Миссия
+      <input id="create-user-catch-phrase" type="text" formControlName="catchPhrase" />
+    </label>
+
+    <label class="user-createfield user-createfield--wide" for="create-user-bs">
+      Специализация
+      <input id="create-user-bs" type="text" formControlName="bs" />
+    </label>
+  </div>
+
+  @if (userForm.controls.name.invalid && userForm.controls.name.touched) {
+    <p class="user-create__error">Имя пользователя обязательно.</p>
+  }
+
+  @if (userForm.controls.email.invalid && userForm.controls.email.touched) {
+    <p class="user-create__error">Введите корректный email.</p>
+  }
+
+  <button class="user-create__button" type="submit">Создать пользователя</button>
+</form>
