@@ -5,20 +5,29 @@ import { BehaviorSubject, Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class LoaderService {
-  // Приватный поток хранит состояние загрузчика.
-  private readonly loaderSubject = new BehaviorSubject<boolean>(false);
+  private readonly loaderSubject =
+    new BehaviorSubject<boolean>(false);
 
-  // Публичный поток доступен компонентам только для чтения.
+  private activeLoaders = 0;
+
   public readonly loader$: Observable<boolean> =
     this.loaderSubject.asObservable();
 
-  // Показывает глобальный загрузчик.
   public showLoader(): void {
-    this.loaderSubject.next(true);
+    this.activeLoaders += 1;
+
+    if (this.activeLoaders === 1) {
+      this.loaderSubject.next(true);
+    }
   }
 
-  // Скрывает глобальный загрузчик.
   public hideLoader(): void {
-    this.loaderSubject.next(false);
+    if (this.activeLoaders > 0) {
+      this.activeLoaders -= 1;
+    }
+
+    if (this.activeLoaders === 0) {
+      this.loaderSubject.next(false);
+    }
   }
 }

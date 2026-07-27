@@ -7,7 +7,8 @@
   min-height: 100vh;
   padding: 80px 40px 80px;
 
-  background-color: #f3f5f4;
+  background-color: var(--app-background);
+  color: var(--app-text);
   font-family: 'Nunito Sans', sans-serif;
 }
 
@@ -17,7 +18,6 @@
   max-width: 100%;
   margin: 0 auto 80px;
 
-  color: #1d3939;
   font-size: 48px;
   font-weight: 800;
   line-height: 29.9px;

@@ -131,7 +131,7 @@
           alt="Видео о походе"
         />
         <button class="about__play-button" type="button" aria-label="Смотреть видео">
-          <img class="about__play-icon" src="assets/play-icon.svg" alt="" />
+          <fa-icon class="about__play-icon" [icon]="faPlay" aria-hidden="true"></fa-icon>
         </button>
       </div>
     </div>
@@ -169,7 +169,7 @@
       <div class="programs__list">
         @for (feature of programFeatures; track feature.title) {
           <article class="programs__item">
-            <img class="programs__icon" [src]="feature.icon" alt="" />
+            <fa-icon class="programs__icon" [icon]="feature.icon" aria-hidden="true"></fa-icon>
             <div class="programs__item-content">
               <h3 class="programs__item-title">
                 {{ feature.title }}

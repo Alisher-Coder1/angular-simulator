@@ -1,4 +1,4 @@
-:host {
+﻿:host {
   display: block;
 }
 
@@ -87,7 +87,7 @@
   white-space: nowrap;
 }
 
-// Кнопка Консультация
+// РљРЅРѕРїРєР° РљРѕРЅСЃСѓР»СЊС‚Р°С†РёСЏ
 .consultation-button {
   flex: 0 0 158px;
   width: 158px;
@@ -105,7 +105,7 @@
   cursor: pointer;
 }
 
-// Верхняя панель для даты и счётчика по макету ментора
+// Р’РµСЂС…РЅСЏСЏ РїР°РЅРµР»СЊ РґР»СЏ РґР°С‚С‹ Рё СЃС‡С‘С‚С‡РёРєР° РїРѕ РјР°РєРµС‚Сѓ РјРµРЅС‚РѕСЂР°
 .top-task-panel {
   position: absolute;
   top: 24px;
@@ -290,7 +290,15 @@
   width: 100%;
   padding-top: 100px;
   padding-bottom: 100px;
-  background-color: #ffffff;
+  background-color: var(--app-background);
+}
+
+.about__play-icon {
+  display: inline-flex;
+
+  color: var(--app-primary);
+  font-size: 24px;
+  line-height: 1;
 }
 
 .about__inner {
@@ -378,7 +386,7 @@
   font-weight: 400;
   font-size: 24px;
   line-height: 20px;
-  color: #f2be22;
+  color: var(--app-accent);
 }
 
 .about__title {
@@ -389,7 +397,7 @@
   font-weight: 800;
   font-size: 32px;
   line-height: 120%;
-  color: #18121c;
+  color: var(--app-text);
 }
 
 .about__text {
@@ -400,7 +408,7 @@
   font-weight: 400;
   font-size: 18px;
   line-height: 150%;
-  color: #18121c;
+  color: var(--app-text);
 }
 
 .about__button {
@@ -430,7 +438,7 @@
 .programs {
   width: 100%;
   padding: 100px 0;
-  background: #f3f5f4;
+  background: var(--app-surface-muted);
 }
 
 .programs__inner {
@@ -456,7 +464,7 @@
   font-weight: 400;
   font-size: 24px;
   line-height: 20px;
-  color: #f2be22;
+  color: var(--app-accent);
 }
 
 .programs__title {
@@ -467,7 +475,7 @@
   font-weight: 800;
   font-size: 32px;
   line-height: 120%;
-  color: #18121c;
+  color: var(--app-text);
 }
 
 .programs__text {
@@ -505,7 +513,14 @@
   width: 50px;
   height: 50px;
   flex: 0 0 50px;
-  display: block;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  color: var(--app-primary);
+  font-size: 36px;
+  line-height: 1;
 }
 
 .programs__item-content {
@@ -621,7 +636,7 @@
   }
 }
 
-/* Live input (пункт 7) */
+/* Live input (РїСѓРЅРєС‚ 7) */
 .live-input-demo {
   margin-top: 30px;
   padding: 20px;
@@ -684,7 +699,7 @@
 
 .popular__title {
   margin: 0;
-  color: #18121e;
+  color: var(--app-text);
   font-size: 32px;
   font-weight: 800;
   line-height: 120%;
@@ -970,5 +985,298 @@
     font: inherit;
     font-weight: 600;
     cursor: pointer;
+  }
+}
+
+/* HW23: programs theme fix */
+.programs__text,
+.programs__item-title,
+.programs__item-text {
+  color: var(--app-text);
+}
+
+:host-context(.app-dark) .programs {
+  background: var(--app-background);
+}
+
+:host-context(.app-dark) .programs__icon {
+  filter: brightness(0) invert(1);
+}
+
+/* BLOG THEME OVERRIDES */
+.blog {
+  background: var(--app-blog-background);
+  color: var(--app-text);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.blog__post {
+  background-color: var(--app-blog-card);
+}
+
+.blog__title,
+.blog__post-title {
+  color: var(--app-text);
+}
+
+.blog__post-description {
+  color: var(--app-text-muted);
+}
+
+.blog__subtitle,
+.blog__post-date {
+  color: var(--app-accent);
+}
+
+.blog__post-link {
+  color: var(--app-blog-link);
+}
+
+/* HW23: gallery theme fix */
+.gallery {
+  background-color: var(--app-gallery-background);
+  color: var(--app-text);
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.gallery__title {
+  color: var(--app-text);
+}
+
+@media (max-width: 900px) {
+  /* Панель даты и счётчика становится частью обычного потока страницы. */
+  .top-task-panel {
+    position: static;
+    top: auto;
+    right: auto;
+
+    width: 100%;
+    min-height: auto;
+    padding: 12px 16px;
+  }
+
+  .top-task-panel__content {
+    width: 100%;
+    max-width: 1180px;
+    margin: 0 auto;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .top-task-panel__datetime {
+    flex: 1 1 220px;
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .top-task-panel__counter {
+    min-width: 48px;
+  }
+
+  .top-task-panel__button,
+  .top-task-panel__toggle {
+    flex: 0 1 auto;
+    max-width: 100%;
+    white-space: nowrap;
+  }
+
+  /* Туристическая шапка больше не использует жёсткую ширину 1180 px. */
+  .header {
+    height: auto;
+    min-height: 120px;
+    padding: 20px 16px;
+  }
+
+  .header__inner {
+    width: 100%;
+    max-width: 1180px;
+    height: auto;
+    min-width: 0;
+
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px 24px;
+  }
+
+  .logo {
+    flex: 0 0 138px;
+  }
+
+  .nav {
+    order: 3;
+    flex: 1 1 100%;
+
+    width: 100%;
+    height: auto;
+    min-width: 0;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px 20px;
+  }
+
+  .nav__link {
+    font-size: 16px;
+    line-height: 22px;
+  }
+
+  .consultation-button {
+    flex: 0 0 auto;
+    width: auto;
+    min-width: 158px;
+  }
+}
+
+@media (max-width: 600px) {
+  .header {
+    padding: 16px 12px;
+  }
+
+  .header__inner {
+    flex-direction: column;
+    flex-wrap: nowrap;
+    gap: 16px;
+  }
+
+  .logo {
+    order: 1;
+  }
+
+  .nav {
+    order: 2;
+    gap: 10px 16px;
+  }
+
+  .nav__link {
+    font-size: 15px;
+    line-height: 20px;
+  }
+
+  .consultation-button {
+    order: 3;
+    width: min(100%, 320px);
+  }
+}
+
+@media (max-width: 480px) {
+  .top-task-panel {
+    padding: 10px 12px;
+  }
+
+  .top-task-panel__content {
+    display: grid;
+    grid-template-columns: 40px minmax(48px, 1fr) 40px;
+    gap: 8px;
+  }
+
+  .top-task-panel__datetime,
+  .top-task-panel__toggle {
+    grid-column: 1 / -1;
+    width: 100%;
+  }
+
+  .top-task-panel__counter {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .top-task-panel__button {
+    width: 40px;
+  }
+
+  .header__inner {
+    gap: 14px;
+  }
+
+  .nav {
+    gap: 8px 14px;
+  }
+}
+
+/* Дополнение: адаптивная hero-секция и форма поиска. Загрузчик не затрагивается. */
+:host {
+  width: 100%;
+  min-width: 0;
+}
+
+@media (max-width: 900px) {
+  .hero {
+    width: 100%;
+    min-width: 0;
+    min-height: auto;
+    overflow-x: hidden;
+  }
+
+  .hero__content {
+    width: 100%;
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: clamp(280px, 52vw, 390px) 16px 32px;
+  }
+
+  .hero__title {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    font-size: clamp(26px, 4.5vw, 38px);
+    line-height: 1.25;
+    overflow-wrap: anywhere;
+  }
+
+  .search-form {
+    width: 100%;
+    height: auto;
+    padding: 24px;
+    flex-wrap: wrap;
+    align-items: stretch;
+  }
+
+  .search-field {
+    width: auto;
+    height: auto;
+    min-width: 0;
+    flex: 1 1 240px;
+  }
+
+  .search-select,
+  .search-input,
+  .search-field__hint {
+    width: 100%;
+  }
+
+  .search-button {
+    width: auto;
+    max-width: 100%;
+    flex: 1 1 213px;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero__content {
+    padding: 250px 12px 24px;
+  }
+
+  .hero__title {
+    font-size: clamp(24px, 7vw, 32px);
+    line-height: 1.2;
+  }
+
+  .search-form {
+    padding: 16px;
+    gap: 16px;
+  }
+
+  .search-field,
+  .search-button {
+    flex-basis: 100%;
+  }
+
+  .search-button {
+    width: 100%;
   }
 }

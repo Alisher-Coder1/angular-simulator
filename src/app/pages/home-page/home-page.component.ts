@@ -1,5 +1,7 @@
 import { Component, OnDestroy, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { faPersonHiking, faPlay, faShieldHalved, faTag, } from '@fortawesome/free-solid-svg-icons';
 import { Color } from '../../../enums/Color';
 import { Collection } from '../../collection';
 import { MessageService } from '../../../services/message.service';
@@ -11,7 +13,7 @@ type TaskPanelMode = 'date' | 'counter';
 
 @Component({
   selector: 'app-home-page',
-  imports: [FormsModule, MessageComponent],
+  imports: [FormsModule, MessageComponent, FontAwesomeModule],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.scss',
 })
@@ -27,6 +29,7 @@ export class HomePageComponent implements OnDestroy {
 
   // Делаем enum доступным в HTML-шаблоне.
   public readonly MessageType = MessageType;
+  public readonly faPlay = faPlay;
 
   /// Выбирает метод сервиса в зависимости от типа сообщения.
   public addMessage(type: MessageType, text: string): void {
@@ -91,17 +94,17 @@ export class HomePageComponent implements OnDestroy {
   // Данные для преимуществ блока "Лучшие программы для тебя".
   programFeatures = [
     {
-      icon: 'assets/icon-guide.svg',
+      icon: faPersonHiking,
       title: 'Опытный гид',
       text: 'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации.',
     },
     {
-      icon: 'assets/icon-safety.svg',
+      icon: faShieldHalved,
       title: 'Безопасный поход',
       text: 'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации.',
     },
     {
-      icon: 'assets/icon-price.svg',
+      icon: faTag,
       title: 'Лояльные цены',
       text: 'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации.',
     },

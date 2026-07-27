@@ -9,6 +9,7 @@
   padding: 30px;
 
   background-color: #ffffff;
+  border: 1px solid #cbd5e1;
   border-top: 4px solid #d4a373;
   border-radius: 4px;
 }
@@ -51,8 +52,8 @@
   font-family: 'Nunito Sans', sans-serif;
   font-size: 14px;
   font-weight: 700;
-
-  border: 1px solid #e2e8f0;
+  background-color: #ffffff;
+  border: 1px solid #b8c2cf;
   border-radius: 4px;
   outline: none;
 }
@@ -95,5 +96,43 @@
 
   .user-create__grid {
     grid-template-columns: 1fr;
+  }
+}
+/* USER CREATE DARK THEME */
+:host-context(.app-dark) {
+  .user-create {
+    background-color: var(--app-surface);
+    border-color: var(--app-border);
+  }
+
+  .user-create__title {
+    color: var(--app-text);
+  }
+
+  .user-create__field {
+    color: var(--app-text-muted);
+  }
+
+  .user-create__field input {
+    color: var(--app-text);
+    background-color: var(--app-surface-muted);
+    border-color: var(--app-border);
+  }
+
+  .user-create__field input::placeholder {
+    color: var(--app-text-muted);
+  }
+
+  .user-create__field input:focus {
+    border-color: var(--app-primary);
+  }
+
+  .user-create__button {
+    color: var(--app-primary-text);
+    background-color: var(--app-primary);
+  }
+
+  .user-create__button:hover {
+    filter: brightness(1.08);
   }
 }

@@ -1,9 +1,131 @@
-/* You can add global styles to this file, and also import other style files */
+﻿/* You can add global styles to this file, and also import other style files */
+
+* /* Р“Р»РѕР±Р°Р»СЊРЅР°СЏ СЃРІРµС‚Р»Р°СЏ С†РІРµС‚РѕРІР°СЏ СЃС…РµРјР° РїСЂРёР»РѕР¶РµРЅРёСЏ. */
+:root {
+  color-scheme: light;
+
+  --app-background: #fdfdfd;
+  --app-surface: #ffffff;
+  --app-surface-muted: #f3f5f4;
+
+  --app-text: #18121e;
+  --app-text-muted: #666c7c;
+
+  --app-border: #b8c0cc;
+
+  --app-primary: #1a3e3e;
+  --app-primary-text: #fdfdfd;
+
+  --app-accent: #f2be22;
+  --app-nav-accent: #1a3e5e;
+
+  --app-shadow: rgb(24 18 30 / 12%);
+}
+
+/* Р“Р»РѕР±Р°Р»СЊРЅР°СЏ С‚С‘РјРЅР°СЏ С†РІРµС‚РѕРІР°СЏ СЃС…РµРјР° РїСЂРёР»РѕР¶РµРЅРёСЏ. */
+html.app-dark {
+  color-scheme: dark;
+
+  --app-background: #111827;
+  --app-surface: #1f2937;
+  --app-surface-muted: #273449;
+
+  --app-text: #f3f5f4;
+  --app-text-muted: #b8c0cc;
+
+  --app-border: #3d4858;
+
+  --app-primary: #245454;
+  --app-primary-text: #fdfdfd;
+
+  --app-accent: #f2be22;
+  --app-nav-accent: #8fb8ff;
+
+  --app-shadow: rgb(0 0 0 / 35%);
+}
 
 * {
   box-sizing: border-box;
 }
 
+html,
+body {
+  min-height: 100%;
+}
+
 body {
   margin: 0;
+
+  color: var(--app-text);
+  background-color: var(--app-background);
+
+  transition:
+    color 0.2s ease,
+    background-color 0.2s ease;
+}
+/* BLOG THEME TOKENS */
+:root {
+  --app-blog-background: #f3f5f4;
+  --app-blog-card: #ffffff;
+  --app-blog-link: #1a3e3e;
+  --app-topbar-background: #ffffff;
+  --app-topbar-text: #18121e;
+  --app-topbar-border: #dddddd;
+}
+
+html.app-dark {
+  --app-blog-background: #171e2b;
+  --app-blog-card: #1f2937;
+  --app-blog-link: #f2be22;
+   --app-topbar-background: #171c2b;
+  --app-topbar-text: #e8ecf3;
+  --app-topbar-border: #30384a;
+}
+
+/* GALLERY THEME TOKENS */
+:root {
+  --app-gallery-background: #ffffff;
+}
+
+html.app-dark {
+  --app-gallery-background: #0f172a;
+}
+
+.bootstrap-loader {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+
+  background-color: #181827;
+}
+
+.bootstrap-loader__spinner {
+  width: 40px;
+  height: 40px;
+
+  border: 4px solid rgba(255, 255, 255, 0.25);
+  border-top-color: #ffffff;
+  border-radius: 50%;
+
+  animation: bootstrap-loader-spin 1s linear infinite;
+}
+
+.bootstrap-loader__text {
+  margin: 0;
+  color: #ffffff;
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+@keyframes bootstrap-loader-spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
