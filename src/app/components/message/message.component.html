@@ -1,7 +1,6 @@
 <ng-template #messageTemplate let-message>
   <div class="message" [class]="'message message--' + message.type">
-    <img class="message__icon" src="assets/message.svg" alt="" />
-
+    <fa-icon class="message__icon" [icon]="faMessage" aria-hidden="true"></fa-icon>
     <div class="message__content">
       <strong class="message__title">
         {{ message.type }}

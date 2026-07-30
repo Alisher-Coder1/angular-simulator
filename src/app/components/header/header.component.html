@@ -11,4 +11,29 @@
       </a>
     }
   </nav>
+  <div class="header__settings">
+    <div class="header__mode">
+      <label for="dark-mode">
+        {{ isDarkMode ? 'Тёмный режим' : 'Светлый режим' }}
+      </label>
+
+      <p-toggleswitch
+        inputId="dark-mode"
+        [ngModel]="isDarkMode"
+        (ngModelChange)="changeColorMode($event)"
+      ></p-toggleswitch>
+    </div>
+    <div class="header__theme">
+      <span id="theme-label">Тема:</span>
+      <p-selectbutton
+        [options]="themeOptions"
+        [ngModel]="currentTheme"
+        (ngModelChange)="changeTheme($event)"
+        optionLabel="label"
+        optionValue="value"
+        [allowEmpty]="false"
+        aria-labelledby="theme-label"
+      ></p-selectbutton>
+    </div>
+  </div>
 </header>

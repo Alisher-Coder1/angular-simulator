@@ -1,9 +1,41 @@
 .header {
   padding: 24px 40px;
-  background-color: #ffffff;
-  border-bottom: 1px solid #dddddd;
+
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+
+  background-color: var(--app-surface);
+  border-bottom: 1px solid var(--app-border);
+
+  &__settings {
+    grid-column: 1;
+    grid-row: 1;
+    justify-self: start;
+
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px 16px;
+
+    min-width: 0;
+  }
+
+  &__theme,
+  &__mode {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    color: var(--app-text);
+    font-size: 14px;
+    font-weight: 600;
+  }
 
   &__navigation {
+    grid-column: 2;
+    grid-row: 1;
+
     display: flex;
     align-items: center;
     justify-content: center;
@@ -11,20 +43,89 @@
   }
 
   &__link {
-    color: #18121e;
+    color: var(--app-text);
     font-size: 18px;
     font-weight: 600;
     text-decoration: none;
     transition: color 0.2s ease;
 
-    &:hover {
-      color: #1a3e5e;
-    }
-
+    &:hover,
     &--active {
-      color: #1a3e5e;
+      color: var(--app-primary);
       text-decoration: underline;
       text-underline-offset: 6px;
+    }
+  }
+}
+
+/* Навигация в тёмной теме */
+:host-context(.app-dark) .header__link {
+  color: #d7deea;
+}
+
+:host-context(.app-dark) .header__link:hover {
+  color: #ffffff;
+}
+
+:host-context(.app-dark) .header__link--active {
+  color: #ffffff;
+  font-weight: 700;
+  text-decoration: underline;
+  text-decoration-color: #60a5fa;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 6px;
+}
+
+@media (max-width: 900px) {
+  .header {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto auto;
+    row-gap: 12px;
+    padding: 12px 16px;
+
+    &__settings {
+      grid-column: 1;
+      grid-row: 1;
+      justify-self: start;
+
+      width: 100%;
+      min-width: 0;
+    }
+
+    &__navigation {
+      grid-column: 1;
+      grid-row: 2;
+      justify-self: center;
+
+      width: 100%;
+      min-width: 0;
+      flex-wrap: wrap;
+      gap: 12px 20px;
+    }
+
+    &__link {
+      font-size: 14px;
+      line-height: 20px;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .header {
+    padding: 10px 12px;
+
+    &__settings {
+      gap: 8px 12px;
+    }
+
+    &__theme,
+    &__mode {
+      font-size: 13px;
+    }
+
+    &__navigation {
+      justify-content: center;
+      gap: 8px 16px;
     }
   }
 }

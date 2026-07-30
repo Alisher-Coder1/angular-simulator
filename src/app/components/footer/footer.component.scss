@@ -1,13 +1,13 @@
 .footer {
-  // Footer служит опорой для белой карточки подписки.
+  // Footer СЃР»СѓР¶РёС‚ РѕРїРѕСЂРѕР№ РґР»СЏ Р±РµР»РѕР№ РєР°СЂС‚РѕС‡РєРё РїРѕРґРїРёСЃРєРё.
   position: relative;
 
-  // Основной фон footer из макета.
+  // РћСЃРЅРѕРІРЅРѕР№ С„РѕРЅ footer РёР· РјР°РєРµС‚Р°.
   background-color: #1a3e3e;
 }
 
 .footer__subscription {
-  // Размер белой карточки в Figma — 1180 × 196 px.
+  // Р Р°Р·РјРµСЂ Р±РµР»РѕР№ РєР°СЂС‚РѕС‡РєРё РІ Figma вЂ” 1180 Г— 196 px.
   position: absolute;
   top: -98px;
   left: 50%;
@@ -17,7 +17,7 @@
   max-width: 1180px;
   min-height: 196px;
 
-  // Заголовок слева, форма справа.
+  // Р—Р°РіРѕР»РѕРІРѕРє СЃР»РµРІР°, С„РѕСЂРјР° СЃРїСЂР°РІР°.
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -69,8 +69,8 @@
   row-gap: 8px;
 }
 
-// Позволяет дочерним элементам участвовать
-// непосредственно в сетке формы.
+// РџРѕР·РІРѕР»СЏРµС‚ РґРѕС‡РµСЂРЅРёРј СЌР»РµРјРµРЅС‚Р°Рј СѓС‡Р°СЃС‚РІРѕРІР°С‚СЊ
+// РЅРµРїРѕСЃСЂРµРґСЃС‚РІРµРЅРЅРѕ РІ СЃРµС‚РєРµ С„РѕСЂРјС‹.
 .footer__subscription-field {
   display: contents;
 }
@@ -150,7 +150,7 @@
   opacity: 0.9;
 }
 
-// Контейнер основной части footer с тремя колонками.
+// РљРѕРЅС‚РµР№РЅРµСЂ РѕСЃРЅРѕРІРЅРѕР№ С‡Р°СЃС‚Рё footer СЃ С‚СЂРµРјСЏ РєРѕР»РѕРЅРєР°РјРё.
 .footer__content {
   width: calc(100% - 40px);
   max-width: 1180px;
@@ -247,8 +247,17 @@
   width: 32px;
   height: 32px;
 
-  display: block;
-  object-fit: contain;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #f3f5f4;
+  font-size: 32px;
+  line-height: 1;
+}
+
+.footersocial-link:hover .footersocial-icon {
+  color: #f2be22;
 }
 
 .footer__links {
@@ -277,18 +286,7 @@
   text-decoration: none;
 }
 
-.footer__link::before {
-  content: "›";
-
-  flex-shrink: 0;
-
-  color: #f3f5f4;
-  font-size: 18px;
-  line-height: 16px;
-}
-
-.footer__link:hover,
-.footer__link:hover::before {
+.footer__link:hover {
   color: #f2be22;
 }
 
@@ -456,4 +454,36 @@
     flex-direction: column;
     align-items: flex-start;
   }
+}
+
+/* FOOTER SUBSCRIPTION DARK THEME */
+:host-context(.app-dark) .footer__subscription {
+  background-color: #303752;
+  border: 1px solid #6675a8;
+  box-shadow: 0 12px 30px rgb(0 0 0 / 28%);
+}
+:host-context(.app-dark) .footer__subscription-title,
+:host-context(.app-dark) .footer__subscription-label {
+  color: #f5f7ff;
+}
+:host-context(.app-dark) .footer__subscription-agreement {
+  color: #d5daec;
+}
+:host-context(.app-dark) .footer__subscription-input {
+  color: #f5f7ff;
+  background-color: #3c4565;
+  border-color: #7180b5;
+}
+:host-context(.app-dark) .footer__subscription-input::placeholder {
+  color: #b9c1dd;
+}
+:host-context(.app-dark) .footer__subscription-input:focus {
+  border-color: #91a0e3;
+}
+:host-context(.app-dark) .footer__subscription-button {
+  color: #ffffff;
+  background-color: #5d6fd0;
+}
+:host-context(.app-dark) .footer__subscription-button:hover {
+  background-color: #6d7fe0;
 }
