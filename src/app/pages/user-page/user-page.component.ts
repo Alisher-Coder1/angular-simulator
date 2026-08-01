@@ -6,10 +6,11 @@ import { User } from '../../../interfaces/user';
 import { UserCreateComponent } from '../../components/user-create/user-create.component';
 import { BehaviorSubject, combineLatest, map } from 'rxjs';
 import { UsersFilterComponent } from '../../components/users-filter/users-filter.component';
+import { PluralPipe } from '../../pipes/plural.pipe';
 
 @Component({
   selector: 'app-user-page',
-  imports: [AsyncPipe, UserCardComponent, UserCreateComponent, UsersFilterComponent,],
+  imports: [AsyncPipe, UserCardComponent, UserCreateComponent, UsersFilterComponent, PluralPipe],
   templateUrl: './user-page.component.html',
   styleUrl: './user-page.component.scss',
 })
