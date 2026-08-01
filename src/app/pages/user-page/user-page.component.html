@@ -4,6 +4,10 @@
   <app-users-filter (filterUsers)="onFilterUsers($event)"></app-users-filter>
 
   @if (filteredUsers$ | async; as users) {
+    <p class="user-page__count">
+      {{ users.length }}
+      {{ users.length | plural: 'пользователь' : 'пользователя' : 'пользователей' }}
+    </p>
     @if (users.length > 0) {
       <div class="user-page__list">
         @for (user of users; track user.id) {

@@ -1,6 +1,6 @@
 <article class="user-card">
   <header class="user-card__header">
-    <h2 class="user-card__name">{{ user.name || 'Неизвестно' }}</h2>
+    <h2 class="user-card__name">{{ user.name || 'Пользователь' | uppercase }}</h2>
     <p class="user-card__username">@{{ user.username || 'Неизвестно' }}</p>
   </header>
 
@@ -17,7 +17,9 @@
 
     <div class="user-card__row">
       <span class="user-card__label">Телефон:</span>
-      <span class="user-card__value">{{ user.phone || 'Неизвестно' }}</span>
+      <span class="user-card__value">
+        {{ user.phone ? (user.phone | phone: 'international') : 'Неизвестно' }}
+      </span>
     </div>
 
     <div class="user-card__row">
@@ -101,7 +103,7 @@
       </span>
     </div>
   </section>
-  <button class="user-card__delete-button" type="button" (click)="onDeleteUser()">
+  <button appBoldHover class="user-card__delete-button" type="button" (click)="onDeleteUser()">
     Удалить пользователя
   </button>
 </article>
