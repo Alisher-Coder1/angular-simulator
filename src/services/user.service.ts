@@ -5,6 +5,7 @@ import { LoaderService } from './loader.service';
 import { LocalStorageService } from './local-storage.service';
 import { MessageService } from './message.service';
 import { UserApiService } from './user-api.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
@@ -102,17 +103,19 @@ export class UserService {
         this.setUsers(users);
       }),
 
-      catchError(() => {
-        this.messageService.showError(
-          'Не удалось загрузить пользователей',
-        );
+      catchError((error: HttpErrorResponse) => {
+  if (error.status < 500 || error.status >= 600) {
+    this.messageService.showError(
+      'Не удалось загрузить пользователей',
+    );
+  }
 
-        // Очищаем старые данные.
-        this.setUsers([]);
+  // Очищаем старые данные.
+  this.setUsers([]);
 
-        // Возвращаем безопасный пустой массив.
-        return of([] as User[]);
-      }),
+  // Возвращаем безопасный пустой массив.
+  return of([] as User[]);
+}),
 
       // Выполняется и после успеха, и после ошибки.
       finalize(() => {

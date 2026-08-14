@@ -1,27 +1,32 @@
 import { Routes } from '@angular/router';
 
-import { HomePageComponent } from './pages/home-page/home-page.component';
-import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
-import { UserPageComponent } from './pages/user-page/user-page.component';
-
 export const routes: Routes = [
   // Главная страница открывается по адресу: /
   {
     path: '',
-    component: HomePageComponent,
+    loadComponent: () =>
+      import('./pages/home-page/home-page.component').then(
+        (m) => m.HomePageComponent,
+      ),
     pathMatch: 'full',
   },
 
   // Страница пользователей открывается по адресу: /users
   {
     path: 'users',
-    component: UserPageComponent,
+    loadComponent: () =>
+      import('./pages/user-page/user-page.component').then(
+        (m) => m.UserPageComponent,
+      ),
   },
 
   // Любой неизвестный адрес открывает страницу «Страница не найдена».
   // Этот маршрут обязательно должен находиться последним.
   {
     path: '**',
-    component: NotFoundPageComponent,
+    loadComponent: () =>
+      import('./pages/not-found-page/not-found-page.component').then(
+        (m) => m.NotFoundPageComponent,
+      ),
   },
 ];
