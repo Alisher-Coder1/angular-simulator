@@ -1,0 +1,45 @@
+<section class="post-create">
+  <h1>Создание поста</h1>
+
+  <form [formGroup]="form" (ngSubmit)="createPost()">
+    <div>
+      <label for="title">Заголовок</label>
+
+      <input id="title" type="text" formControlName="title" />
+
+      @if (form.controls.title.invalid && form.controls.title.touched) {
+        <small>Введите заголовок</small>
+      }
+    </div>
+
+    <div>
+      <label for="body">Текст поста</label>
+
+      <textarea id="body" rows="6" formControlName="body"></textarea>
+
+      @if (form.controls.body.invalid && form.controls.body.touched) {
+        <small>Введите текст поста</small>
+      }
+    </div>
+
+    <div>
+      <label for="tags">Теги</label>
+
+      <input id="tags" type="text" formControlName="tags" placeholder="history, crime, english" />
+    </div>
+
+    <div>
+      <label for="userId">ID пользователя</label>
+
+      <input id="userId" type="number" min="1" formControlName="userId" />
+    </div>
+
+    <div>
+      <button type="submit" [disabled]="form.invalid || isSubmitting">
+        {{ isSubmitting ? 'Создание...' : 'Создать' }}
+      </button>
+
+      <button type="button" [disabled]="isSubmitting" (click)="cancel()">Отмена</button>
+    </div>
+  </form>
+</section>

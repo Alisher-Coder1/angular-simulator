@@ -1,0 +1,62 @@
+<section class="posts-page">
+  <h1>Посты</h1>
+
+  <p-table
+    [value]="posts"
+    [paginator]="true"
+    [rows]="rows"
+    [first]="first"
+    [totalRecords]="totalRecords"
+    [rowsPerPageOptions]="rowsPerPageOptions"
+    [lazy]="true"
+    (onLazyLoad)="loadPosts($event)"
+    [contextMenu]="cm"
+    [(contextMenuSelection)]="selectedPost"
+    [tableStyle]="{ 'min-width': '50rem' }"
+  >
+    <ng-template #header>
+      <tr>
+        <th>Название</th>
+        <th>Теги</th>
+        <th>Просмотры</th>
+      </tr>
+    </ng-template>
+
+    <ng-template #body let-post>
+      @if (isLoading) {
+        <tr>
+          <td>
+            <p-skeleton height="2rem" />
+          </td>
+
+          <td>
+            <p-skeleton height="2rem" />
+          </td>
+
+          <td>
+            <p-skeleton height="2rem" />
+          </td>
+        </tr>
+      } @else {
+        <tr class="post-row" [pContextMenuRow]="post" (dblclick)="openPost(post)">
+          <td>{{ post.title }}</td>
+
+          <td>
+            {{ post.tags.join(', ') }}
+          </td>
+
+          <td>
+            {{ post.views }}
+          </td>
+        </tr>
+      }
+    </ng-template>
+
+    <ng-template #emptymessage>
+      <tr>
+        <td colspan="3">Посты не найдены</td>
+      </tr>
+    </ng-template>
+  </p-table>
+  <p-contextmenu #cm [model]="contextMenuItems" />
+</section>

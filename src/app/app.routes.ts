@@ -1,32 +1,55 @@
 import { Routes } from '@angular/router';
 
+import { postResolver } from './posts/post.resolver';
+
 export const routes: Routes = [
-  // Главная страница открывается по адресу: /
   {
     path: '',
     loadComponent: () =>
       import('./pages/home-page/home-page.component').then(
-        (m) => m.HomePageComponent,
+        m => m.HomePageComponent,
       ),
     pathMatch: 'full',
   },
-
-  // Страница пользователей открывается по адресу: /users
   {
     path: 'users',
     loadComponent: () =>
       import('./pages/user-page/user-page.component').then(
-        (m) => m.UserPageComponent,
+        m => m.UserPageComponent,
       ),
   },
 
-  // Любой неизвестный адрес открывает страницу «Страница не найдена».
-  // Этот маршрут обязательно должен находиться последним.
+  // Posts feature
+  {
+    path: 'posts',
+    loadComponent: () =>
+      import('./posts/posts.component').then(
+        m => m.PostsComponent,
+      ),
+  },
+  {
+    path: 'posts/create',
+    loadComponent: () =>
+      import('./posts/post-create.component').then(
+        m => m.PostCreateComponent,
+      ),
+  },
+  {
+    path: 'posts/:id',
+    loadComponent: () =>
+      import('./posts/post-detail.component').then(
+        m => m.PostDetailComponent,
+      ),
+    resolve: {
+      post: postResolver,
+    },
+  },
+
   {
     path: '**',
     loadComponent: () =>
       import('./pages/not-found-page/not-found-page.component').then(
-        (m) => m.NotFoundPageComponent,
+        m => m.NotFoundPageComponent,
       ),
   },
 ];
