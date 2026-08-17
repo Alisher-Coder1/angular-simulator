@@ -1,0 +1,35 @@
+<section class="post-detail">
+  <h1>{{ post.title }}</h1>
+
+  <p>
+    <strong>ID поста:</strong>
+    {{ post.id }}
+  </p>
+
+  <p>{{ post.body }}</p>
+
+  <p>
+    <strong>Теги:</strong>
+    {{ post.tags.join(', ') }}
+  </p>
+
+  <p>
+    <strong>Просмотры:</strong>
+    {{ post.views }}
+  </p>
+
+  <p>
+    <strong>Лайки:</strong>
+    {{ post.reactions.likes }}
+  </p>
+
+  <p>
+    <strong>Дизлайки:</strong>
+    {{ post.reactions.dislikes }}
+  </p>
+
+  <p>
+    <strong>ID пользователя:</strong>
+    {{ post.userId }}
+  </p>
+</section>
