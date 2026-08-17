@@ -7,13 +7,14 @@ import { routes } from './app.routes';
 import { loggingInterceptor } from './interceptors/logging.interceptor';
 import { errorInterceptor } from './interceptors/error-interceptor';
 import { loaderInterceptor } from './interceptors/loader.interceptor';
+import { authInterceptor } from './features/auth/auth.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideRouter(routes),
     provideZoneChangeDetection(),
-    provideHttpClient(withInterceptors([loaderInterceptor, loggingInterceptor, errorInterceptor,]),
+    provideHttpClient(withInterceptors([authInterceptor, loaderInterceptor, loggingInterceptor, errorInterceptor,]),
   ),
     providePrimeNG({
   theme: { preset: Aura,
