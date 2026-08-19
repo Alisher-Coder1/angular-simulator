@@ -20,3 +20,9 @@ export interface IRefreshTokenResponse {
   accessToken: string;
   refreshToken: string;
 }
+
+export type TUserRole = 'admin' | 'moderator' | 'user';
+
+export interface ICurrentUser {
+  role: TUserRole;
+}
