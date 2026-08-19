@@ -68,7 +68,45 @@ export class AuthService {
   }
 
   isAuthenticated(): boolean {
-    return !!this.getAccessToken();
+    const accessToken = this.getAccessToken();
+
+    if (!accessToken || this.isTokenExpired(accessToken)) {
+      this.logout();
+      return false;
+    }
+
+    return true;
+  }
+
+  private isTokenExpired(token: string): boolean {
+    try {
+      const tokenParts = token.split('.');
+
+      if (tokenParts.length !== 3) {
+        return true;
+      }
+
+      const payload = tokenParts[1]
+        .replace(/-/g, '+')
+        .replace(/_/g, '/');
+
+      const paddedPayload = payload.padEnd(
+        Math.ceil(payload.length / 4) * 4,
+        '=',
+      );
+
+      const decodedPayload = JSON.parse(
+        atob(paddedPayload),
+      ) as { exp?: number };
+
+      if (typeof decodedPayload.exp !== 'number') {
+        return true;
+      }
+
+      return decodedPayload.exp * 1000 <= Date.now();
+    } catch {
+      return true;
+    }
   }
 
   private saveAuthData(user: IAuth): void {
