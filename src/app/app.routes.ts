@@ -1,10 +1,18 @@
 import { Routes } from '@angular/router';
-
 import { postResolver } from './posts/post.resolver';
+import { authGuard } from './features/auth/auth.guard';
 
 export const routes: Routes = [
   {
+  path: 'login',
+  loadComponent: () =>
+    import('./features/auth/login/login.component').then(
+      (m) => m.LoginComponent,
+    ),
+  }, 
+  {
     path: '',
+    canActivate: [authGuard],
     loadComponent: () =>
       import('./pages/home-page/home-page.component').then(
         m => m.HomePageComponent,
@@ -13,6 +21,7 @@ export const routes: Routes = [
   },
   {
     path: 'users',
+    canActivate: [authGuard],
     loadComponent: () =>
       import('./pages/user-page/user-page.component').then(
         m => m.UserPageComponent,
@@ -22,6 +31,7 @@ export const routes: Routes = [
   // Posts feature
   {
     path: 'posts',
+    canActivate: [authGuard],
     loadComponent: () =>
       import('./posts/posts.component').then(
         m => m.PostsComponent,
@@ -29,6 +39,7 @@ export const routes: Routes = [
   },
   {
     path: 'posts/create',
+    canActivate: [authGuard],
     loadComponent: () =>
       import('./posts/post-create.component').then(
         m => m.PostCreateComponent,
@@ -36,6 +47,7 @@ export const routes: Routes = [
   },
   {
     path: 'posts/:id',
+    canActivate: [authGuard],
     loadComponent: () =>
       import('./posts/post-detail.component').then(
         m => m.PostDetailComponent,
@@ -47,6 +59,7 @@ export const routes: Routes = [
 
   {
     path: '**',
+    canActivate: [authGuard],
     loadComponent: () =>
       import('./pages/not-found-page/not-found-page.component').then(
         m => m.NotFoundPageComponent,

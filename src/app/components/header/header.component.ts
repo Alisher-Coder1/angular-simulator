@@ -1,18 +1,20 @@
 import { Component, inject, Inject } from '@angular/core';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { ToggleSwitchModule } from 'primeng/toggleswitch';
 import { ColorMode } from '../../../enums/ColorMode';
 import { ThemeService } from '../../../services/theme.service';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { Theme } from '../../../enums/Theme';
+import { AuthService } from '../../features/auth/auth.service';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-header',
 
   // Подключаем директивы для навигации
   // и выделения активной ссылки.
-  imports: [RouterLink, RouterLinkActive, FormsModule, ToggleSwitchModule, SelectButtonModule],
+  imports: [RouterLink, RouterLinkActive, FormsModule, ToggleSwitchModule, SelectButtonModule, AsyncPipe,],
 
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
@@ -20,6 +22,10 @@ import { Theme } from '../../../enums/Theme';
 export class HeaderComponent {
 
   private readonly themeService = inject(ThemeService);
+  private readonly authService = inject(AuthService);
+  private readonly router = inject(Router);
+
+  readonly currentUser$ = this.authService.currentUser$;
 
 public readonly themeOptions = [
   {
@@ -65,4 +71,8 @@ public changeColorMode(isDarkMode: boolean): void {
       path: '/users',
     },
   ];
+logout(): void {
+  this.authService.logout();
+  void this.router.navigate(['/login']);
+}
 }
