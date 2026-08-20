@@ -4,6 +4,7 @@ import { BehaviorSubject, Observable, tap } from 'rxjs';
 
 import {
   IAuth,
+  ICurrentUser,
   ILoginRequest,
   IRefreshTokenResponse,
 } from './auth.interface';
@@ -25,6 +26,10 @@ export class AuthService {
   );
 
   readonly currentUser$ = this.currentUserSubject.asObservable();
+
+  getCurrentUser(): Observable<ICurrentUser> {
+  return this.http.get<ICurrentUser>(`${this.apiUrl}/me`);
+}
 
   login(credentials: ILoginRequest): Observable<IAuth> {
     return this.http
