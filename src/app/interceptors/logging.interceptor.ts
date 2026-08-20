@@ -15,20 +15,20 @@ export const loggingInterceptor: HttpInterceptorFn = (
 
   return next(req).pipe(
     tap({
-      next: event => {
+      next: (event) => {
         if (event instanceof HttpResponse) {
           const duration = Math.round(performance.now() - startedAt);
 
-          console.log(
-            `[HTTP] ${req.method} ${req.urlWithParams} | Status: ${event.status} | Time: ${duration} ms`,
+          console.warn(
+            `[HTTP] ${ req.method } ${ req.urlWithParams } | Status: ${ event.status } | Time: ${ duration } ms`,
           );
         }
       },
       error: (error: HttpErrorResponse) => {
         const duration = Math.round(performance.now() - startedAt);
 
-        console.log(
-          `[HTTP] ${req.method} ${req.urlWithParams} | Status: ${error.status} | Time: ${duration} ms`,
+        console.error(
+          `[HTTP] ${ req.method } ${ req.urlWithParams } | Status: ${ error.status } | Time: ${ duration } ms`,
         );
       },
     }),

@@ -21,20 +21,25 @@ import { PostService } from './post.service';
   styleUrl: './post-edit-dialog.component.scss',
 })
 export class PostEditDialogComponent {
+
   private readonly config = inject(DynamicDialogConfig);
+
   private readonly dialogRef = inject(DynamicDialogRef);
+
   private readonly postService = inject(PostService);
 
   private readonly post: IPost =
     this.config.data.post as IPost;
 
-  public title = this.post.title;
-  public tags = this.post.tags.join(', ');
-  public views = this.post.views;
+  title = this.post.title;
 
-  public isSaving = false;
+  tags = this.post.tags.join(', ');
 
-  public save(): void {
+  views = this.post.views;
+
+  isSaving = false;
+
+  save(): void {
     if (!this.title.trim() || this.isSaving) {
       return;
     }
@@ -68,7 +73,8 @@ export class PostEditDialogComponent {
       });
   }
 
-  public cancel(): void {
+  cancel(): void {
     this.dialogRef.close();
   }
+
 }

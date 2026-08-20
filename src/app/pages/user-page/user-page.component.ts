@@ -2,7 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { UserService } from '../../../services/user.service';
 import { AsyncPipe } from '@angular/common';
 import { UserCardComponent } from '../../components/user-card/user-card.component';
-import { User } from '../../../interfaces/user';
+import {  IUser } from '../../../interfaces/user';
 import { UserCreateComponent } from '../../components/user-create/user-create.component';
 import { BehaviorSubject, combineLatest, map } from 'rxjs';
 import { UsersFilterComponent } from '../../components/users-filter/users-filter.component';
@@ -15,6 +15,7 @@ import { PluralPipe } from '../../pipes/plural.pipe';
   styleUrl: './user-page.component.scss',
 })
 export class UserPageComponent implements OnInit {
+
   // Получаем сервис, который управляет данными пользователей.
   private readonly userService = inject(UserService);
 
@@ -23,35 +24,37 @@ export class UserPageComponent implements OnInit {
 
   private readonly users$ = this.userService.getUsers();
 
-  public readonly filteredUsers$ = combineLatest([
+  readonly filteredUsers$ = combineLatest([
     this.users$,
     this.searchValueSubject,
   ]).pipe(
-    map(([users, searchValue]: [User[], string]) => {
+    map(([users, searchValue]: [ IUser[], string]) => {
        if (searchValue === '') {
         return users;
       }
 
-      return users.filter((user: User) =>
+      return users.filter((user:  IUser) =>
         user.name.toLowerCase().includes(searchValue),
       );
     }),
   );
-  public onDeleteUser(userId: number): void {
+
+  onDeleteUser(userId: number): void {
   this.userService.deleteUser(userId);
 }
 
-public onFilterUsers(searchValue: string): void {
+onFilterUsers(searchValue: string): void {
   this.searchValueSubject.next(searchValue);
 }
 
-  public onCreateUser(user: User): void {
+  onCreateUser(user:  IUser): void {
   this.userService.addUser(user);
 }
  
   // Срабатывает один раз после создания страницы.
-  public ngOnInit(): void {
+  ngOnInit(): void {
     // Запускаем HTTP-запрос пользователей.
     this.userService.loadUsers().subscribe();
   }
+
 }

@@ -13,9 +13,13 @@
   </nav>
   <div class="header__auth">
     @if (currentUser$ | async; as user) {
-      <span class="header__user"> {{ user.firstName }} {{ user.lastName }} </span>
+      <span class="header__user">
+        {{ user.firstName }} {{ user.lastName }}
+      </span>
 
-      <button type="button" class="header__logout" (click)="logout()">Выйти</button>
+      <button type="button" class="header__logout" (click)="logout()">
+        Выйти
+      </button>
     } @else {
       <a class="header__link" routerLink="/login"> Войти </a>
     }

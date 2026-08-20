@@ -13,12 +13,15 @@ import {
   providedIn: 'root',
 })
 export class AuthService {
+
   private readonly http = inject(HttpClient);
 
   private readonly apiUrl = 'https://dummyjson.com/auth';
 
   private readonly accessTokenKey = 'accessToken';
+
   private readonly refreshTokenKey = 'refreshToken';
+
   private readonly userKey = 'authUser';
 
   private readonly currentUserSubject = new BehaviorSubject<IAuth | null>(
@@ -28,12 +31,12 @@ export class AuthService {
   readonly currentUser$ = this.currentUserSubject.asObservable();
 
   getCurrentUser(): Observable<ICurrentUser> {
-  return this.http.get<ICurrentUser>(`${this.apiUrl}/me`);
+  return this.http.get<ICurrentUser>(`${ this.apiUrl }/me`);
 }
 
   login(credentials: ILoginRequest): Observable<IAuth> {
     return this.http
-      .post<IAuth>(`${this.apiUrl}/login`, credentials)
+      .post<IAuth>(`${ this.apiUrl }/login`, credentials)
       .pipe(
         tap((user) => {
           this.saveAuthData(user);
@@ -44,7 +47,7 @@ export class AuthService {
 
   refreshToken(): Observable<IRefreshTokenResponse> {
     return this.http
-      .post<IRefreshTokenResponse>(`${this.apiUrl}/refresh`, {
+      .post<IRefreshTokenResponse>(`${ this.apiUrl }/refresh`, {
         refreshToken: this.getRefreshToken(),
         expiresInMins: 30,
       })
@@ -133,4 +136,5 @@ export class AuthService {
       return null;
     }
   }
+
 }

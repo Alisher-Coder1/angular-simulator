@@ -1,6 +1,10 @@
 <ng-template #messageTemplate let-message>
   <div class="message" [class]="'message message--' + message.type">
-    <fa-icon class="message__icon" [icon]="faMessage" aria-hidden="true"></fa-icon>
+    <fa-icon
+      class="message__icon"
+      [icon]="faMessage"
+      aria-hidden="true"
+    ></fa-icon>
     <div class="message__content">
       <strong class="message__title">
         {{ message.type }}
@@ -11,15 +15,21 @@
       </p>
     </div>
 
-    <button class="message__close" type="button" (click)="closeMessage(message.id)">×</button>
+    <button
+      class="message__close"
+      type="button"
+      (click)="closeMessage(message.id)"
+    >
+      ×
+    </button>
   </div>
 </ng-template>
 
 <div class="messages">
-  <ng-container
-    *ngFor="let message of messages$ | async"
-    [ngTemplateOutlet]="messageTemplate"
-    [ngTemplateOutletContext]="{ $implicit: message }"
-  >
-  </ng-container>
+  @for (message of messages$ | async; track message.id) {
+    <ng-container
+      [ngTemplateOutlet]="messageTemplate"
+      [ngTemplateOutletContext]="{ $implicit: message }"
+    ></ng-container>
+  }
 </div>

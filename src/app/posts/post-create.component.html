@@ -25,7 +25,12 @@
     <div>
       <label for="tags">Теги</label>
 
-      <input id="tags" type="text" formControlName="tags" placeholder="history, crime, english" />
+      <input
+        id="tags"
+        type="text"
+        formControlName="tags"
+        placeholder="history, crime, english"
+      />
     </div>
 
     <div>
@@ -39,7 +44,9 @@
         {{ isSubmitting ? 'Создание...' : 'Создать' }}
       </button>
 
-      <button type="button" [disabled]="isSubmitting" (click)="cancel()">Отмена</button>
+      <button type="button" [disabled]="isSubmitting" (click)="cancel()">
+        Отмена
+      </button>
     </div>
   </form>
 </section>

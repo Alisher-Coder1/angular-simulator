@@ -1,5 +1,5 @@
-import { Component, DestroyRef, inject,} from '@angular/core';
-import { NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router, RouterOutlet,} from '@angular/router';
+import { Component, DestroyRef, inject, } from '@angular/core';
+import { NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router, RouterOutlet, } from '@angular/router';
 import { filter } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { HeaderComponent } from './components/header/header.component';
@@ -22,8 +22,11 @@ import { LoaderService } from '../services/loader.service';
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
+
   private readonly router = inject(Router);
+
   private readonly loaderService = inject(LoaderService);
+
   private readonly destroyRef = inject(DestroyRef);
 
   constructor() {
@@ -47,4 +50,5 @@ export class AppComponent {
         this.loaderService.hideLoader();
       });
   }
+
 }

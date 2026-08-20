@@ -10,13 +10,14 @@ import {
   selector: '[appBoldHover]',
 })
 export class BoldHoverDirective {
+
   private readonly elementRef =
     inject<ElementRef<HTMLElement>>(ElementRef);
 
   private readonly renderer = inject(Renderer2);
 
   @HostListener('mouseenter')
-  public onMouseEnter(): void {
+  onMouseEnter(): void {
     this.renderer.setStyle(
       this.elementRef.nativeElement,
       'font-weight',
@@ -25,10 +26,11 @@ export class BoldHoverDirective {
   }
 
   @HostListener('mouseleave')
-  public onMouseLeave(): void {
+  onMouseLeave(): void {
     this.renderer.removeStyle(
       this.elementRef.nativeElement,
       'font-weight',
     );
   }
+
 }

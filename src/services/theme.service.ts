@@ -9,7 +9,7 @@ import Aura from '@primeuix/themes/aura';
 import Lara from '@primeuix/themes/lara';
 import Nora from '@primeuix/themes/nora';
 
-export interface ThemeState {
+export interface IThemeState {
   theme: Theme;
   colorMode: ColorMode;
 }
@@ -18,27 +18,28 @@ export interface ThemeState {
   providedIn: 'root',
 })
 export class ThemeService {
+
   private readonly storageKey = 'app-theme-state';
 
-  private readonly defaultState: ThemeState = {
-    theme: Theme.Aura,
-    colorMode: ColorMode.Light,
+  private readonly defaultState: IThemeState = {
+    theme: Theme.AURA,
+    colorMode: ColorMode.LIGHT,
   };
 
   private readonly localStorageService = inject(LocalStorageService);
 
-  private readonly stateSubject = new BehaviorSubject<ThemeState>(
+  private readonly stateSubject = new BehaviorSubject<IThemeState>(
     this.loadState(),
   );
 
-  public readonly state$ = this.stateSubject.asObservable();
+  readonly state$ = this.stateSubject.asObservable();
 
-  public readonly theme$ = this.state$.pipe(
+  readonly theme$ = this.state$.pipe(
     map((state) => state.theme),
     distinctUntilChanged(),
   );
 
-  public readonly colorMode$ = this.state$.pipe(
+  readonly colorMode$ = this.state$.pipe(
     map((state) => state.colorMode),
     distinctUntilChanged(),
   );
@@ -48,11 +49,11 @@ export class ThemeService {
   this.applyColorMode(this.currentState.colorMode);
 }
 
-  public get currentState(): ThemeState {
+  get currentState(): IThemeState {
     return this.stateSubject.getValue();
   }
 
-  public setTheme(theme: Theme): void {
+  setTheme(theme: Theme): void {
     if (!this.isTheme(theme)) {
       return;
     }
@@ -61,7 +62,7 @@ export class ThemeService {
     this.applyTheme(theme);
   }
 
-  public setColorMode(colorMode: ColorMode): void {
+  setColorMode(colorMode: ColorMode): void {
   if (!this.isColorMode(colorMode)) {
     return;
   }
@@ -70,8 +71,8 @@ export class ThemeService {
   this.applyColorMode(colorMode);
 }
 
-  private updateState(patch: Partial<ThemeState>): void {
-    const state: ThemeState = {
+  private updateState(patch: Partial<IThemeState>): void {
+    const state: IThemeState = {
       ...this.currentState,
       ...patch,
     };
@@ -84,14 +85,14 @@ export class ThemeService {
 
   private readonly document = inject(DOCUMENT);
 
-  private loadState(): ThemeState {
+  private loadState(): IThemeState {
     try {
       const storedState =
-        this.localStorageService.getItem<Partial<ThemeState>>(
+        this.localStorageService.getItem<Partial<IThemeState>>(
           this.storageKey,
         );
 
-      const state: ThemeState = {
+      const state: IThemeState = {
         theme: this.isTheme(storedState?.theme)
           ? storedState.theme
           : this.defaultState.theme,
@@ -116,15 +117,15 @@ export class ThemeService {
 
   private applyTheme(theme: Theme): void {
   switch (theme) {
-    case Theme.Lara:
+    case Theme.LARA:
       usePreset(Lara);
       return;
 
-    case Theme.Nora:
+    case Theme.NORA:
       usePreset(Nora);
       return;
 
-    case Theme.Aura:
+    case Theme.AURA:
     default:
       usePreset(Aura);
   }
@@ -133,7 +134,7 @@ export class ThemeService {
   private applyColorMode(colorMode: ColorMode): void {
   this.document.documentElement.classList.toggle(
     this.darkModeClass,
-    colorMode === ColorMode.Dark,
+    colorMode === ColorMode.DARK,
   );
 }
 
@@ -144,4 +145,5 @@ export class ThemeService {
   private isColorMode(value: unknown): value is ColorMode {
     return Object.values(ColorMode).includes(value as ColorMode);
   }
+
 }

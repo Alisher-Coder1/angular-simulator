@@ -19,24 +19,30 @@ import { PostEditDialogComponent } from './post-edit-dialog.component';
   styleUrl: './posts.component.scss',
 })
 export class PostsComponent {
+
   private readonly postService = inject(PostService);
+
   private readonly router = inject(Router);
+
   private readonly destroyRef = inject(DestroyRef);
+
   private readonly dialogService = inject(DialogService);
 
-  public posts: IPost[] = [];
+  posts: IPost[] = [];
 
-  public totalRecords = 0;
-  public rows = 10;
-  public first = 0;
+  totalRecords = 0;
 
-  public isLoading = false;
+  rows = 10;
 
-  public readonly rowsPerPageOptions = [10, 20, 50];
+  first = 0;
 
-  public selectedPost: IPost | null = null;
+  isLoading = false;
 
-  public readonly contextMenuItems: MenuItem[] = [
+  readonly rowsPerPageOptions = [10, 20, 50];
+
+  selectedPost: IPost | null = null;
+
+  readonly contextMenuItems: MenuItem[] = [
     {
       label: 'Просмотреть',
       icon: 'pi pi-eye',
@@ -70,7 +76,7 @@ export class PostsComponent {
 },
   ];
 
-  public loadPosts(
+  loadPosts(
     event: TableLazyLoadEvent,
   ): void {
     this.first = event.first ?? 0;
@@ -110,14 +116,14 @@ export class PostsComponent {
       });
   }
 
-  public openPost(post: IPost): void {
+  openPost(post: IPost): void {
     void this.router.navigate([
       '/posts',
       post.id,
     ]);
   }
 
-  public openEditDialog(post: IPost): void {
+  openEditDialog(post: IPost): void {
     const dialogRef = this.dialogService.open(
       PostEditDialogComponent,
       {
@@ -159,7 +165,7 @@ export class PostsComponent {
       );
   }
 
-  public deletePost(post: IPost): void {
+  deletePost(post: IPost): void {
     this.postService
       .deletePost(post.id)
       .pipe(
@@ -179,4 +185,5 @@ export class PostsComponent {
         },
       });
   }
+
 }

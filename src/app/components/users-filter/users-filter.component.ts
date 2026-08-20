@@ -10,15 +10,16 @@ import { debounceTime, distinctUntilChanged, map } from 'rxjs';
   styleUrl: './users-filter.component.scss',
 })
 export class UsersFilterComponent implements OnInit {
+
   private readonly destroyRef = inject(DestroyRef);
 
   @Output() filterUsers = new EventEmitter<string>();
 
-  public readonly searchControl = new FormControl('', {
+  readonly searchControl = new FormControl('', {
     nonNullable: true,
   });
 
-  public ngOnInit(): void {
+  ngOnInit(): void {
     this.searchControl.valueChanges
       .pipe(
         debounceTime(200),
@@ -30,4 +31,5 @@ export class UsersFilterComponent implements OnInit {
         this.filterUsers.emit(searchValue);
       });
   }
+
 }

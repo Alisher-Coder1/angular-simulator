@@ -1,6 +1,8 @@
 <article class="user-card">
   <header class="user-card__header">
-    <h2 class="user-card__name">{{ user.name || 'Пользователь' | uppercase }}</h2>
+    <h2 class="user-card__name">
+      {{ user.name || 'Пользователь' | uppercase }}
+    </h2>
     <p class="user-card__username">@{{ user.username || 'Неизвестно' }}</p>
   </header>
 
@@ -103,7 +105,12 @@
       </span>
     </div>
   </section>
-  <button appBoldHover class="user-card__delete-button" type="button" (click)="onDeleteUser()">
+  <button
+    appBoldHover
+    class="user-card__delete-button"
+    type="button"
+    (click)="onDeleteUser()"
+  >
     Удалить пользователя
   </button>
 </article>

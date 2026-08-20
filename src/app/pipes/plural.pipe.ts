@@ -4,7 +4,8 @@ import { Pipe, PipeTransform } from '@angular/core';
   name: 'plural',
 })
 export class PluralPipe implements PipeTransform {
-  public transform(
+
+  transform(
     value: number,
     one: string,
     few: string,
@@ -28,4 +29,5 @@ export class PluralPipe implements PipeTransform {
 
     return many;
   }
+
 }

@@ -4,14 +4,15 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class LocalStorageService {
+
   // Пункт 4 домашнего задания №17:
   // Сохраняет значение любого типа в localStorage по указанному ключу.
-  public setItem<T>(key: string, value: T): void {
+  setItem<T>(key: string, value: T): void {
     localStorage.setItem(key, JSON.stringify(value));
   }
 
   // Возвращает значение из localStorage по указанному ключу.
-  public getItem<T>(key: string): T | null {
+  getItem<T>(key: string): T | null {
     const item = localStorage.getItem(key);
 
     if (item === null) {
@@ -22,12 +23,13 @@ export class LocalStorageService {
   }
 
   // Удаляет значение из localStorage по указанному ключу.
-  public removeItem(key: string): void {
+  removeItem(key: string): void {
     localStorage.removeItem(key);
   }
 
   // Полностью очищает localStorage.
-  public clear(): void {
+  clear(): void {
     localStorage.clear();
   }
+
 }

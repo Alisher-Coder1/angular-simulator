@@ -12,7 +12,7 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
         const message =
           error.status === 0
             ? 'Ошибка сети. Проверьте подключение и попробуйте снова.'
-            : `Ошибка HTTP ${error.status}. Попробуйте позже.`;
+            : `Ошибка HTTP ${ error.status }. Попробуйте позже.`;
 
         messageService.showError(message);
       }

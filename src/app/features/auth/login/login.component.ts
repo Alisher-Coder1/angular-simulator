@@ -16,8 +16,11 @@ import { AuthService } from '../auth.service';
   styleUrl: './login.component.scss',
 })
 export class LoginComponent {
+
   private readonly formBuilder = inject(FormBuilder);
+
   private readonly authService = inject(AuthService);
+
   private readonly router = inject(Router);
 
   readonly loginForm = this.formBuilder.nonNullable.group({
@@ -26,6 +29,7 @@ export class LoginComponent {
   });
 
   isLoading = false;
+
   errorMessage = '';
 
   login(): void {
@@ -49,4 +53,5 @@ export class LoginComponent {
         },
       });
   }
+
 }

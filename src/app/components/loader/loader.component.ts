@@ -9,9 +9,11 @@ import { LoaderService } from '../../../services/loader.service';
   styleUrl: './loader.component.scss',
 })
 export class LoaderComponent {
+
   // Получаем глобальный сервис загрузчика.
   private readonly loaderService = inject(LoaderService);
 
   // Передаём состояние загрузчика в HTML через Observable.
-  public readonly loader$ = this.loaderService.loader$;
+  readonly loader$ = this.loaderService.loader$;
+
 }

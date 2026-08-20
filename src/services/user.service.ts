@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { BehaviorSubject, catchError, finalize, map, Observable, of, tap, } from 'rxjs';
-import { User } from '../interfaces/user';
+import {  IUser } from '../interfaces/user';
 import { LoaderService } from './loader.service';
 import { LocalStorageService } from './local-storage.service';
 import { MessageService } from './message.service';
@@ -11,6 +11,7 @@ import { HttpErrorResponse } from '@angular/common/http';
   providedIn: 'root',
 })
 export class UserService {
+
   // Ключ, по которому список пользователей хранится в localStorage.
   private readonly usersStorageKey = 'users';
 
@@ -27,42 +28,42 @@ export class UserService {
   private readonly localStorageService = inject(LocalStorageService);
 
   // Внутреннее хранилище списка пользователей.
-  private readonly usersSubject = new BehaviorSubject<User[]>([]);
+  private readonly usersSubject = new BehaviorSubject< IUser[]>([]);
 
   // Публичный поток: компоненты могут читать данные,
   // но не могут самостоятельно изменять хранилище.
-  public readonly users$: Observable<User[]> =
+  readonly users$: Observable< IUser[]> =
     this.usersSubject.asObservable();
 
   // Устанавливает новый список пользователей в поток и localStorage.
-  public setUsers(users: User[]): void {
+  setUsers(users:  IUser[]): void {
     this.usersSubject.next(users);
-    this.localStorageService.setItem<User[]>(this.usersStorageKey, users);
+    this.localStorageService.setItem< IUser[]>(this.usersStorageKey, users);
   }
 
   // Возвращает поток со списком пользователей.
-  public getUsers(): Observable<User[]> {
+  getUsers(): Observable< IUser[]> {
     return this.users$;
   }
 
   // Удаляет пользователя и синхронизирует список с localStorage.
-  public deleteUser(userId: number): void {
+  deleteUser(userId: number): void {
     const filteredUsers = this.usersSubject.value.filter(
-      (user: User) => user.id !== userId,
+      (user:  IUser) => user.id !== userId,
     );
 
     this.setUsers(filteredUsers);
   }
 
-  public addUser(user: User): void {
+  addUser(user:  IUser): void {
   const updatedUsers = [user, ...this.usersSubject.value];
 
   this.setUsers(updatedUsers);
 }
 
   // Загружает пользователей: сначала из localStorage, потом с сервера.
-  public loadUsers(): Observable<User[]> {
-    const savedUsers = this.localStorageService.getItem<User[]>(
+  loadUsers(): Observable< IUser[]> {
+    const savedUsers = this.localStorageService.getItem< IUser[]>(
       this.usersStorageKey,
     );
 
@@ -76,8 +77,8 @@ export class UserService {
 
     return this.userApiService.getUsers().pipe(
       // Оставляем в телефоне только цифры, тире и плюс в начале номера.
-      map((users: User[]) =>
-        users.map((user: User) => {
+      map((users:  IUser[]) =>
+        users.map((user:  IUser) => {
           const phoneWithoutExtension = user.phone.replace(
             /\s*(?:x|ext\.?|extension)\s*\d+.*$/i,
             '',
@@ -93,13 +94,13 @@ export class UserService {
 
           return {
             ...user,
-            phone: hasPlus ? `+${normalizedPhone}` : normalizedPhone,
+            phone: hasPlus ? `+${ normalizedPhone }` : normalizedPhone,
           };
         }),
       ),
 
       // Сохраняем уже обработанных пользователей в поток и localStorage.
-      tap((users: User[]) => {
+      tap((users:  IUser[]) => {
         this.setUsers(users);
       }),
 
@@ -114,7 +115,7 @@ export class UserService {
   this.setUsers([]);
 
   // Возвращаем безопасный пустой массив.
-  return of([] as User[]);
+  return of([] as  IUser[]);
 }),
 
       // Выполняется и после успеха, и после ошибки.
@@ -123,4 +124,5 @@ export class UserService {
       }),
     );
   }
+
 }

@@ -22,7 +22,7 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
     accessToken && !isAuthRequest
       ? req.clone({
           setHeaders: {
-            Authorization: `Bearer ${accessToken}`,
+            Authorization: `Bearer ${ accessToken }`,
           },
         })
       : req;
@@ -50,7 +50,7 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
         switchMap((tokens) => {
           const retryRequest = req.clone({
             setHeaders: {
-              Authorization: `Bearer ${tokens.accessToken}`,
+              Authorization: `Bearer ${ tokens.accessToken }`,
             },
           });
 

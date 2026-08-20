@@ -11,16 +11,18 @@ import {
   selector: '[appAnimatedGradient]',
 })
 export class AnimatedGradientDirective implements OnDestroy {
+
   private readonly elementRef =
     inject<ElementRef<HTMLElement>>(ElementRef);
 
   private readonly renderer = inject(Renderer2);
 
   private animationId: number | null = null;
+
   private backgroundPosition = 0;
 
   @HostListener('mouseenter')
-  public onMouseEnter(): void {
+  onMouseEnter(): void {
     this.renderer.setStyle(
       this.elementRef.nativeElement,
       'background',
@@ -43,7 +45,7 @@ export class AnimatedGradientDirective implements OnDestroy {
   }
 
   @HostListener('mouseleave')
-  public onMouseLeave(): void {
+  onMouseLeave(): void {
     this.stopAnimation();
 
     this.renderer.removeStyle(
@@ -67,7 +69,7 @@ export class AnimatedGradientDirective implements OnDestroy {
     );
   }
 
-  public ngOnDestroy(): void {
+  ngOnDestroy(): void {
     this.stopAnimation();
   }
 
@@ -81,7 +83,7 @@ export class AnimatedGradientDirective implements OnDestroy {
       this.renderer.setStyle(
         this.elementRef.nativeElement,
         'background-position',
-        `${this.backgroundPosition}% 50% `,
+        `${ this.backgroundPosition }% 50% `,
       );
 
       this.animationId = requestAnimationFrame(animate);
@@ -98,4 +100,5 @@ export class AnimatedGradientDirective implements OnDestroy {
 
     this.backgroundPosition = 0;
   }
+
 }

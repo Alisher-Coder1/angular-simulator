@@ -19,35 +19,37 @@ type TaskPanelMode = 'date' | 'counter';
 })
 
 export class HomePageComponent implements OnDestroy {
+
   // Пункт 3 домашнего задания №17:
   // подключаем сервис сообщений к компоненту.
-  public readonly messageService = inject(MessageService);
+  readonly messageService = inject(MessageService);
 
   // Пункт 4 домашнего задания №17:
   // подключаем сервис для работы с localStorage.
   private readonly localStorageService = inject(LocalStorageService);
 
   // Делаем enum доступным в HTML-шаблоне.
-  public readonly MessageType = MessageType;
-  public readonly faPlay = faPlay;
+  readonly MessageType = MessageType;
+
+  readonly faPlay = faPlay;
 
   /// Выбирает метод сервиса в зависимости от типа сообщения.
-  public addMessage(type: MessageType, text: string): void {
+  addMessage(type: MessageType, text: string): void {
     switch (type) {
   // Успешное выполнение действия. 
-    case MessageType.Success:
+    case MessageType.SUCCESS:
       this.messageService.showSuccess(text);
       break;
   // Информационное сообщение.
-    case MessageType.Info:
+    case MessageType.INFO:
       this.messageService.showInfo(text);
       break;
   // Предупреждение для пользователя.
-    case MessageType.Warn:
+    case MessageType.WARN:
       this.messageService.showWarn(text);
       break;
   // Сообщение об ошибке.
-    case MessageType.Error:
+    case MessageType.ERROR:
       this.messageService.showError(text);
       break;
   }
@@ -315,7 +317,7 @@ galleryImages = [
   // Метод проверяет, является ли переданный цвет одним из трёх основных цветов:
   // красным, зелёным или синим.
   isPrimaryColor(color: Color): boolean {
-    return color === Color.Red || color === Color.Green || color === Color.Blue;
+    return color === Color.RED || color === Color.GREEN || color === Color.BLUE;
   }
 
   // Пункт 3:
@@ -393,4 +395,5 @@ galleryImages = [
       !this.selectedParticipants
     );
   }
+
 }
