@@ -20,7 +20,7 @@ export const loggingInterceptor: HttpInterceptorFn = (
           const duration = Math.round(performance.now() - startedAt);
 
           console.warn(
-            `[HTTP] ${ req.method } ${ req.urlWithParams } | Status: ${ event.status } | Time: ${ duration } ms`,
+            `[HTTP] ${req.method} ${req.urlWithParams} | Status: ${event.status} | Time: ${duration} ms`,
           );
         }
       },
@@ -28,7 +28,7 @@ export const loggingInterceptor: HttpInterceptorFn = (
         const duration = Math.round(performance.now() - startedAt);
 
         console.error(
-          `[HTTP] ${ req.method } ${ req.urlWithParams } | Status: ${ error.status } | Time: ${ duration } ms`,
+          `[HTTP] ${req.method} ${req.urlWithParams} | Status: ${error.status} | Time: ${duration} ms`,
         );
       },
     }),

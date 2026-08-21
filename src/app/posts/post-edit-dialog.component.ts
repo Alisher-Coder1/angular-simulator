@@ -2,10 +2,7 @@ import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { finalize } from 'rxjs';
 
-import {
-  DynamicDialogConfig,
-  DynamicDialogRef,
-} from 'primeng/dynamicdialog';
+import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { InputTextModule } from 'primeng/inputtext';
 
 import { IPost } from './interfaces/post.interface';
@@ -13,23 +10,18 @@ import { PostService } from './post.service';
 
 @Component({
   selector: 'app-post-edit-dialog',
-  imports: [
-    FormsModule,
-    InputTextModule,
-  ],
+  imports: [FormsModule, InputTextModule],
   templateUrl: './post-edit-dialog.component.html',
   styleUrl: './post-edit-dialog.component.scss',
 })
 export class PostEditDialogComponent {
-
   private readonly config = inject(DynamicDialogConfig);
 
   private readonly dialogRef = inject(DynamicDialogRef);
 
   private readonly postService = inject(PostService);
 
-  private readonly post: IPost =
-    this.config.data.post as IPost;
+  private readonly post: IPost = this.config.data.post as IPost;
 
   title = this.post.title;
 
@@ -48,7 +40,7 @@ export class PostEditDialogComponent {
       title: this.title.trim(),
       tags: this.tags
         .split(',')
-        .map(tag => tag.trim())
+        .map((tag) => tag.trim())
         .filter(Boolean),
       views: Number(this.views),
     };
@@ -63,7 +55,7 @@ export class PostEditDialogComponent {
         }),
       )
       .subscribe({
-        next: updatedPost => {
+        next: (updatedPost) => {
           this.dialogRef.close({
             ...this.post,
             ...updatedPost,
@@ -76,5 +68,4 @@ export class PostEditDialogComponent {
   cancel(): void {
     this.dialogRef.close();
   }
-
 }

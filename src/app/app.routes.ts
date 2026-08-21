@@ -5,18 +5,18 @@ import { adminGuard } from './features/auth/admin.guard';
 
 export const routes: Routes = [
   {
-  path: 'login',
-  loadComponent: () =>
-    import('./features/auth/login/login.component').then(
-      (m) => m.LoginComponent,
-    ),
-  }, 
+    path: 'login',
+    loadComponent: () =>
+      import('./features/auth/login/login.component').then(
+        (m) => m.LoginComponent,
+      ),
+  },
   {
     path: '',
     canActivate: [authGuard],
     loadComponent: () =>
       import('./pages/home-page/home-page.component').then(
-        m => m.HomePageComponent,
+        (m) => m.HomePageComponent,
       ),
     pathMatch: 'full',
   },
@@ -25,7 +25,7 @@ export const routes: Routes = [
     canActivate: [authGuard, adminGuard],
     loadComponent: () =>
       import('./pages/user-page/user-page.component').then(
-        m => m.UserPageComponent,
+        (m) => m.UserPageComponent,
       ),
   },
 
@@ -34,16 +34,14 @@ export const routes: Routes = [
     path: 'posts',
     canActivate: [authGuard, adminGuard],
     loadComponent: () =>
-      import('./posts/posts.component').then(
-        m => m.PostsComponent,
-      ),
+      import('./posts/posts.component').then((m) => m.PostsComponent),
   },
   {
     path: 'posts/create',
     canActivate: [authGuard, adminGuard],
     loadComponent: () =>
       import('./posts/post-create.component').then(
-        m => m.PostCreateComponent,
+        (m) => m.PostCreateComponent,
       ),
   },
   {
@@ -51,7 +49,7 @@ export const routes: Routes = [
     canActivate: [authGuard, adminGuard],
     loadComponent: () =>
       import('./posts/post-detail.component').then(
-        m => m.PostDetailComponent,
+        (m) => m.PostDetailComponent,
       ),
     resolve: {
       post: postResolver,
@@ -63,7 +61,7 @@ export const routes: Routes = [
     canActivate: [authGuard],
     loadComponent: () =>
       import('./pages/not-found-page/not-found-page.component').then(
-        m => m.NotFoundPageComponent,
+        (m) => m.NotFoundPageComponent,
       ),
   },
 ];

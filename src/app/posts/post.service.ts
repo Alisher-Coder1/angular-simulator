@@ -9,22 +9,19 @@ import { PostApiService } from './post-api.service';
   providedIn: 'root',
 })
 export class PostService {
-
   private readonly postApiService = inject(PostApiService);
 
   private readonly postsSubject = new BehaviorSubject<IPost[]>([]);
 
   private readonly totalSubject = new BehaviorSubject<number>(0);
 
-  readonly posts$: Observable<IPost[]> =
-    this.postsSubject.asObservable();
+  readonly posts$: Observable<IPost[]> = this.postsSubject.asObservable();
 
-  readonly total$: Observable<number> =
-    this.totalSubject.asObservable();
+  readonly total$: Observable<number> = this.totalSubject.asObservable();
 
   loadPosts(limit: number, skip: number): Observable<IPostResponse> {
     return this.postApiService.getPosts(limit, skip).pipe(
-      tap(response => {
+      tap((response) => {
         this.postsSubject.next(response.posts);
         this.totalSubject.next(response.total);
       }),
@@ -39,15 +36,11 @@ export class PostService {
     return this.postApiService.createPost(post);
   }
 
-  updatePost(
-    id: number,
-    post: Partial<IPost>,
-  ): Observable<IPost> {
+  updatePost(id: number, post: Partial<IPost>): Observable<IPost> {
     return this.postApiService.updatePost(id, post);
   }
 
   deletePost(id: number): Observable<IPost> {
     return this.postApiService.deletePost(id);
   }
-
 }

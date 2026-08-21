@@ -10,10 +10,7 @@ import { IPost } from './interfaces/post.interface';
   styleUrl: './post-detail.component.scss',
 })
 export class PostDetailComponent {
-
   private readonly route = inject(ActivatedRoute);
 
-  readonly post =
-    this.route.snapshot.data['post'] as IPost;
-
+  readonly post = this.route.snapshot.data['post'] as IPost;
 }

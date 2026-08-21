@@ -14,7 +14,6 @@ import { PostService } from './post.service';
   styleUrl: './post-create.component.scss',
 })
 export class PostCreateComponent {
-
   private readonly formBuilder = inject(FormBuilder);
 
   private readonly postService = inject(PostService);
@@ -45,7 +44,7 @@ export class PostCreateComponent {
       body: formValue.body.trim(),
       tags: formValue.tags
         .split(',')
-        .map(tag => tag.trim())
+        .map((tag) => tag.trim())
         .filter(Boolean),
       reactions: {
         likes: 0,
@@ -75,5 +74,4 @@ export class PostCreateComponent {
   cancel(): void {
     void this.router.navigate(['/posts']);
   }
-
 }

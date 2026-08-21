@@ -3,7 +3,6 @@
 // <T> означает, что коллекция может работать с любым типом данных:
 // string, number, object и другими.
 export class Collection<T> {
-
   private items: T[];
 
   // Пункт 5:
@@ -43,5 +42,4 @@ export class Collection<T> {
   replaceOne(index: number, newItem: T): void {
     this.items[index] = newItem;
   }
-
 }

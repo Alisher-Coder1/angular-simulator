@@ -4,7 +4,6 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class LocalStorageService {
-
   // Пункт 4 домашнего задания №17:
   // Сохраняет значение любого типа в localStorage по указанному ключу.
   setItem<T>(key: string, value: T): void {
@@ -31,5 +30,4 @@ export class LocalStorageService {
   clear(): void {
     localStorage.clear();
   }
-
 }

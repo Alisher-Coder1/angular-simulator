@@ -13,7 +13,6 @@ import {
   providedIn: 'root',
 })
 export class AuthService {
-
   private readonly http = inject(HttpClient);
 
   private readonly apiUrl = 'https://dummyjson.com/auth';
@@ -31,23 +30,21 @@ export class AuthService {
   readonly currentUser$ = this.currentUserSubject.asObservable();
 
   getCurrentUser(): Observable<ICurrentUser> {
-  return this.http.get<ICurrentUser>(`${ this.apiUrl }/me`);
-}
+    return this.http.get<ICurrentUser>(`${this.apiUrl}/me`);
+  }
 
   login(credentials: ILoginRequest): Observable<IAuth> {
-    return this.http
-      .post<IAuth>(`${ this.apiUrl }/login`, credentials)
-      .pipe(
-        tap((user) => {
-          this.saveAuthData(user);
-          this.currentUserSubject.next(user);
-        }),
-      );
+    return this.http.post<IAuth>(`${this.apiUrl}/login`, credentials).pipe(
+      tap((user) => {
+        this.saveAuthData(user);
+        this.currentUserSubject.next(user);
+      }),
+    );
   }
 
   refreshToken(): Observable<IRefreshTokenResponse> {
     return this.http
-      .post<IRefreshTokenResponse>(`${ this.apiUrl }/refresh`, {
+      .post<IRefreshTokenResponse>(`${this.apiUrl}/refresh`, {
         refreshToken: this.getRefreshToken(),
         expiresInMins: 30,
       })
@@ -94,18 +91,16 @@ export class AuthService {
         return true;
       }
 
-      const payload = tokenParts[1]
-        .replace(/-/g, '+')
-        .replace(/_/g, '/');
+      const payload = tokenParts[1].replace(/-/g, '+').replace(/_/g, '/');
 
       const paddedPayload = payload.padEnd(
         Math.ceil(payload.length / 4) * 4,
         '=',
       );
 
-      const decodedPayload = JSON.parse(
-        atob(paddedPayload),
-      ) as { exp?: number };
+      const decodedPayload = JSON.parse(atob(paddedPayload)) as {
+        exp?: number;
+      };
 
       if (typeof decodedPayload.exp !== 'number') {
         return true;
@@ -136,5 +131,4 @@ export class AuthService {
       return null;
     }
   }
-
 }

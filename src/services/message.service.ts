@@ -7,7 +7,6 @@ import { IMessage } from '../interfaces/message';
   providedIn: 'root',
 })
 export class MessageService {
-
   // Приватный поток хранит текущий список сообщений.
   private readonly messagesSubject = new BehaviorSubject<IMessage[]>([]);
 
@@ -71,5 +70,4 @@ export class MessageService {
 
     this.messagesSubject.next(filteredMessages);
   }
-
 }

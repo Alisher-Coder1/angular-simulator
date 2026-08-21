@@ -1,9 +1,5 @@
 import { Component, inject } from '@angular/core';
-import {
-  FormBuilder,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { finalize } from 'rxjs';
 
@@ -16,7 +12,6 @@ import { AuthService } from '../auth.service';
   styleUrl: './login.component.scss',
 })
 export class LoginComponent {
-
   private readonly formBuilder = inject(FormBuilder);
 
   private readonly authService = inject(AuthService);
@@ -53,5 +48,4 @@ export class LoginComponent {
         },
       });
   }
-
 }

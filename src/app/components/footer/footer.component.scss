@@ -62,9 +62,9 @@
   display: grid;
   grid-template-columns: 280px 240px;
   grid-template-areas:
-    "label empty"
-    "input button"
-    "agreement agreement";
+    'label empty'
+    'input button'
+    'agreement agreement';
   column-gap: 16px;
   row-gap: 8px;
 }

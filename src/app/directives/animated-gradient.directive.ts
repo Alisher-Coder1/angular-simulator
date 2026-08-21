@@ -11,9 +11,7 @@ import {
   selector: '[appAnimatedGradient]',
 })
 export class AnimatedGradientDirective implements OnDestroy {
-
-  private readonly elementRef =
-    inject<ElementRef<HTMLElement>>(ElementRef);
+  private readonly elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
 
   private readonly renderer = inject(Renderer2);
 
@@ -35,11 +33,7 @@ export class AnimatedGradientDirective implements OnDestroy {
       '300% 100%',
     );
 
-    this.renderer.setStyle(
-      this.elementRef.nativeElement,
-      'color',
-      '#ffffff',
-    );
+    this.renderer.setStyle(this.elementRef.nativeElement, 'color', '#ffffff');
 
     this.startAnimation();
   }
@@ -48,25 +42,16 @@ export class AnimatedGradientDirective implements OnDestroy {
   onMouseLeave(): void {
     this.stopAnimation();
 
-    this.renderer.removeStyle(
-      this.elementRef.nativeElement,
-      'background',
-    );
+    this.renderer.removeStyle(this.elementRef.nativeElement, 'background');
 
-    this.renderer.removeStyle(
-      this.elementRef.nativeElement,
-      'background-size',
-    );
+    this.renderer.removeStyle(this.elementRef.nativeElement, 'background-size');
 
     this.renderer.removeStyle(
       this.elementRef.nativeElement,
       'background-position',
     );
 
-    this.renderer.removeStyle(
-      this.elementRef.nativeElement,
-      'color',
-    );
+    this.renderer.removeStyle(this.elementRef.nativeElement, 'color');
   }
 
   ngOnDestroy(): void {
@@ -77,13 +62,12 @@ export class AnimatedGradientDirective implements OnDestroy {
     this.stopAnimation();
 
     const animate = (): void => {
-      this.backgroundPosition =
-        (this.backgroundPosition + 0.5) % 100;
+      this.backgroundPosition = (this.backgroundPosition + 0.5) % 100;
 
       this.renderer.setStyle(
         this.elementRef.nativeElement,
         'background-position',
-        `${ this.backgroundPosition }% 50% `,
+        `${this.backgroundPosition}% 50% `,
       );
 
       this.animationId = requestAnimationFrame(animate);
@@ -100,5 +84,4 @@ export class AnimatedGradientDirective implements OnDestroy {
 
     this.backgroundPosition = 0;
   }
-
 }

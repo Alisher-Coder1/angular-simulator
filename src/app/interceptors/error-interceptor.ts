@@ -1,4 +1,4 @@
-import { HttpErrorResponse, HttpInterceptorFn, } from '@angular/common/http';
+import { HttpErrorResponse, HttpInterceptorFn } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { catchError, throwError } from 'rxjs';
 import { MessageService } from '../../services/message.service';
@@ -12,7 +12,7 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
         const message =
           error.status === 0
             ? 'Ошибка сети. Проверьте подключение и попробуйте снова.'
-            : `Ошибка HTTP ${ error.status }. Попробуйте позже.`;
+            : `Ошибка HTTP ${error.status}. Попробуйте позже.`;
 
         messageService.showError(message);
       }

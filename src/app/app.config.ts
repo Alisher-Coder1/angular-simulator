@@ -1,5 +1,9 @@
-import { ApplicationConfig, provideBrowserGlobalErrorListeners, provideZoneChangeDetection, } from '@angular/core';
-import { provideHttpClient, withInterceptors, } from '@angular/common/http';
+import {
+  ApplicationConfig,
+  provideBrowserGlobalErrorListeners,
+  provideZoneChangeDetection,
+} from '@angular/core';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { provideRouter } from '@angular/router';
 import { providePrimeNG } from 'primeng/config';
 import Aura from '@primeuix/themes/aura';
@@ -14,13 +18,16 @@ export const appConfig: ApplicationConfig = {
     provideBrowserGlobalErrorListeners(),
     provideRouter(routes),
     provideZoneChangeDetection(),
-    provideHttpClient(withInterceptors([authInterceptor, loaderInterceptor, loggingInterceptor, errorInterceptor,]),
-  ),
+    provideHttpClient(
+      withInterceptors([
+        authInterceptor,
+        loaderInterceptor,
+        loggingInterceptor,
+        errorInterceptor,
+      ]),
+    ),
     providePrimeNG({
-  theme: { preset: Aura,
-    options: { darkModeSelector: '.app-dark',
-    },
-  },
-}),
+      theme: { preset: Aura, options: { darkModeSelector: '.app-dark' } },
+    }),
   ],
 };

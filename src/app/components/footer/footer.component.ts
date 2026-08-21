@@ -14,7 +14,6 @@ import {
   styleUrl: './footer.component.scss',
 })
 export class FooterComponent {
-
   readonly faTelegram = faTelegram;
 
   readonly faVk = faVk;
@@ -22,5 +21,4 @@ export class FooterComponent {
   readonly faPinterest = faPinterest;
 
   readonly faSkype = faSkype;
-
 }

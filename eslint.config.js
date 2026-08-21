@@ -18,11 +18,14 @@ module.exports = defineConfig(
       tseslint.configs.stylistic,
       angular.configs.tsRecommended,
     ],
+
+    plugins: {
+      prettier: prettierPlugin,
+    },
+
     processor: angular.processInlineTemplates,
 
     rules: {
-      ...prettierConfig.rules,
-
       'no-console': [
         'warn',
         {
@@ -101,6 +104,9 @@ module.exports = defineConfig(
           style: 'kebab-case',
         },
       ],
+
+      ...prettierConfig.rules,
+      'prettier/prettier': 'error',
     },
   },
 

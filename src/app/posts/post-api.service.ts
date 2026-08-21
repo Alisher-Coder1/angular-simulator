@@ -9,7 +9,6 @@ import { IPostResponse } from './interfaces/post-response.interface';
   providedIn: 'root',
 })
 export class PostApiService {
-
   private readonly http = inject(HttpClient);
 
   private readonly postsUrl = 'https://dummyjson.com/posts';
@@ -24,30 +23,18 @@ export class PostApiService {
   }
 
   getPostById(id: number): Observable<IPost> {
-    return this.http.get<IPost>(`${ this.postsUrl }/${ id }`);
+    return this.http.get<IPost>(`${this.postsUrl}/${id}`);
   }
 
   createPost(post: Omit<IPost, 'id'>): Observable<IPost> {
-    return this.http.post<IPost>(
-      `${ this.postsUrl }/add`,
-      post,
-    );
+    return this.http.post<IPost>(`${this.postsUrl}/add`, post);
   }
 
-  updatePost(
-    id: number,
-    post: Partial<IPost>,
-  ): Observable<IPost> {
-    return this.http.patch<IPost>(
-      `${ this.postsUrl }/${ id }`,
-      post,
-    );
+  updatePost(id: number, post: Partial<IPost>): Observable<IPost> {
+    return this.http.patch<IPost>(`${this.postsUrl}/${id}`, post);
   }
 
   deletePost(id: number): Observable<IPost> {
-    return this.http.delete<IPost>(
-      `${ this.postsUrl }/${ id }`,
-    );
+    return this.http.delete<IPost>(`${this.postsUrl}/${id}`);
   }
-
 }

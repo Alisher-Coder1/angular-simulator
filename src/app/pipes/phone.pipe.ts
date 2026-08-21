@@ -1,16 +1,11 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
-export type PhoneFormat =
-  | 'compact'
-  | 'international'
-  | 'national'
-  | 'masked';
+export type PhoneFormat = 'compact' | 'international' | 'national' | 'masked';
 
 @Pipe({
   name: 'phone',
 })
 export class PhonePipe implements PipeTransform {
-
   transform(
     value: string | number | null | undefined,
     mode: PhoneFormat = 'international',
@@ -35,16 +30,16 @@ export class PhonePipe implements PipeTransform {
 
     switch (mode) {
       case 'compact':
-        return `+${ countryCode }${ nationalNumber }`;
+        return `+${countryCode}${nationalNumber}`;
 
       case 'international':
-        return `+${ countryCode } ${ operatorCode } ${ firstGroup } ${ secondGroup } ${ lastGroup }`;
+        return `+${countryCode} ${operatorCode} ${firstGroup} ${secondGroup} ${lastGroup}`;
 
       case 'national':
-        return `${ operatorCode } ${ firstGroup } ${ secondGroup } ${ lastGroup }`;
+        return `${operatorCode} ${firstGroup} ${secondGroup} ${lastGroup}`;
 
       case 'masked':
-        return `+${ countryCode } ${ operatorCode } *** ** ${ lastGroup }`;
+        return `+${countryCode} ${operatorCode} *** ** ${lastGroup}`;
 
       default:
         return originalValue;
@@ -58,5 +53,4 @@ export class PhonePipe implements PipeTransform {
 
     return digits;
   }
-
 }

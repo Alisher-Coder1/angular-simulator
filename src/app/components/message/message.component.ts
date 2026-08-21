@@ -4,7 +4,6 @@ import { MessageService } from '../../../services/message.service';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faMessage } from '@fortawesome/free-regular-svg-icons';
 
-
 @Component({
   selector: 'app-message',
   imports: [AsyncPipe, NgTemplateOutlet, FontAwesomeModule],
@@ -12,7 +11,6 @@ import { faMessage } from '@fortawesome/free-regular-svg-icons';
   styleUrl: './message.component.scss',
 })
 export class MessageComponent {
-
   // Получаем сервис сообщений.
   private readonly messageService = inject(MessageService);
 
@@ -21,10 +19,8 @@ export class MessageComponent {
 
   readonly faMessage = faMessage;
 
-
   // Закрывает выбранное сообщение.
   closeMessage(id: number): void {
     this.messageService.closeMessage(id);
   }
-
 }
