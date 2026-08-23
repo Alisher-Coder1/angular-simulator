@@ -13,5 +13,5 @@ export class LoaderComponent {
   private readonly loaderService = inject(LoaderService);
 
   // Передаём состояние загрузчика в HTML через Observable.
-  public readonly loader$ = this.loaderService.loader$;
+  readonly loader$ = this.loaderService.loader$;
 }

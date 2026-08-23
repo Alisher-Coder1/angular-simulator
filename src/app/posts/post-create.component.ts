@@ -15,20 +15,23 @@ import { PostService } from './post.service';
 })
 export class PostCreateComponent {
   private readonly formBuilder = inject(FormBuilder);
+
   private readonly postService = inject(PostService);
+
   private readonly router = inject(Router);
+
   private readonly destroyRef = inject(DestroyRef);
 
-  public isSubmitting = false;
+  isSubmitting = false;
 
-  public readonly form = this.formBuilder.nonNullable.group({
+  readonly form = this.formBuilder.nonNullable.group({
     title: ['', [Validators.required]],
     body: ['', [Validators.required]],
     tags: [''],
     userId: [1, [Validators.required, Validators.min(1)]],
   });
 
-  public createPost(): void {
+  createPost(): void {
     if (this.form.invalid || this.isSubmitting) {
       this.form.markAllAsTouched();
       return;
@@ -41,7 +44,7 @@ export class PostCreateComponent {
       body: formValue.body.trim(),
       tags: formValue.tags
         .split(',')
-        .map(tag => tag.trim())
+        .map((tag) => tag.trim())
         .filter(Boolean),
       reactions: {
         likes: 0,
@@ -68,7 +71,7 @@ export class PostCreateComponent {
       });
   }
 
-  public cancel(): void {
+  cancel(): void {
     void this.router.navigate(['/posts']);
   }
 }

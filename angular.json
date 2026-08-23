@@ -3,21 +3,46 @@
   "version": 1,
   "cli": {
     "packageManager": "npm",
-    "analytics": false
+    "analytics": false,
+    "schematicCollections": ["angular-eslint"]
   },
   "newProjectRoot": "projects",
   "projects": {
     "angular-simulator": {
       "projectType": "application",
-      "schematics": { 
-        "@schematics/angular:component": { "type": "component", "style": "scss", "skipTests": true },
-        "@schematics/angular:directive": { "type": "directive", "skipTests": true },
-        "@schematics/angular:service": { "type": "service", "skipTests": true },
-        "@schematics/angular:guard": { "typeSeparator": ".", "skipTests": true },
-        "@schematics/angular:interceptor": { "typeSeparator": ".", "skipTests": true },
-        "@schematics/angular:pipe": { "typeSeparator": ".", "skipTests": true },
-        "@schematics/angular:resolver": { "typeSeparator": ".", "skipTests": true },
-        "@schematics/angular:module": { "typeSeparator": "." }
+      "schematics": {
+        "@schematics/angular:component": {
+          "type": "component",
+          "style": "scss",
+          "skipTests": true
+        },
+        "@schematics/angular:directive": {
+          "type": "directive",
+          "skipTests": true
+        },
+        "@schematics/angular:service": {
+          "type": "service",
+          "skipTests": true
+        },
+        "@schematics/angular:guard": {
+          "typeSeparator": ".",
+          "skipTests": true
+        },
+        "@schematics/angular:interceptor": {
+          "typeSeparator": ".",
+          "skipTests": true
+        },
+        "@schematics/angular:pipe": {
+          "typeSeparator": ".",
+          "skipTests": true
+        },
+        "@schematics/angular:resolver": {
+          "typeSeparator": ".",
+          "skipTests": true
+        },
+        "@schematics/angular:module": {
+          "typeSeparator": "."
+        }
       },
       "root": "",
       "sourceRoot": "src",
@@ -35,39 +60,35 @@
                 "input": "public"
               }
             ],
-            "styles": [
-              "src/styles.scss"
-            ],
-            "polyfills": [
-              "zone.js"
-            ]
+            "styles": ["src/styles.scss"],
+            "polyfills": ["zone.js"]
           },
           "configurations": {
             "production": {
               "optimization": {
                 "scripts": true,
                 "styles": {
-                   "minify": true,
-                   "inlineCritical": true
-               },
-               "fonts": {
-                 "inline": false
-               }
+                  "minify": true,
+                  "inlineCritical": true
+                },
+                "fonts": {
+                  "inline": false
+                }
+              },
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kB",
+                  "maximumError": "1MB"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "14kB",
+                  "maximumError": "18kB"
+                }
+              ],
+              "outputHashing": "all"
             },
-            "budgets": [
-             {
-               "type": "initial",
-               "maximumWarning": "500kB",
-               "maximumError": "1MB"
-             },
-             {
-               "type": "anyComponentStyle",
-               "maximumWarning": "14kB",
-               "maximumError": "18kB"
-             }
-            ],
-            "outputHashing": "all"
-         },
             "development": {
               "optimization": false,
               "extractLicenses": false,
@@ -90,6 +111,12 @@
         },
         "test": {
           "builder": "@angular/build:unit-test"
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": ["src/**/*.ts", "src/**/*.html"]
+          }
         }
       }
     }

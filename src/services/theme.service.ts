@@ -9,7 +9,7 @@ import Aura from '@primeuix/themes/aura';
 import Lara from '@primeuix/themes/lara';
 import Nora from '@primeuix/themes/nora';
 
-export interface ThemeState {
+export interface IThemeState {
   theme: Theme;
   colorMode: ColorMode;
 }
@@ -20,39 +20,39 @@ export interface ThemeState {
 export class ThemeService {
   private readonly storageKey = 'app-theme-state';
 
-  private readonly defaultState: ThemeState = {
-    theme: Theme.Aura,
-    colorMode: ColorMode.Light,
+  private readonly defaultState: IThemeState = {
+    theme: Theme.AURA,
+    colorMode: ColorMode.LIGHT,
   };
 
   private readonly localStorageService = inject(LocalStorageService);
 
-  private readonly stateSubject = new BehaviorSubject<ThemeState>(
+  private readonly stateSubject = new BehaviorSubject<IThemeState>(
     this.loadState(),
   );
 
-  public readonly state$ = this.stateSubject.asObservable();
+  readonly state$ = this.stateSubject.asObservable();
 
-  public readonly theme$ = this.state$.pipe(
+  readonly theme$ = this.state$.pipe(
     map((state) => state.theme),
     distinctUntilChanged(),
   );
 
-  public readonly colorMode$ = this.state$.pipe(
+  readonly colorMode$ = this.state$.pipe(
     map((state) => state.colorMode),
     distinctUntilChanged(),
   );
 
   constructor() {
-  this.applyTheme(this.currentState.theme);
-  this.applyColorMode(this.currentState.colorMode);
-}
+    this.applyTheme(this.currentState.theme);
+    this.applyColorMode(this.currentState.colorMode);
+  }
 
-  public get currentState(): ThemeState {
+  get currentState(): IThemeState {
     return this.stateSubject.getValue();
   }
 
-  public setTheme(theme: Theme): void {
+  setTheme(theme: Theme): void {
     if (!this.isTheme(theme)) {
       return;
     }
@@ -61,17 +61,17 @@ export class ThemeService {
     this.applyTheme(theme);
   }
 
-  public setColorMode(colorMode: ColorMode): void {
-  if (!this.isColorMode(colorMode)) {
-    return;
+  setColorMode(colorMode: ColorMode): void {
+    if (!this.isColorMode(colorMode)) {
+      return;
+    }
+
+    this.updateState({ colorMode });
+    this.applyColorMode(colorMode);
   }
 
-  this.updateState({ colorMode });
-  this.applyColorMode(colorMode);
-}
-
-  private updateState(patch: Partial<ThemeState>): void {
-    const state: ThemeState = {
+  private updateState(patch: Partial<IThemeState>): void {
+    const state: IThemeState = {
       ...this.currentState,
       ...patch,
     };
@@ -84,14 +84,13 @@ export class ThemeService {
 
   private readonly document = inject(DOCUMENT);
 
-  private loadState(): ThemeState {
+  private loadState(): IThemeState {
     try {
-      const storedState =
-        this.localStorageService.getItem<Partial<ThemeState>>(
-          this.storageKey,
-        );
+      const storedState = this.localStorageService.getItem<
+        Partial<IThemeState>
+      >(this.storageKey);
 
-      const state: ThemeState = {
+      const state: IThemeState = {
         theme: this.isTheme(storedState?.theme)
           ? storedState.theme
           : this.defaultState.theme,
@@ -105,37 +104,34 @@ export class ThemeService {
 
       return state;
     } catch {
-      this.localStorageService.setItem(
-        this.storageKey,
-        this.defaultState,
-      );
+      this.localStorageService.setItem(this.storageKey, this.defaultState);
 
       return this.defaultState;
     }
   }
 
   private applyTheme(theme: Theme): void {
-  switch (theme) {
-    case Theme.Lara:
-      usePreset(Lara);
-      return;
+    switch (theme) {
+      case Theme.LARA:
+        usePreset(Lara);
+        return;
 
-    case Theme.Nora:
-      usePreset(Nora);
-      return;
+      case Theme.NORA:
+        usePreset(Nora);
+        return;
 
-    case Theme.Aura:
-    default:
-      usePreset(Aura);
+      case Theme.AURA:
+      default:
+        usePreset(Aura);
+    }
   }
-}
 
   private applyColorMode(colorMode: ColorMode): void {
-  this.document.documentElement.classList.toggle(
-    this.darkModeClass,
-    colorMode === ColorMode.Dark,
-  );
-}
+    this.document.documentElement.classList.toggle(
+      this.darkModeClass,
+      colorMode === ColorMode.DARK,
+    );
+  }
 
   private isTheme(value: unknown): value is Theme {
     return Object.values(Theme).includes(value as Theme);

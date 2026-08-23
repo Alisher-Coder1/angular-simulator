@@ -1,4 +1,11 @@
-import { Component, DestroyRef, EventEmitter, inject, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  DestroyRef,
+  EventEmitter,
+  inject,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { debounceTime, distinctUntilChanged, map } from 'rxjs';
@@ -14,11 +21,11 @@ export class UsersFilterComponent implements OnInit {
 
   @Output() filterUsers = new EventEmitter<string>();
 
-  public readonly searchControl = new FormControl('', {
+  readonly searchControl = new FormControl('', {
     nonNullable: true,
   });
 
-  public ngOnInit(): void {
+  ngOnInit(): void {
     this.searchControl.valueChanges
       .pipe(
         debounceTime(200),

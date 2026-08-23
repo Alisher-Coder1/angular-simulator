@@ -308,7 +308,9 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 .about__inner:hover {
@@ -427,7 +429,9 @@
   line-height: 20px;
   color: #fdfdfd;
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  transition:
+    background-color 0.3s ease,
+    transform 0.2s ease;
 }
 
 .about__inner:hover .about__button {
@@ -579,7 +583,9 @@
   height: 250px;
   display: block;
   object-fit: cover;
-  transition: transform 0.2s ease, filter 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    filter 0.2s ease;
 }
 
 .programs__image:hover {
@@ -791,12 +797,12 @@
   height: 52px;
   margin: 50px auto 0;
 
-  background: #1A3E3E;
+  background: #1a3e3e;
   border: none;
   border-radius: 4px;
 
-  color: #FDFDFD;
-  font-family: "Nunito Sans", sans-serif;
+  color: #fdfdfd;
+  font-family: 'Nunito Sans', sans-serif;
   font-size: 16px;
   font-weight: 600;
   line-height: 20px;
@@ -824,7 +830,7 @@
 }
 
 .blog__subtitle {
-  font-family: "Nunito Sans", sans-serif;
+  font-family: 'Nunito Sans', sans-serif;
   font-size: 24px;
   font-weight: 400;
   line-height: 20px;
@@ -833,7 +839,7 @@
 
 .blog__title {
   margin: 0;
-  font-family: "Nunito Sans", sans-serif;
+  font-family: 'Nunito Sans', sans-serif;
   font-size: 32px;
   font-weight: 800;
   line-height: 120%;
@@ -866,7 +872,7 @@
 
 .blog__post-title {
   margin: 0;
-  font-family: "Nunito Sans", sans-serif;
+  font-family: 'Nunito Sans', sans-serif;
   font-size: 24px;
   font-weight: 700;
   line-height: 32px;
@@ -875,7 +881,7 @@
 
 .blog__post-description {
   margin: 24px 0 0;
-  font-family: "Nunito Sans", sans-serif;
+  font-family: 'Nunito Sans', sans-serif;
   font-size: 14px;
   font-weight: 400;
   line-height: 20px;
@@ -891,7 +897,7 @@
 
 .blog__post-date,
 .blog__post-link {
-  font-family: "Nunito Sans", sans-serif;
+  font-family: 'Nunito Sans', sans-serif;
   font-size: 14px;
   font-weight: 700;
   line-height: 20px;
@@ -918,7 +924,7 @@
   border-radius: 4px;
   background: #1a3e3e;
 
-  font-family: "Nunito Sans", sans-serif;
+  font-family: 'Nunito Sans', sans-serif;
   font-size: 16px;
   font-weight: 600;
   line-height: 20px;
@@ -1007,7 +1013,9 @@
 .blog {
   background: var(--app-blog-background);
   color: var(--app-text);
-  transition: background-color 0.2s ease, color 0.2s ease;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
 }
 
 .blog__post {

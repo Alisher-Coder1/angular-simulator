@@ -1,9 +1,5 @@
 import { Component, inject } from '@angular/core';
-import {
-  FormBuilder,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { finalize } from 'rxjs';
 
@@ -17,7 +13,9 @@ import { AuthService } from '../auth.service';
 })
 export class LoginComponent {
   private readonly formBuilder = inject(FormBuilder);
+
   private readonly authService = inject(AuthService);
+
   private readonly router = inject(Router);
 
   readonly loginForm = this.formBuilder.nonNullable.group({
@@ -26,6 +24,7 @@ export class LoginComponent {
   });
 
   isLoading = false;
+
   errorMessage = '';
 
   login(): void {

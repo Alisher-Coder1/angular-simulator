@@ -1,7 +1,4 @@
-import {
-  HttpErrorResponse,
-  HttpInterceptorFn,
-} from '@angular/common/http';
+import { HttpErrorResponse, HttpInterceptorFn } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { catchError, switchMap, throwError } from 'rxjs';
@@ -13,8 +10,7 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
   const router = inject(Router);
 
   const isAuthRequest =
-    req.url.includes('/auth/login') ||
-    req.url.includes('/auth/refresh');
+    req.url.includes('/auth/login') || req.url.includes('/auth/refresh');
 
   const accessToken = authService.getAccessToken();
 

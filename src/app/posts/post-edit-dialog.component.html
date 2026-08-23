@@ -1,7 +1,14 @@
 <form class="post-edit-form" (ngSubmit)="save()">
   <label for="title">Название</label>
 
-  <input id="title" name="title" type="text" pInputText [(ngModel)]="title" required />
+  <input
+    id="title"
+    name="title"
+    type="text"
+    pInputText
+    [(ngModel)]="title"
+    required
+  />
 
   <label for="tags">Теги</label>
 
@@ -12,7 +19,9 @@
   <input id="views" name="views" type="number" pInputText [(ngModel)]="views" />
 
   <div class="dialog-actions">
-    <button type="button" (click)="cancel()" [disabled]="isSaving">Отмена</button>
+    <button type="button" (click)="cancel()" [disabled]="isSaving">
+      Отмена
+    </button>
 
     <button type="submit" [disabled]="isSaving || !title.trim()">
       {{ isSaving ? 'Сохранение...' : 'Сохранить' }}

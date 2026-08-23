@@ -13,7 +13,10 @@
         placeholder="Введите логин"
       />
 
-      @if (loginForm.controls.username.touched && loginForm.controls.username.invalid) {
+      @if (
+        loginForm.controls.username.touched &&
+        loginForm.controls.username.invalid
+      ) {
         <small class="field-error">Введите логин</small>
       }
     </div>
@@ -29,7 +32,10 @@
         placeholder="Введите пароль"
       />
 
-      @if (loginForm.controls.password.touched && loginForm.controls.password.invalid) {
+      @if (
+        loginForm.controls.password.touched &&
+        loginForm.controls.password.invalid
+      ) {
         <small class="field-error">Введите пароль</small>
       }
     </div>

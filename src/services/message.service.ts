@@ -1,57 +1,57 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { MessageType } from '../enums/MessageType';
-import { Message } from '../interfaces/message';
+import { IMessage } from '../interfaces/message';
 
 @Injectable({
   providedIn: 'root',
 })
 export class MessageService {
   // Приватный поток хранит текущий список сообщений.
-  private readonly messagesSubject = new BehaviorSubject<Message[]>([]);
+  private readonly messagesSubject = new BehaviorSubject<IMessage[]>([]);
 
   // Публичный поток доступен компонентам только для чтения.
-  public readonly messages$: Observable<Message[]> =
+  readonly messages$: Observable<IMessage[]> =
     this.messagesSubject.asObservable();
 
   // Показывает сообщение об успешном действии.
-  public showSuccess(text: string): void {
+  showSuccess(text: string): void {
     this.addMessage({
       id: Date.now(),
-      type: MessageType.Success,
+      type: MessageType.SUCCESS,
       text,
     });
   }
 
   // Показывает информационное сообщение.
-  public showInfo(text: string): void {
+  showInfo(text: string): void {
     this.addMessage({
       id: Date.now(),
-      type: MessageType.Info,
+      type: MessageType.INFO,
       text,
     });
   }
 
   // Показывает предупреждающее сообщение.
-  public showWarn(text: string): void {
+  showWarn(text: string): void {
     this.addMessage({
       id: Date.now(),
-      type: MessageType.Warn,
+      type: MessageType.WARN,
       text,
     });
   }
 
   // Показывает сообщение об ошибке.
-  public showError(text: string): void {
+  showError(text: string): void {
     this.addMessage({
       id: Date.now(),
-      type: MessageType.Error,
+      type: MessageType.ERROR,
       text,
     });
   }
 
   // Добавляет новое сообщение в начало потока.
-  private addMessage(message: Message): void {
+  private addMessage(message: IMessage): void {
     const currentMessages = this.messagesSubject.getValue();
 
     this.messagesSubject.next([message, ...currentMessages]);
@@ -63,7 +63,7 @@ export class MessageService {
   }
 
   // Закрывает сообщение по его идентификатору.
-  public closeMessage(id: number): void {
+  closeMessage(id: number): void {
     const filteredMessages = this.messagesSubject
       .getValue()
       .filter((message) => message.id !== id);

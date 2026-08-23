@@ -38,7 +38,11 @@
           </td>
         </tr>
       } @else {
-        <tr class="post-row" [pContextMenuRow]="post" (dblclick)="openPost(post)">
+        <tr
+          class="post-row"
+          [pContextMenuRow]="post"
+          (dblclick)="openPost(post)"
+        >
           <td>{{ post.title }}</td>
 
           <td>

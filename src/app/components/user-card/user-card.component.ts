@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { UpperCasePipe } from '@angular/common';
-import { User } from '../../../interfaces/user';
+import { IUser } from '../../../interfaces/user';
 import { PhonePipe } from '../../pipes/phone.pipe';
 import { BoldHoverDirective } from '../../directives/bold-hover.directive';
 
@@ -12,7 +12,7 @@ import { BoldHoverDirective } from '../../directives/bold-hover.directive';
 })
 export class UserCardComponent {
   // Пользователь приходит от родительского smart-компонента.
-  @Input({ required: true }) user!: User;
+  @Input({ required: true }) user!: IUser;
 
   // Карточка не удаляет пользователя сама, а только сообщает родителю id.
   @Output() deleteUser = new EventEmitter<number>();

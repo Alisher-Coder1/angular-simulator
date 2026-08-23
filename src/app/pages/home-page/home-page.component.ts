@@ -1,7 +1,12 @@
 import { Component, OnDestroy, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faPersonHiking, faPlay, faShieldHalved, faTag, } from '@fortawesome/free-solid-svg-icons';
+import {
+  faPersonHiking,
+  faPlay,
+  faShieldHalved,
+  faTag,
+} from '@fortawesome/free-solid-svg-icons';
 import { Color } from '../../../enums/Color';
 import { Collection } from '../../collection';
 import { MessageService } from '../../../services/message.service';
@@ -17,41 +22,41 @@ type TaskPanelMode = 'date' | 'counter';
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.scss',
 })
-
 export class HomePageComponent implements OnDestroy {
   // Пункт 3 домашнего задания №17:
   // подключаем сервис сообщений к компоненту.
-  public readonly messageService = inject(MessageService);
+  readonly messageService = inject(MessageService);
 
   // Пункт 4 домашнего задания №17:
   // подключаем сервис для работы с localStorage.
   private readonly localStorageService = inject(LocalStorageService);
 
   // Делаем enum доступным в HTML-шаблоне.
-  public readonly MessageType = MessageType;
-  public readonly faPlay = faPlay;
+  readonly MessageType = MessageType;
+
+  readonly faPlay = faPlay;
 
   /// Выбирает метод сервиса в зависимости от типа сообщения.
-  public addMessage(type: MessageType, text: string): void {
+  addMessage(type: MessageType, text: string): void {
     switch (type) {
-  // Успешное выполнение действия. 
-    case MessageType.Success:
-      this.messageService.showSuccess(text);
-      break;
-  // Информационное сообщение.
-    case MessageType.Info:
-      this.messageService.showInfo(text);
-      break;
-  // Предупреждение для пользователя.
-    case MessageType.Warn:
-      this.messageService.showWarn(text);
-      break;
-  // Сообщение об ошибке.
-    case MessageType.Error:
-      this.messageService.showError(text);
-      break;
+      // Успешное выполнение действия.
+      case MessageType.SUCCESS:
+        this.messageService.showSuccess(text);
+        break;
+      // Информационное сообщение.
+      case MessageType.INFO:
+        this.messageService.showInfo(text);
+        break;
+      // Предупреждение для пользователя.
+      case MessageType.WARN:
+        this.messageService.showWarn(text);
+        break;
+      // Сообщение об ошибке.
+      case MessageType.ERROR:
+        this.messageService.showError(text);
+        break;
+    }
   }
-}
 
   // Пункт 1:
   // Название компании хранится в свойстве компонента
@@ -136,94 +141,97 @@ export class HomePageComponent implements OnDestroy {
   ];
 
   // Пункт 1 домашнего задания №17
-  // Данные для блока "Популярные направления" 
+  // Данные для блока "Популярные направления"
   popularTours = [
-  {
-    image: 'assets/popular-lake.png',
-    title: 'Озеро возле гор',
-    description: 'романтическое путешествие',
-    price: 480,
-    rating: 4.9,
-  },
-  {
-    image: 'assets/popular-night.png',
-    title: 'Ночь в горах',
-    description: 'в компании друзей',
-    price: 500,
-    rating: 4.5,
-  },
-  {
-    image: 'assets/popular-yoga.png',
-    title: 'Растяжка в горах',
-    description: 'для тех, кто заботится о себе',
-    price: 230,
-    rating: 5.0,
-  },
-];
+    {
+      image: 'assets/popular-lake.png',
+      title: 'Озеро возле гор',
+      description: 'романтическое путешествие',
+      price: 480,
+      rating: 4.9,
+    },
+    {
+      image: 'assets/popular-night.png',
+      title: 'Ночь в горах',
+      description: 'в компании друзей',
+      price: 500,
+      rating: 4.5,
+    },
+    {
+      image: 'assets/popular-yoga.png',
+      title: 'Растяжка в горах',
+      description: 'для тех, кто заботится о себе',
+      price: 230,
+      rating: 5.0,
+    },
+  ];
 
-blogPosts = [
-  {
-    image: 'assets/blog-italy.png',
-    title: 'Красивая Италия, какая она в реальности?',
-    description: 'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации.',
-    date: '01/04/2023',
-    link: 'читать статью',
-  },
-  {
-    image: 'assets/blog-airplane.png',
-    title: 'Долой сомнения! Весь мир открыт для вас!',
-    description: 'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации ... независимые способы реализации соответствующих...',
-    date: '01/04/2023',
-    link: 'читать статью',
-  },
-  {
-    image: 'assets/blog-map.png',
-    title: 'Как подготовиться к путешествию в одиночку? ',
-    description: 'Для современного мира базовый вектор развития предполагает.',
-    date: '01/04/2023',
-    link: 'читать статью',
-  },
-  {
-    image: 'assets/blog-mountains.png',
-    title: 'Индия ... летим?',
-    description: 'Для современного мира базовый.',
-    date: '01/04/2023',
-    link: 'читать статью',
-  },
-];
+  blogPosts = [
+    {
+      image: 'assets/blog-italy.png',
+      title: 'Красивая Италия, какая она в реальности?',
+      description:
+        'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации.',
+      date: '01/04/2023',
+      link: 'читать статью',
+    },
+    {
+      image: 'assets/blog-airplane.png',
+      title: 'Долой сомнения! Весь мир открыт для вас!',
+      description:
+        'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации ... независимые способы реализации соответствующих...',
+      date: '01/04/2023',
+      link: 'читать статью',
+    },
+    {
+      image: 'assets/blog-map.png',
+      title: 'Как подготовиться к путешествию в одиночку? ',
+      description:
+        'Для современного мира базовый вектор развития предполагает.',
+      date: '01/04/2023',
+      link: 'читать статью',
+    },
+    {
+      image: 'assets/blog-mountains.png',
+      title: 'Индия ... летим?',
+      description: 'Для современного мира базовый.',
+      date: '01/04/2023',
+      link: 'читать статью',
+    },
+  ];
 
-galleryImages = [
-  {
-    src: 'assets/gallery-balloons.png',
-    alt: 'Путешественники среди воздушных шаров',
-    isWide: true,
-  },
-  {
-    src: 'assets/gallery-travel-items.png',
-    alt: 'Вещи для путешествия',
-    isWide: false,
-  },
-  {
-    src: 'assets/gallery-sailboat.png',
-    alt: 'Парусник у побережья',
-    isWide: false,
-  },
-  {
-    src: 'assets/gallery-beach.png',
-    alt: 'Пляж с прозрачной водой',
-    isWide: false,
-  },
-  {
-    src: 'assets/gallery-canyon.png',
-    alt: 'Путешественники в каньоне',
-    isWide: true,
-  },
-  {
-    src: 'assets/gallery-workspace.png',
-    alt: 'Записи и принадлежности путешественника',
-    isWide: false,
-  },
-];
+  galleryImages = [
+    {
+      src: 'assets/gallery-balloons.png',
+      alt: 'Путешественники среди воздушных шаров',
+      isWide: true,
+    },
+    {
+      src: 'assets/gallery-travel-items.png',
+      alt: 'Вещи для путешествия',
+      isWide: false,
+    },
+    {
+      src: 'assets/gallery-sailboat.png',
+      alt: 'Парусник у побережья',
+      isWide: false,
+    },
+    {
+      src: 'assets/gallery-beach.png',
+      alt: 'Пляж с прозрачной водой',
+      isWide: false,
+    },
+    {
+      src: 'assets/gallery-canyon.png',
+      alt: 'Путешественники в каньоне',
+      isWide: true,
+    },
+    {
+      src: 'assets/gallery-workspace.png',
+      alt: 'Записи и принадлежности путешественника',
+      isWide: false,
+    },
+  ];
 
   // Пункт 4 домашнего задания №16:
   // Свойство хранит текущую дату и время.
@@ -315,7 +323,7 @@ galleryImages = [
   // Метод проверяет, является ли переданный цвет одним из трёх основных цветов:
   // красным, зелёным или синим.
   isPrimaryColor(color: Color): boolean {
-    return color === Color.Red || color === Color.Green || color === Color.Blue;
+    return color === Color.RED || color === Color.GREEN || color === Color.BLUE;
   }
 
   // Пункт 3:
@@ -330,13 +338,14 @@ galleryImages = [
   // Метод получает текущее количество заходов из localStorage,
   // увеличивает значение на 1 и сохраняет обратно.
   saveVisitCount(): void {
-    const savedVisitCount = this.localStorageService.getItem<number>('visitCount');
+    const savedVisitCount =
+      this.localStorageService.getItem<number>('visitCount');
     const currentVisitCount = savedVisitCount ? Number(savedVisitCount) : 0;
     const nextVisitCount = currentVisitCount + 1;
 
     this.localStorageService.setItem('visitCount', nextVisitCount);
   }
-  
+
   // Пункт 4 домашнего задания №16:
   // Метод формирует текущую дату и время до секунд.
   updateCurrentDateTime(): void {

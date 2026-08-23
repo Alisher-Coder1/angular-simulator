@@ -12,6 +12,5 @@ import { IPost } from './interfaces/post.interface';
 export class PostDetailComponent {
   private readonly route = inject(ActivatedRoute);
 
-  public readonly post =
-    this.route.snapshot.data['post'] as IPost;
+  readonly post = this.route.snapshot.data['post'] as IPost;
 }

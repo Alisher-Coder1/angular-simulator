@@ -28,10 +28,20 @@
         {{ clickCount }}
       </span>
 
-      <button class="top-task-panel__button" type="button" (click)="increaseClickCount()">+</button>
+      <button
+        class="top-task-panel__button"
+        type="button"
+        (click)="increaseClickCount()"
+      >
+        +
+      </button>
     }
 
-    <button class="top-task-panel__toggle" type="button" (click)="toggleTaskPanelMode()">
+    <button
+      class="top-task-panel__toggle"
+      type="button"
+      (click)="toggleTaskPanelMode()"
+    >
       {{ taskPanelToggleText }}
     </button>
   </div>
@@ -67,7 +77,11 @@
 
     <form class="search-form">
       <div class="search-field">
-        <select class="search-select" name="tourLocation" [(ngModel)]="selectedTourLocation">
+        <select
+          class="search-select"
+          name="tourLocation"
+          [(ngModel)]="selectedTourLocation"
+        >
           <option value="">Локация для тура</option>
           @for (location of tourLocations; track location) {
             <option [value]="location">
@@ -79,12 +93,21 @@
       </div>
 
       <div class="search-field">
-        <input class="search-input" type="date" name="tourDate" [(ngModel)]="selectedTourDate" />
+        <input
+          class="search-input"
+          type="date"
+          name="tourDate"
+          [(ngModel)]="selectedTourDate"
+        />
         <span class="search-field__hint">укажите дату</span>
       </div>
 
       <div class="search-field">
-        <select class="search-select" name="participants" [(ngModel)]="selectedParticipants">
+        <select
+          class="search-select"
+          name="participants"
+          [(ngModel)]="selectedParticipants"
+        >
           <option value="">Участники</option>
           @for (participant of participantOptions; track participant) {
             <option [value]="participant">
@@ -95,15 +118,22 @@
         <span class="search-field__hint">выберите из списка</span>
       </div>
 
-      <button class="search-button" type="button" [disabled]="isSearchButtonDisabled">
+      <button
+        class="search-button"
+        type="button"
+        [disabled]="isSearchButtonDisabled"
+      >
         Найти программу
       </button>
     </form>
 
     <!-- Live input (пункт 7) -->
     <div class="live-input-demo">
-      <label class="live-input-demo__label">Live input:</label>
+      <label class="live-input-demo__label" for="live-input-demo-field">
+        Live input:
+      </label>
       <input
+        id="live-input-demo-field"
         class="live-input-demo__field"
         type="text"
         [(ngModel)]="liveInputText"
@@ -130,25 +160,38 @@
           src="assets/about-video-preview.png"
           alt="Видео о походе"
         />
-        <button class="about__play-button" type="button" aria-label="Смотреть видео">
-          <fa-icon class="about__play-icon" [icon]="faPlay" aria-hidden="true"></fa-icon>
+        <button
+          class="about__play-button"
+          type="button"
+          aria-label="Смотреть видео"
+        >
+          <fa-icon
+            class="about__play-icon"
+            [icon]="faPlay"
+            aria-hidden="true"
+          ></fa-icon>
         </button>
       </div>
     </div>
 
     <div class="about__content">
       <span class="about__label">о нашем походе</span>
-      <h2 class="about__title">Исследуйте все горные массивы мира вместе с нами</h2>
+      <h2 class="about__title">
+        Исследуйте все горные массивы мира вместе с нами
+      </h2>
       <p class="about__text">
-        Его корни уходят в один фрагмент классической латыни 45 года н.э., то есть более двух
-        тысячелетий назад. Ричард МакКлинток, профессор латыни из колледжа Hampden-Sydney, штат
-        Вирджиния, взял одно из самых странных слов в Lorem Ipsum, "consectetur" и занялся его
-        поисками в классической латинской литературе.
+        Его корни уходят в один фрагмент классической латыни 45 года н.э., то
+        есть более двух тысячелетий назад. Ричард МакКлинток, профессор латыни
+        из колледжа Hampden-Sydney, штат Вирджиния, взял одно из самых странных
+        слов в Lorem Ipsum, "consectetur" и занялся его поисками в классической
+        латинской литературе.
       </p>
       <button
         class="about__button"
         type="button"
-        (click)="addMessage(MessageType.Warn, 'Программа тура сейчас недоступна')"
+        (click)="
+          addMessage(MessageType.WARN, 'Программа тура сейчас недоступна')
+        "
       >
         Программа тура
       </button>
@@ -162,14 +205,19 @@
       <span class="programs__label">наше предложение</span>
       <h2 class="programs__title">Лучшие программы для тебя</h2>
       <p class="programs__text">
-        Его корни уходят в один фрагмент классической латыни 45 года н.э., то есть более двух
-        тысячелетий назад. Ричард МакКлинток, профессор латыни из колледжа.
+        Его корни уходят в один фрагмент классической латыни 45 года н.э., то
+        есть более двух тысячелетий назад. Ричард МакКлинток, профессор латыни
+        из колледжа.
       </p>
 
       <div class="programs__list">
         @for (feature of programFeatures; track feature.title) {
           <article class="programs__item">
-            <fa-icon class="programs__icon" [icon]="feature.icon" aria-hidden="true"></fa-icon>
+            <fa-icon
+              class="programs__icon"
+              [icon]="feature.icon"
+              aria-hidden="true"
+            ></fa-icon>
             <div class="programs__item-content">
               <h3 class="programs__item-title">
                 {{ feature.title }}
@@ -185,7 +233,7 @@
       <button
         class="programs__button"
         type="button"
-        (click)="addMessage(MessageType.Info, 'Стоимость программ рассчитана')"
+        (click)="addMessage(MessageType.INFO, 'Стоимость программ рассчитана')"
       >
         Стоимость программ
       </button>
@@ -233,7 +281,7 @@
   <button
     class="popular__button"
     type="button"
-    (click)="addMessage(MessageType.Success, 'Направления получены')"
+    (click)="addMessage(MessageType.SUCCESS, 'Направления получены')"
   >
     Рейтинг направлений
   </button>
@@ -276,7 +324,7 @@
     <div class="blog__footer">
       <button
         class="blog__button"
-        (click)="addMessage(MessageType.Error, 'Материалы временно недоступны')"
+        (click)="addMessage(MessageType.ERROR, 'Материалы временно недоступны')"
       >
         Другие материалы
       </button>

@@ -1,33 +1,33 @@
 // Координаты пользователя.
-export interface UserGeo {
+export interface IUserGeo {
   lat: string;
   lng: string;
 }
 
 // Адрес пользователя.
-export interface UserAddress {
+export interface IUserAddress {
   street: string;
   suite: string;
   city: string;
   zipcode: string;
-  geo: UserGeo;
+  geo: IUserGeo;
 }
 
 // Данные компании пользователя.
-export interface UserCompany {
+export interface IUserCompany {
   name: string;
   catchPhrase: string;
   bs: string;
 }
 
 // Полная модель пользователя, получаемая с сервера.
-export interface User {
+export interface IUser {
   id: number;
   name: string;
   username: string;
   email: string;
-  address: UserAddress;
+  address: IUserAddress;
   phone: string;
   website: string;
-  company: UserCompany;
+  company: IUserCompany;
 }

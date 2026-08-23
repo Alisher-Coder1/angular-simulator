@@ -6,12 +6,17 @@
   @if (filteredUsers$ | async; as users) {
     <p class="user-page__count">
       {{ users.length }}
-      {{ users.length | plural: 'пользователь' : 'пользователя' : 'пользователей' }}
+      {{
+        users.length | plural: 'пользователь' : 'пользователя' : 'пользователей'
+      }}
     </p>
     @if (users.length > 0) {
       <div class="user-page__list">
         @for (user of users; track user.id) {
-          <app-user-card [user]="user" (deleteUser)="onDeleteUser($event)"></app-user-card>
+          <app-user-card
+            [user]="user"
+            (deleteUser)="onDeleteUser($event)"
+          ></app-user-card>
         }
       </div>
     } @else {

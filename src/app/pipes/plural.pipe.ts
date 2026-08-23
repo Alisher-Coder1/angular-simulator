@@ -4,12 +4,7 @@ import { Pipe, PipeTransform } from '@angular/core';
   name: 'plural',
 })
 export class PluralPipe implements PipeTransform {
-  public transform(
-    value: number,
-    one: string,
-    few: string,
-    many: string,
-  ): string {
+  transform(value: number, one: string, few: string, many: string): string {
     const normalizedValue = Math.abs(Math.trunc(value));
     const lastTwoDigits = normalizedValue % 100;
     const lastDigit = normalizedValue % 10;

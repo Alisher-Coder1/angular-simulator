@@ -5,15 +5,13 @@ import { BehaviorSubject, Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class LoaderService {
-  private readonly loaderSubject =
-    new BehaviorSubject<boolean>(false);
+  private readonly loaderSubject = new BehaviorSubject<boolean>(false);
 
   private activeLoaders = 0;
 
-  public readonly loader$: Observable<boolean> =
-    this.loaderSubject.asObservable();
+  readonly loader$: Observable<boolean> = this.loaderSubject.asObservable();
 
-  public showLoader(): void {
+  showLoader(): void {
     this.activeLoaders += 1;
 
     if (this.activeLoaders === 1) {
@@ -21,7 +19,7 @@ export class LoaderService {
     }
   }
 
-  public hideLoader(): void {
+  hideLoader(): void {
     if (this.activeLoaders > 0) {
       this.activeLoaders -= 1;
     }

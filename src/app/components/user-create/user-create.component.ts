@@ -1,6 +1,6 @@
 import { Component, EventEmitter, inject, Output } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule, Validators, } from '@angular/forms';
-import { User } from '../../../interfaces/user';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { IUser } from '../../../interfaces/user';
 import { BoldHoverDirective } from '../../directives/bold-hover.directive';
 import { AnimatedGradientDirective } from '../../directives/animated-gradient.directive';
 
@@ -13,9 +13,9 @@ import { AnimatedGradientDirective } from '../../directives/animated-gradient.di
 export class UserCreateComponent {
   private readonly formBuilder = inject(FormBuilder);
 
-  @Output() createUser = new EventEmitter<User>();
+  @Output() createUser = new EventEmitter<IUser>();
 
-  public readonly userForm = this.formBuilder.nonNullable.group({
+  readonly userForm = this.formBuilder.nonNullable.group({
     name: ['', [Validators.required]],
     username: [''],
     email: ['', [Validators.required, Validators.email]],
@@ -32,7 +32,7 @@ export class UserCreateComponent {
     bs: [''],
   });
 
-  public onSubmit(): void {
+  onSubmit(): void {
     if (this.userForm.invalid) {
       this.userForm.markAllAsTouched();
       return;
@@ -40,7 +40,7 @@ export class UserCreateComponent {
 
     const formValue = this.userForm.getRawValue();
 
-    const newUser: User = {
+    const newUser: IUser = {
       id: Date.now(),
       name: formValue.name,
       username: this.getValueOrUnknown(formValue.username),

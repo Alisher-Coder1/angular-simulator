@@ -1,16 +1,12 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
-export type PhoneFormat =
-  | 'compact'
-  | 'international'
-  | 'national'
-  | 'masked';
+export type PhoneFormat = 'compact' | 'international' | 'national' | 'masked';
 
 @Pipe({
   name: 'phone',
 })
 export class PhonePipe implements PipeTransform {
-  public transform(
+  transform(
     value: string | number | null | undefined,
     mode: PhoneFormat = 'international',
   ): string {

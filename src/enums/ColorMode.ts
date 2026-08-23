@@ -1,4 +1,4 @@
 ﻿export enum ColorMode {
-  Light = 'light',
-  Dark = 'dark',
+  LIGHT = 'light',
+  DARK = 'dark',
 }
