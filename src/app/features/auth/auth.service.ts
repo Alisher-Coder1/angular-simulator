@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
-
+import { APP_CONFIG } from '../../config/app-config.token';
 import {
   IAuth,
   ICurrentUser,
@@ -14,6 +14,8 @@ import {
 })
 export class AuthService {
   private readonly http = inject(HttpClient);
+
+  private readonly appConfig = inject(APP_CONFIG);
 
   private readonly apiUrl = 'https://dummyjson.com/auth';
 
@@ -34,19 +36,24 @@ export class AuthService {
   }
 
   login(credentials: ILoginRequest): Observable<IAuth> {
-    return this.http.post<IAuth>(`${this.apiUrl}/login`, credentials).pipe(
-      tap((user) => {
-        this.saveAuthData(user);
-        this.currentUserSubject.next(user);
-      }),
-    );
+    return this.http
+      .post<IAuth>(`${this.apiUrl}/login`, {
+        ...credentials,
+        expiresInMins: this.appConfig.sessionTimeout,
+      })
+      .pipe(
+        tap((user) => {
+          this.saveAuthData(user);
+          this.currentUserSubject.next(user);
+        }),
+      );
   }
 
   refreshToken(): Observable<IRefreshTokenResponse> {
     return this.http
       .post<IRefreshTokenResponse>(`${this.apiUrl}/refresh`, {
         refreshToken: this.getRefreshToken(),
-        expiresInMins: 30,
+        expiresInMins: this.appConfig.sessionTimeout,
       })
       .pipe(
         tap((tokens) => {

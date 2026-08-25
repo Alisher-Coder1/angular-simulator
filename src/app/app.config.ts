@@ -12,12 +12,23 @@ import { loggingInterceptor } from './interceptors/logging.interceptor';
 import { errorInterceptor } from './interceptors/error-interceptor';
 import { loaderInterceptor } from './interceptors/loader.interceptor';
 import { authInterceptor } from './features/auth/auth.interceptor';
+import { APP_CONFIG } from './config/app-config.token';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideRouter(routes),
     provideZoneChangeDetection(),
+    {
+      provide: APP_CONFIG,
+      useValue: {
+        companyName: 'Angular Simulator',
+        enableLogs: true,
+        enableNotifications: true,
+        enableTheming: true,
+        sessionTimeout: 30,
+      },
+    },
     provideHttpClient(
       withInterceptors([
         authInterceptor,

@@ -8,6 +8,7 @@ import { SelectButtonModule } from 'primeng/selectbutton';
 import { Theme } from '../../../enums/Theme';
 import { AuthService } from '../../features/auth/auth.service';
 import { AsyncPipe } from '@angular/common';
+import { APP_CONFIG } from '../../config/app-config.token';
 
 @Component({
   selector: 'app-header',
@@ -32,6 +33,8 @@ export class HeaderComponent {
   private readonly authService = inject(AuthService);
 
   private readonly router = inject(Router);
+
+  readonly appConfig = inject(APP_CONFIG);
 
   readonly currentUser$ = this.authService.currentUser$;
 
