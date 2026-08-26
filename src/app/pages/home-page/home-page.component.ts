@@ -1,4 +1,5 @@
 import { Component, OnDestroy, inject } from '@angular/core';
+import { formatDate } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {
@@ -13,6 +14,8 @@ import { MessageService } from '../../../services/message.service';
 import { MessageType } from '../../../enums/MessageType';
 import { LocalStorageService } from '../../../services/local-storage.service';
 import { MessageComponent } from '../../components/message/message.component';
+import { APP_CONFIG } from '../../config/app-config.token';
+import { DATE_FORMAT } from '../../config/date-format.token';
 
 type TaskPanelMode = 'date' | 'counter';
 
@@ -23,6 +26,10 @@ type TaskPanelMode = 'date' | 'counter';
   styleUrl: './home-page.component.scss',
 })
 export class HomePageComponent implements OnDestroy {
+  readonly appConfig = inject(APP_CONFIG);
+
+  private readonly dateFormat = inject(DATE_FORMAT);
+
   // Пункт 3 домашнего задания №17:
   // подключаем сервис сообщений к компоненту.
   readonly messageService = inject(MessageService);
@@ -351,11 +358,7 @@ export class HomePageComponent implements OnDestroy {
   updateCurrentDateTime(): void {
     const currentDate = new Date();
 
-    const date = currentDate.toLocaleDateString('ru-RU', {
-      day: '2-digit',
-      month: '2-digit',
-      year: 'numeric',
-    });
+    const date = formatDate(currentDate, this.dateFormat, 'en-US');
 
     const time = currentDate.toLocaleTimeString('ru-RU', {
       hour: '2-digit',

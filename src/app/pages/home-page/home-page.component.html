@@ -330,7 +330,9 @@
       </button>
     </div>
   </div>
-  <app-message></app-message>
+  @if (appConfig.enableNotifications) {
+    <app-message></app-message>
+  }
 </section>
 <section class="gallery">
   <div class="gallery__container">
