@@ -7,46 +7,6 @@
   </div>
 }
 
-<!-- Панель с датой и счётчиком вынесена наверх, отдельно от header -->
-<div class="top-task-panel">
-  <div class="top-task-panel__content">
-    @if (taskPanelMode === 'date') {
-      <span class="top-task-panel__datetime">
-        {{ currentDateTime }}
-      </span>
-    } @else {
-      <button
-        class="top-task-panel__button"
-        type="button"
-        (click)="decreaseClickCount()"
-        [disabled]="clickCount === 0"
-      >
-        -
-      </button>
-
-      <span class="top-task-panel__counter">
-        {{ clickCount }}
-      </span>
-
-      <button
-        class="top-task-panel__button"
-        type="button"
-        (click)="increaseClickCount()"
-      >
-        +
-      </button>
-    }
-
-    <button
-      class="top-task-panel__toggle"
-      type="button"
-      (click)="toggleTaskPanelMode()"
-    >
-      {{ taskPanelToggleText }}
-    </button>
-  </div>
-</div>
-
 <section class="hero">
   <header class="header">
     <div class="header__inner">
@@ -330,7 +290,9 @@
       </button>
     </div>
   </div>
-  <app-message></app-message>
+  @if (appConfig.enableNotifications) {
+    <app-message></app-message>
+  }
 </section>
 <section class="gallery">
   <div class="gallery__container">

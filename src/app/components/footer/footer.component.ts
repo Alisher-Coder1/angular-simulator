@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { APP_CONFIG } from '../../config/app-config.token';
 import {
   faPinterest,
   faSkype,
@@ -14,6 +15,8 @@ import {
   styleUrl: './footer.component.scss',
 })
 export class FooterComponent {
+  readonly appConfig = inject(APP_CONFIG);
+
   readonly faTelegram = faTelegram;
 
   readonly faVk = faVk;

@@ -105,61 +105,6 @@
   cursor: pointer;
 }
 
-// Р’РµСЂС…РЅСЏСЏ РїР°РЅРµР»СЊ РґР»СЏ РґР°С‚С‹ Рё СЃС‡С‘С‚С‡РёРєР° РїРѕ РјР°РєРµС‚Сѓ РјРµРЅС‚РѕСЂР°
-.top-task-panel {
-  position: absolute;
-  top: 24px;
-  right: 40px;
-  z-index: 30;
-}
-
-.top-task-panel__content {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.top-task-panel__datetime,
-.top-task-panel__counter {
-  min-width: 120px;
-  padding: 8px 12px;
-  border: 1px solid rgba(253, 253, 253, 0.8);
-  border-radius: 4px;
-  background-color: rgba(24, 18, 30, 0.45);
-  font-family: 'Nunito Sans', sans-serif;
-  font-weight: 600;
-  font-size: 14px;
-  line-height: 20px;
-  color: #fdfdfd;
-  text-align: center;
-  white-space: nowrap;
-}
-
-.top-task-panel__toggle,
-.top-task-panel__button {
-  height: 36px;
-  padding: 8px 12px;
-  border: 1px solid rgba(253, 253, 253, 0.8);
-  border-radius: 4px;
-  background-color: rgba(24, 18, 30, 0.45);
-  font-family: 'Nunito Sans', sans-serif;
-  font-weight: 600;
-  font-size: 14px;
-  line-height: 20px;
-  color: #fdfdfd;
-  cursor: pointer;
-}
-
-.top-task-panel__button {
-  width: 36px;
-  padding: 0;
-}
-
-.top-task-panel__button:disabled {
-  opacity: 0.4;
-  cursor: not-allowed;
-}
-
 .hero__content {
   width: 1180px;
   margin: 0 auto;
@@ -1054,46 +999,6 @@
 }
 
 @media (max-width: 900px) {
-  /* Панель даты и счётчика становится частью обычного потока страницы. */
-  .top-task-panel {
-    position: static;
-    top: auto;
-    right: auto;
-
-    width: 100%;
-    min-height: auto;
-    padding: 12px 16px;
-  }
-
-  .top-task-panel__content {
-    width: 100%;
-    max-width: 1180px;
-    margin: 0 auto;
-
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .top-task-panel__datetime {
-    flex: 1 1 220px;
-    min-width: 0;
-    max-width: 100%;
-  }
-
-  .top-task-panel__counter {
-    min-width: 48px;
-  }
-
-  .top-task-panel__button,
-  .top-task-panel__toggle {
-    flex: 0 1 auto;
-    max-width: 100%;
-    white-space: nowrap;
-  }
-
   /* Туристическая шапка больше не использует жёсткую ширину 1180 px. */
   .header {
     height: auto;
@@ -1172,31 +1077,6 @@
 }
 
 @media (max-width: 480px) {
-  .top-task-panel {
-    padding: 10px 12px;
-  }
-
-  .top-task-panel__content {
-    display: grid;
-    grid-template-columns: 40px minmax(48px, 1fr) 40px;
-    gap: 8px;
-  }
-
-  .top-task-panel__datetime,
-  .top-task-panel__toggle {
-    grid-column: 1 / -1;
-    width: 100%;
-  }
-
-  .top-task-panel__counter {
-    width: 100%;
-    min-width: 0;
-  }
-
-  .top-task-panel__button {
-    width: 40px;
-  }
-
   .header__inner {
     gap: 14px;
   }
