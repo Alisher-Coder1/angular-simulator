@@ -1,5 +1,4 @@
 import { Component, OnDestroy, inject } from '@angular/core';
-import { formatDate } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {
@@ -15,9 +14,6 @@ import { MessageType } from '../../../enums/MessageType';
 import { LocalStorageService } from '../../../services/local-storage.service';
 import { MessageComponent } from '../../components/message/message.component';
 import { APP_CONFIG } from '../../config/app-config.token';
-import { DATE_FORMAT } from '../../config/date-format.token';
-
-type TaskPanelMode = 'date' | 'counter';
 
 @Component({
   selector: 'app-home-page',
@@ -27,8 +23,6 @@ type TaskPanelMode = 'date' | 'counter';
 })
 export class HomePageComponent implements OnDestroy {
   readonly appConfig = inject(APP_CONFIG);
-
-  private readonly dateFormat = inject(DATE_FORMAT);
 
   // Пункт 3 домашнего задания №17:
   // подключаем сервис сообщений к компоненту.
@@ -50,14 +44,17 @@ export class HomePageComponent implements OnDestroy {
       case MessageType.SUCCESS:
         this.messageService.showSuccess(text);
         break;
+
       // Информационное сообщение.
       case MessageType.INFO:
         this.messageService.showInfo(text);
         break;
+
       // Предупреждение для пользователя.
       case MessageType.WARN:
         this.messageService.showWarn(text);
         break;
+
       // Сообщение об ошибке.
       case MessageType.ERROR:
         this.messageService.showError(text);
@@ -240,20 +237,6 @@ export class HomePageComponent implements OnDestroy {
     },
   ];
 
-  // Пункт 4 домашнего задания №16:
-  // Свойство хранит текущую дату и время.
-  currentDateTime = '';
-
-  // Пункт 5 домашнего задания №16:
-  // Свойство хранит текущее значение счётчика кликов.
-  clickCount = 0;
-
-  // Пункт 6 домашнего задания №16:
-  // Один блок переключается между двумя режимами:
-  // 'date' — показывает дату,
-  // 'counter' — показывает кликер из пункта 5.
-  taskPanelMode: TaskPanelMode = 'date';
-
   // Пункт 7 домашнего задания №16:
   // Свойство для живого ввода текста.
   liveInputText = '';
@@ -278,10 +261,6 @@ export class HomePageComponent implements OnDestroy {
   // Создаём коллекцию на основе второго источника данных.
   priceCollection = new Collection<number>(this.tourPrices);
 
-  // Пункт 4 домашнего задания №16:
-  // Идентификатор таймера нужен, чтобы потом корректно остановить setInterval.
-  private dateTimerId: number | undefined;
-
   // Пункт 8 домашнего задания №16:
   // Идентификатор таймера загрузки нужен,
   // чтобы при уничтожении компонента можно было очистить setTimeout.
@@ -296,16 +275,6 @@ export class HomePageComponent implements OnDestroy {
     // При создании компонента увеличиваем и сохраняем количество заходов.
     this.saveVisitCount();
 
-    // Пункт 4 домашнего задания №16:
-    // Сразу показываем текущее время, не ожидая первой секунды.
-    this.updateCurrentDateTime();
-
-    // Пункт 4 домашнего задания №16:
-    // Каждую секунду обновляем дату и время.
-    this.dateTimerId = window.setInterval(() => {
-      this.updateCurrentDateTime();
-    }, 1000);
-
     // Пункт 8 домашнего задания №16:
     // Через 2 секунды скрываем искусственную загрузку страницы.
     this.loadingTimerId = window.setTimeout(() => {
@@ -313,14 +282,10 @@ export class HomePageComponent implements OnDestroy {
     }, 2000);
   }
 
-  // Пункт 4 и пункт 8 домашнего задания №16:
-  // При уничтожении компонента очищаем таймеры,
+  // Пункт 8 домашнего задания №16:
+  // При уничтожении компонента очищаем таймер,
   // чтобы не оставлять лишние процессы в памяти.
   ngOnDestroy(): void {
-    if (this.dateTimerId !== undefined) {
-      clearInterval(this.dateTimerId);
-    }
-
     if (this.loadingTimerId !== undefined) {
       clearTimeout(this.loadingTimerId);
     }
@@ -347,52 +312,12 @@ export class HomePageComponent implements OnDestroy {
   saveVisitCount(): void {
     const savedVisitCount =
       this.localStorageService.getItem<number>('visitCount');
+
     const currentVisitCount = savedVisitCount ? Number(savedVisitCount) : 0;
+
     const nextVisitCount = currentVisitCount + 1;
 
     this.localStorageService.setItem('visitCount', nextVisitCount);
-  }
-
-  // Пункт 4 домашнего задания №16:
-  // Метод формирует текущую дату и время до секунд.
-  updateCurrentDateTime(): void {
-    const currentDate = new Date();
-
-    const date = formatDate(currentDate, this.dateFormat, 'en-US');
-
-    const time = currentDate.toLocaleTimeString('ru-RU', {
-      hour: '2-digit',
-      minute: '2-digit',
-      second: '2-digit',
-    });
-
-    this.currentDateTime = date + ' ' + time;
-  }
-
-  // Пункт 5 домашнего задания №16:
-  // Увеличиваем счётчик на 1.
-  increaseClickCount(): void {
-    this.clickCount += 1;
-  }
-
-  // Пункт 5 домашнего задания №16:
-  // Уменьшаем счётчик на 1, но не позволяем значению стать меньше 0.
-  decreaseClickCount(): void {
-    if (this.clickCount > 0) {
-      this.clickCount -= 1;
-    }
-  }
-
-  // Пункт 6 домашнего задания №16:
-  // Переключаем отображение между датой и кликером.
-  toggleTaskPanelMode(): void {
-    this.taskPanelMode = this.taskPanelMode === 'date' ? 'counter' : 'date';
-  }
-
-  // Пункт 6 домашнего задания №16:
-  // Текст кнопки меняется в зависимости от того, что сейчас отображается.
-  get taskPanelToggleText(): string {
-    return this.taskPanelMode === 'date' ? 'Показать счётчик' : 'Показать дату';
   }
 
   // Пункт 2 домашнего задания №16:

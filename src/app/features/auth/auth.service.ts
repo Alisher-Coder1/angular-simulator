@@ -25,6 +25,8 @@ export class AuthService {
 
   private readonly userKey = 'authUser';
 
+  private readonly lastLoginKey = 'lastLogin';
+
   private readonly currentUserSubject = new BehaviorSubject<IAuth | null>(
     this.getStoredUser(),
   );
@@ -44,6 +46,7 @@ export class AuthService {
       .pipe(
         tap((user) => {
           this.saveAuthData(user);
+          localStorage.setItem(this.lastLoginKey, new Date().toISOString());
           this.currentUserSubject.next(user);
         }),
       );
@@ -77,6 +80,12 @@ export class AuthService {
 
   getRefreshToken(): string | null {
     return localStorage.getItem(this.refreshTokenKey);
+  }
+
+  getLastLogin(): Date | null {
+    const lastLogin = localStorage.getItem(this.lastLoginKey);
+
+    return lastLogin ? new Date(lastLogin) : null;
   }
 
   isAuthenticated(): boolean {

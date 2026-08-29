@@ -1,5 +1,8 @@
 <header class="header">
-  <span class="header__company-name">{{ appConfig.companyName }}</span>
+  <span class="header__company-name">
+    {{ appConfig.companyName }}
+  </span>
+
   <nav class="header__navigation">
     @for (link of navigationLinks; track link.path) {
       <a
@@ -12,19 +15,70 @@
       </a>
     }
   </nav>
-  <div class="header__auth">
-    @if (currentUser$ | async; as user) {
-      <span class="header__user">
-        {{ user.firstName }} {{ user.lastName }}
-      </span>
 
-      <button type="button" class="header__logout" (click)="logout()">
-        Выйти
+  <div class="header__auth">
+    <div class="header__task-panel">
+      @if (taskPanelMode === 'date') {
+        <span class="header__datetime">
+          {{ currentDateTime }}
+        </span>
+      } @else {
+        <button
+          class="header__counter-button"
+          type="button"
+          (click)="decreaseClickCount()"
+          [disabled]="clickCount === 0"
+        >
+          -
+        </button>
+
+        <span class="header__counter">
+          {{ clickCount }}
+        </span>
+
+        <button
+          class="header__counter-button"
+          type="button"
+          (click)="increaseClickCount()"
+        >
+          +
+        </button>
+      }
+
+      <button
+        class="header__task-toggle"
+        type="button"
+        (click)="toggleTaskPanelMode()"
+      >
+        {{ taskPanelToggleText }}
       </button>
+    </div>
+
+    @if (currentUser$ | async; as user) {
+      <div class="header__user-row">
+        <div class="header__identity">
+          <span class="header__user">
+            {{ user.firstName }} {{ user.lastName }}
+          </span>
+
+          @if (lastLogin) {
+            <span class="header__last-login">
+              Последний вход: {{ lastLogin | date: dateFormat }}
+            </span>
+          }
+        </div>
+
+        <button type="button" class="header__logout" (click)="logout()">
+          Выйти
+        </button>
+      </div>
     } @else {
-      <a class="header__link" routerLink="/login"> Войти </a>
+      <div class="header__user-row">
+        <a class="header__link" routerLink="/login">Войти</a>
+      </div>
     }
   </div>
+
   @if (appConfig.enableTheming) {
     <div class="header__settings">
       <div class="header__mode">
@@ -38,8 +92,10 @@
           (ngModelChange)="changeColorMode($event)"
         ></p-toggleswitch>
       </div>
+
       <div class="header__theme">
         <span id="theme-label">Тема:</span>
+
         <p-selectbutton
           [options]="themeOptions"
           [ngModel]="currentTheme"
