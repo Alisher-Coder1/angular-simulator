@@ -1,0 +1,74 @@
+<section>
+  <h2>Задание №2 — Change DetectionStrategy.Default</h2>
+
+  <p>Count: {{ count }}</p>
+  <p>ngDoCheck вызван: {{ checkCount }} раз</p>
+
+  <button type="button" (click)="changeByClick()">Обычный click</button>
+
+  <button type="button" (click)="changeByTimeout()">setTimeout</button>
+
+  <button type="button" (click)="changeByPromise()">Promise</button>
+
+  <button type="button" (click)="changeByHttpClient()">HttpClient</button>
+
+  <button type="button" (click)="startInterval()">Запустить setInterval</button>
+
+  <button type="button" (click)="stopInterval()">Остановить setInterval</button>
+
+  <button type="button" (click)="reset()">Сбросить count</button>
+
+  <section>
+    <h3>Выводы по экспериментам</h3>
+
+    <p>
+      В приложении также работает таймер в Header, который создаёт фоновые циклы
+      Change Detection. Поэтому при подсчёте учитываются только проверки,
+      непосредственно связанные с текущим сценарием.
+    </p>
+
+    <h4>1. Обычный click</h4>
+    <p>UI обновился автоматически: да.</p>
+    <p>ngDoCheck: один дополнительный вызов после click.</p>
+    <p>ChangeDetectorRef не потребовался.</p>
+    <p>Change Detection вызвало Angular-событие (click).</p>
+
+    <h4>2. setTimeout</h4>
+    <p>UI обновился автоматически: да.</p>
+    <p>
+      ngDoCheck вызывается после click и снова после выполнения callback
+      setTimeout.
+    </p>
+    <p>ChangeDetectorRef не потребовался.</p>
+    <p>Change Detection после таймера запускается через Zone.js.</p>
+
+    <h4>3. Promise</h4>
+    <p>UI обновился автоматически: да.</p>
+    <p>
+      Promise callback выполняется как microtask, после чего Angular запускает
+      Change Detection.
+    </p>
+    <p>ChangeDetectorRef не потребовался.</p>
+    <p>Причиной проверки стало завершение microtask внутри Angular Zone.</p>
+
+    <h4>4. HttpClient</h4>
+    <p>UI обновился автоматически: да.</p>
+    <p>
+      После получения HTTP-ответа и изменения count выполняется Change
+      Detection.
+    </p>
+    <p>ChangeDetectorRef не потребовался.</p>
+    <p>Причиной проверки стал асинхронный HTTP response.</p>
+
+    <h4>5. setInterval</h4>
+    <p>UI обновлялся автоматически после каждого тика.</p>
+    <p>ngDoCheck вызывается после каждого callback setInterval.</p>
+    <p>ChangeDetectorRef не потребовался.</p>
+    <p>Каждый тик setInterval запускает новый цикл Change Detection.</p>
+  </section>
+
+  <p>
+    Результаты Change Detection смотрим в Console браузера по сообщениям «Change
+    Detection».
+  </p>
+</section>

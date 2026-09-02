@@ -1,0 +1,34 @@
+<section class="task">
+  <h2>Задание №1 — ChangeDetectionStrategy.OnPush</h2>
+
+  <p>ParentComponent передаёт объект пользователя в ChildComponent.</p>
+
+  <app-child [user]="user"></app-child>
+
+  <div class="task__actions">
+    <button type="button" (click)="changeName()">Изменить через мутацию</button>
+
+    <button type="button" (click)="changeNameWithNewReference()">
+      Изменить через новую ссылку
+    </button>
+
+    <button type="button" (click)="resetUser()">Сбросить</button>
+  </div>
+
+  <div class="task__explanation">
+    <p>
+      При обычной мутации изменяется свойство объекта, но ссылка на объект
+      остаётся прежней.
+    </p>
+
+    <p>
+      ChildComponent использует OnPush, поэтому изменение внутреннего свойства
+      объекта само по себе не является новым Input.
+    </p>
+
+    <p>
+      Минимальное исправление — создать новый объект с помощью spread, чтобы
+      ссылка изменилась.
+    </p>
+  </div>
+</section>

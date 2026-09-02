@@ -1,0 +1,88 @@
+<section>
+  <h2>Задание №3 — ChangeDetectorRef + OnPush</h2>
+
+  <h3>Часть 1 — markForCheck()</h3>
+
+  <p>Count: {{ count }}</p>
+  <p>ngDoCheck вызван: {{ checkCount }} раз</p>
+
+  <button type="button" (click)="changeWithoutMarkForCheck()">
+    Изменить без markForCheck
+  </button>
+
+  <button type="button" (click)="changeWithMarkForCheck()">
+    Изменить с markForCheck
+  </button>
+
+  <button type="button" (click)="reset()">Сбросить</button>
+
+  <h4>Что проверяем</h4>
+
+  <p>
+    Без markForCheck значение count изменяется внутри setTimeout, но
+    OnPush-компонент не помечается для проверки.
+  </p>
+
+  <p>
+    markForCheck помечает компонент для проверки в ближайшем цикле Change
+    Detection.
+  </p>
+
+  <p>markForCheck сам по себе не выполняет синхронную проверку компонента.</p>
+
+  <hr />
+
+  <h3>Часть 2 — detectChanges()</h3>
+
+  <button type="button" (click)="changeWithDetectChanges()">
+    Изменить с detectChanges
+  </button>
+
+  <p>
+    detectChanges выполняет проверку текущего компонента и его дочернего дерева
+    немедленно.
+  </p>
+
+  <p>
+    В отличие от markForCheck, detectChanges не ждёт следующего общего цикла
+    Change Detection.
+  </p>
+
+  <hr />
+
+  <h3>Часть 3 — detach()</h3>
+
+  <p>
+    detach удаляет компонент из обычного дерева Change Detection. Состояние
+    компонента продолжает изменяться, но Angular больше не проверяет этот view
+    автоматически.
+  </p>
+
+  <button type="button" (click)="detachView()">detach()</button>
+
+  <button type="button" (click)="changeDetachedByClick()">
+    Изменить через click
+  </button>
+
+  <button type="button" (click)="changeDetachedByTimeout()">
+    Изменить через setTimeout
+  </button>
+
+  <button type="button" (click)="changeDetachedByPromise()">
+    Изменить через Promise
+  </button>
+
+  <button type="button" (click)="startDetachedInterval()">
+    Изменить через setInterval
+  </button>
+  <hr />
+
+  <h3>Часть 4 — reattach()</h3>
+
+  <p>
+    reattach возвращает компонент обратно в дерево Change Detection. После этого
+    компонент снова участвует в обычных проверках Angular.
+  </p>
+
+  <button type="button" (click)="reattachView()">reattach()</button>
+</section>

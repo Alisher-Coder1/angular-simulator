@@ -57,6 +57,14 @@ export const routes: Routes = [
   },
 
   {
+    path: 'homework-28',
+    loadComponent: () =>
+      import('./pages/homework-28/homework-28.component').then(
+        (m) => m.Homework28Component,
+      ),
+  },
+
+  {
     path: '**',
     canActivate: [authGuard],
     loadComponent: () =>
