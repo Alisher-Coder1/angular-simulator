@@ -1,0 +1,253 @@
+:host {
+  display: block;
+}
+
+.product-detail {
+  width: min(1200px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 32px 0 130px;
+
+  &__back {
+    display: inline-flex;
+    align-items: center;
+    margin-bottom: 24px;
+    color: inherit;
+    font-weight: 600;
+    text-decoration: none;
+    transition: opacity 160ms ease;
+
+    &:hover {
+      opacity: 0.7;
+    }
+  }
+
+  &__layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 36px;
+    align-items: start;
+  }
+
+  &__gallery,
+  &__info {
+    min-width: 0;
+  }
+
+  &__main-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 480px;
+    padding: 32px;
+    overflow: hidden;
+    border: 1px solid var(--p-content-border-color, #374151);
+    border-radius: 20px;
+    background: var(--p-content-background, #18181b);
+
+    img {
+      display: block;
+      width: 100%;
+      max-width: 480px;
+      height: 420px;
+      object-fit: contain;
+    }
+  }
+
+  &__images {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 12px;
+    margin-top: 16px;
+
+    img {
+      width: 100%;
+      height: 100px;
+      padding: 8px;
+      object-fit: contain;
+      border: 1px solid var(--p-content-border-color, #374151);
+      border-radius: 12px;
+      background: var(--p-content-background, #18181b);
+    }
+  }
+
+  &__info {
+    padding: 30px;
+    border: 1px solid var(--p-content-border-color, #374151);
+    border-radius: 20px;
+    background: var(--p-content-background, #18181b);
+  }
+
+  &__heading {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    h1 {
+      margin: 6px 0 12px;
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      line-height: 1.1;
+    }
+  }
+
+  &__category {
+    margin: 0;
+    opacity: 0.65;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+  }
+
+  &__description {
+    margin: 0;
+    opacity: 0.75;
+    line-height: 1.6;
+  }
+
+  &__price {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    margin: 28px 0;
+  }
+
+  &__price-value {
+    font-size: 2rem;
+    font-weight: 700;
+  }
+
+  &__stats {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  &__stat {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 16px;
+    border: 1px solid var(--p-content-border-color, #374151);
+    border-radius: 12px;
+
+    span {
+      opacity: 0.65;
+      font-size: 0.85rem;
+    }
+
+    strong {
+      overflow-wrap: anywhere;
+    }
+  }
+
+  &__section {
+    margin-top: 30px;
+
+    h2 {
+      margin: 0 0 16px;
+      font-size: 1.2rem;
+    }
+  }
+
+  &__properties {
+    margin: 0;
+
+    > div {
+      display: grid;
+      grid-template-columns: minmax(130px, 0.8fr) minmax(0, 1.2fr);
+      gap: 16px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--p-content-border-color, #374151);
+    }
+
+    dt {
+      opacity: 0.65;
+    }
+
+    dd {
+      margin: 0;
+      font-weight: 600;
+      overflow-wrap: anywhere;
+    }
+  }
+
+  &__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  &__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 32px;
+  }
+
+  &__empty {
+    padding: 64px 24px;
+    text-align: center;
+
+    a {
+      color: inherit;
+    }
+  }
+}
+
+@media (max-width: 900px) {
+  .product-detail {
+    &__layout {
+      grid-template-columns: 1fr;
+    }
+
+    &__main-image {
+      min-height: 380px;
+
+      img {
+        height: 340px;
+      }
+    }
+  }
+}
+
+@media (max-width: 640px) {
+  .product-detail {
+    width: min(100% - 20px, 1200px);
+    padding-top: 20px;
+
+    &__info {
+      padding: 20px;
+    }
+
+    &__heading {
+      flex-direction: column;
+    }
+
+    &__main-image {
+      min-height: 300px;
+      padding: 16px;
+
+      img {
+        height: 280px;
+      }
+    }
+
+    &__images {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    &__stats {
+      grid-template-columns: 1fr;
+    }
+
+    &__properties {
+      > div {
+        grid-template-columns: 1fr;
+        gap: 4px;
+      }
+    }
+
+    &__actions {
+      flex-direction: column;
+    }
+  }
+}
