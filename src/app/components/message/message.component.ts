@@ -1,6 +1,6 @@
 import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { MessageService } from '../../../services/message.service';
+import { MessageService } from '../../core/services/message.service';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faMessage } from '@fortawesome/free-regular-svg-icons';
 

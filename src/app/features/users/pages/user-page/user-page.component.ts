@@ -1,12 +1,12 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { UserService } from '../../../services/user.service';
+import { UserService } from '../../services/user.service';
 import { AsyncPipe } from '@angular/common';
 import { UserCardComponent } from '../../components/user-card/user-card.component';
-import { IUser } from '../../../interfaces/user';
+import { IUser } from '../../interfaces/user';
 import { UserCreateComponent } from '../../components/user-create/user-create.component';
 import { BehaviorSubject, combineLatest, map } from 'rxjs';
 import { UsersFilterComponent } from '../../components/users-filter/users-filter.component';
-import { PluralPipe } from '../../pipes/plural.pipe';
+import { PluralPipe } from '../../../../shared/pipes/plural.pipe';
 
 @Component({
   selector: 'app-user-page',
