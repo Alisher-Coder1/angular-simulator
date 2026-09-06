@@ -9,9 +9,9 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { Color } from '../../../enums/Color';
 import { Collection } from '../../collection';
-import { MessageService } from '../../../services/message.service';
+import { MessageService } from '../../core/services/message.service';
 import { MessageType } from '../../../enums/MessageType';
-import { LocalStorageService } from '../../../services/local-storage.service';
+import { LocalStorageService } from '../../core/services/local-storage.service';
 import { MessageComponent } from '../../components/message/message.component';
 import { APP_CONFIG } from '../../config/app-config.token';
 

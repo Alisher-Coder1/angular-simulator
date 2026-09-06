@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { UpperCasePipe } from '@angular/common';
-import { IUser } from '../../../interfaces/user';
-import { PhonePipe } from '../../pipes/phone.pipe';
-import { BoldHoverDirective } from '../../directives/bold-hover.directive';
+import { IUser } from '../../interfaces/user';
+import { PhonePipe } from '../../../../shared/pipes/phone.pipe';
+import { BoldHoverDirective } from '../../../../shared/directives/bold-hover.directive';
 
 @Component({
   selector: 'app-user-card',

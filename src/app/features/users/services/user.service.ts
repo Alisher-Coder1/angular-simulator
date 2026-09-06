@@ -9,9 +9,9 @@ import {
   tap,
 } from 'rxjs';
 import { IUser } from '../interfaces/user';
-import { LoaderService } from './loader.service';
-import { LocalStorageService } from './local-storage.service';
-import { MessageService } from './message.service';
+import { LoaderService } from '../../../core/services/loader.service';
+import { LocalStorageService } from '../../../core/services/local-storage.service';
+import { MessageService } from '../../../core/services/message.service';
 import { UserApiService } from './user-api.service';
 import { HttpErrorResponse } from '@angular/common/http';
 

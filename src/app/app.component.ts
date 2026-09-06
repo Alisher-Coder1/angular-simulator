@@ -13,7 +13,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { MessageComponent } from './components/message/message.component';
 import { LoaderComponent } from './components/loader/loader.component';
-import { LoaderService } from '../services/loader.service';
+import { LoaderService } from './core/services/loader.service';
 
 @Component({
   selector: 'app-root',

@@ -1,8 +1,8 @@
 ﻿import { DOCUMENT } from '@angular/common';
 import { inject, Injectable } from '@angular/core';
 import { BehaviorSubject, distinctUntilChanged, map } from 'rxjs';
-import { ColorMode } from '../enums/ColorMode';
-import { Theme } from '../enums/Theme';
+import { ColorMode } from '../../../enums/ColorMode';
+import { Theme } from '../../../enums/Theme';
 import { LocalStorageService } from './local-storage.service';
 import { usePreset } from '@primeuix/themes';
 import Aura from '@primeuix/themes/aura';

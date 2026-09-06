@@ -6,7 +6,7 @@ import { SelectButtonModule } from 'primeng/selectbutton';
 import { ToggleSwitchModule } from 'primeng/toggleswitch';
 import { ColorMode } from '../../../enums/ColorMode';
 import { Theme } from '../../../enums/Theme';
-import { ThemeService } from '../../../services/theme.service';
+import { ThemeService } from '../../core/services/theme.service';
 import { APP_CONFIG } from '../../config/app-config.token';
 import { DATE_FORMAT } from '../../config/date-format.token';
 import { AuthService } from '../../features/auth/auth.service';
