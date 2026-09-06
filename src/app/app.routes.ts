@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { productResolver } from './features/products/resolvers/product.resolver';
 import { postResolver } from './posts/post.resolver';
 import { authGuard } from './features/auth/auth.guard';
 import { adminGuard } from './features/auth/admin.guard';
@@ -54,6 +55,30 @@ export const routes: Routes = [
     resolve: {
       post: postResolver,
     },
+  },
+
+  // Homework 29 — Products & Cart feature
+  {
+    path: 'products',
+    loadComponent: () =>
+      import('./features/products/products.component').then(
+        (m) => m.ProductsComponent,
+      ),
+  },
+  {
+    path: 'products/:id',
+    loadComponent: () =>
+      import('./features/products/product-detail.component').then(
+        (m) => m.ProductDetailComponent,
+      ),
+    resolve: {
+      product: productResolver,
+    },
+  },
+  {
+    path: 'cart',
+    loadComponent: () =>
+      import('./features/products/cart.component').then((m) => m.CartComponent),
   },
 
   {

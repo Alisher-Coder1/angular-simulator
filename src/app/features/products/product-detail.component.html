@@ -1,0 +1,171 @@
+<section class="product-detail">
+  @if (product(); as product) {
+    <a class="product-detail__back" routerLink="/products">
+      ← Назад к продуктам
+    </a>
+
+    <div class="product-detail__layout">
+      <div class="product-detail__gallery">
+        <div class="product-detail__main-image">
+          <img [src]="product.thumbnail" [alt]="product.title" />
+        </div>
+
+        @if (product.images.length) {
+          <div class="product-detail__images">
+            @for (image of product.images; track image) {
+              <img [src]="image" [alt]="product.title" />
+            }
+          </div>
+        }
+      </div>
+
+      <div class="product-detail__info">
+        <div class="product-detail__heading">
+          <div>
+            <p class="product-detail__category">
+              {{ product.category }}
+            </p>
+
+            <h1>{{ product.title }}</h1>
+
+            <p class="product-detail__description">
+              {{ product.description }}
+            </p>
+          </div>
+
+          <p-tag
+            [value]="product.availabilityStatus"
+            [severity]="product.stock > 0 ? 'success' : 'danger'"
+          />
+        </div>
+
+        <div class="product-detail__price">
+          <span class="product-detail__price-value">
+            {{ product.price | currency: 'USD' }}
+          </span>
+
+          @if (product.discountPercentage > 0) {
+            <p-tag
+              [value]="'-' + product.discountPercentage + '%'"
+              severity="warn"
+            />
+          }
+        </div>
+
+        <div class="product-detail__stats">
+          <div class="product-detail__stat">
+            <span>Рейтинг</span>
+
+            <strong>
+              {{ product.rating }}
+            </strong>
+          </div>
+
+          <div class="product-detail__stat">
+            <span>В наличии</span>
+
+            <strong>
+              {{ product.stock }}
+            </strong>
+          </div>
+
+          <div class="product-detail__stat">
+            <span>Бренд</span>
+
+            <strong>
+              {{ product.brand }}
+            </strong>
+          </div>
+
+          <div class="product-detail__stat">
+            <span>SKU</span>
+
+            <strong>
+              {{ product.sku }}
+            </strong>
+          </div>
+        </div>
+
+        <div class="product-detail__section">
+          <h2>Характеристики</h2>
+
+          <dl class="product-detail__properties">
+            <div>
+              <dt>Ширина</dt>
+              <dd>{{ product.dimensions.width }}</dd>
+            </div>
+
+            <div>
+              <dt>Высота</dt>
+              <dd>{{ product.dimensions.height }}</dd>
+            </div>
+
+            <div>
+              <dt>Глубина</dt>
+              <dd>{{ product.dimensions.depth }}</dd>
+            </div>
+
+            <div>
+              <dt>Вес</dt>
+              <dd>{{ product.weight }}</dd>
+            </div>
+
+            <div>
+              <dt>Гарантия</dt>
+              <dd>{{ product.warrantyInformation }}</dd>
+            </div>
+
+            <div>
+              <dt>Доставка</dt>
+              <dd>{{ product.shippingInformation }}</dd>
+            </div>
+
+            <div>
+              <dt>Возврат</dt>
+              <dd>{{ product.returnPolicy }}</dd>
+            </div>
+
+            <div>
+              <dt>Минимальный заказ</dt>
+              <dd>{{ product.minimumOrderQuantity }}</dd>
+            </div>
+          </dl>
+        </div>
+
+        @if (product.tags.length) {
+          <div class="product-detail__section">
+            <h2>Теги</h2>
+
+            <div class="product-detail__tags">
+              @for (tag of product.tags; track tag) {
+                <p-tag [value]="tag" severity="secondary" />
+              }
+            </div>
+          </div>
+        }
+
+        <div class="product-detail__actions">
+          <p-button
+            label="В корзину"
+            icon="pi pi-shopping-cart"
+            (onClick)="addToCart()"
+          />
+
+          <p-button
+            label="К продуктам"
+            icon="pi pi-arrow-left"
+            severity="secondary"
+            [outlined]="true"
+            routerLink="/products"
+          />
+        </div>
+      </div>
+    </div>
+  } @else {
+    <div class="product-detail__empty">
+      <h1>Товар не найден</h1>
+
+      <a routerLink="/products"> Вернуться к продуктам </a>
+    </div>
+  }
+</section>

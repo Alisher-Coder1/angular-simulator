@@ -1,0 +1,177 @@
+<section class="cart-page">
+  <header class="cart-page__header">
+    <div>
+      <h1>Корзина</h1>
+
+      <p>
+        Количество товаров:
+        <strong>{{ cartService.itemsCount() }}</strong>
+      </p>
+    </div>
+
+    <p-button
+      label="К продуктам"
+      icon="pi pi-arrow-left"
+      severity="secondary"
+      [routerLink]="['/products']"
+    />
+  </header>
+
+  @if (cartService.error(); as error) {
+    <p-message severity="error">
+      {{ error }}
+    </p-message>
+  }
+
+  @if (cartService.loading()) {
+    <div class="cart-page__loading">
+      <p-progress-spinner ariaLabel="Загрузка корзины" strokeWidth="4" />
+      <p>Загрузка корзины...</p>
+    </div>
+  } @else {
+    @if (cartService.items().length) {
+      <div class="cart-layout">
+        <div class="cart-items">
+          @for (item of cartService.items(); track item.id) {
+            <p-card>
+              <div class="cart-item">
+                <a
+                  class="cart-item__image-link"
+                  [routerLink]="['/products', item.id]"
+                >
+                  <img
+                    class="cart-item__image"
+                    [src]="item.thumbnail"
+                    [alt]="item.title"
+                  />
+                </a>
+
+                <div class="cart-item__content">
+                  <div class="cart-item__heading">
+                    <a
+                      class="cart-item__title"
+                      [routerLink]="['/products', item.id]"
+                    >
+                      {{ item.title }}
+                    </a>
+
+                    <p-button
+                      icon="pi pi-trash"
+                      severity="danger"
+                      [text]="true"
+                      ariaLabel="Удалить товар"
+                      (onClick)="removeProduct(item.id)"
+                    />
+                  </div>
+
+                  <div class="cart-item__details">
+                    <div class="cart-item__detail">
+                      <span>Цена за единицу</span>
+                      <strong>{{ item.price | currency: 'USD' }}</strong>
+                    </div>
+
+                    <div class="cart-item__detail">
+                      <span>Скидка</span>
+                      <strong>{{ item.discountPercentage }}%</strong>
+                    </div>
+                  </div>
+
+                  <div class="cart-item__controls">
+                    <div class="cart-item__quantity">
+                      <span>Количество</span>
+
+                      <p-inputnumber
+                        [ngModel]="item.quantity"
+                        [min]="1"
+                        [showButtons]="true"
+                        buttonLayout="horizontal"
+                        decrementButtonIcon="pi pi-minus"
+                        incrementButtonIcon="pi pi-plus"
+                        (ngModelChange)="onQuantityChange(item.id, $event)"
+                      />
+                    </div>
+
+                    <div class="cart-item__subtotal">
+                      <span>Стоимость</span>
+
+                      <strong>
+                        {{ item.price * item.quantity | currency: 'USD' }}
+                      </strong>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </p-card>
+          }
+        </div>
+
+        <aside class="cart-summary">
+          <p-card header="Итого">
+            <div class="cart-summary__content">
+              <div class="cart-summary__row">
+                <span>Товаров</span>
+                <strong>{{ cartService.itemsCount() }}</strong>
+              </div>
+
+              <div class="cart-summary__row">
+                <span>Подытог</span>
+
+                <strong>
+                  {{ cartService.subtotal() | currency: 'USD' }}
+                </strong>
+              </div>
+
+              <div class="cart-summary__row">
+                <span>Налог (20%)</span>
+
+                <strong>
+                  {{ cartService.tax() | currency: 'USD' }}
+                </strong>
+              </div>
+
+              <div class="cart-summary__row cart-summary__row--total">
+                <span>Всего</span>
+
+                <strong>
+                  {{ cartService.total() | currency: 'USD' }}
+                </strong>
+              </div>
+
+              <div class="cart-summary__actions">
+                <p-button
+                  label="Сохранить корзину"
+                  icon="pi pi-save"
+                  [fluid]="true"
+                  (onClick)="saveCart()"
+                />
+
+                <p-button
+                  label="Удалить корзину"
+                  icon="pi pi-trash"
+                  severity="danger"
+                  variant="outlined"
+                  [fluid]="true"
+                  (onClick)="deleteCart()"
+                />
+              </div>
+            </div>
+          </p-card>
+        </aside>
+      </div>
+    } @else {
+      <div class="cart-page__empty">
+        <i class="pi pi-shopping-cart"></i>
+
+        <h2>Корзина пуста</h2>
+
+        <p>Добавь товары из каталога, чтобы они появились здесь.</p>
+
+        <p-button
+          label="Перейти к продуктам"
+          icon="pi pi-shopping-bag"
+          [routerLink]="['/products']"
+        />
+      </div>
+    }
+  }
+</section>
